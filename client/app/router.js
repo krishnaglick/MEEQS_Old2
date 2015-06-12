@@ -6,6 +6,12 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('Ratings');
+  this.route('RestaurantLocations');
+  this.route('Restaurants');
+  this.route('TagCategories');
+  this.route('Tags');
+  this.route('Users');
 });
 
 export default Router;
