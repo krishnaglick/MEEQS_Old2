@@ -10,7 +10,7 @@ module.exports = {
       return [ "userID", "isAdmin" ];
   },
 
-  find: (data) => {
+  find: function(data){
     return data;
   },
 
