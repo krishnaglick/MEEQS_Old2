@@ -76,9 +76,9 @@ module.exports.policies = {
     'find': 'isAuthenticated',
     'findOne': 'isAuthenticated',
     'populate': 'isAuthenticated',
-    'create': ['isAuthenticated', 'protectedAttributes'],
+    'create': 'protectedAttributes',
     'update': ['isAuthenticated', 'protectedAttributes'],
-    'add': ['isAuthenticated', 'protectedAttributes'],
+    'add': 'protectedAttributes',
     'destroy': 'isAdmin',
     'remove': 'isAdmin'
   }
