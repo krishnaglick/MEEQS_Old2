@@ -1,3 +1,3 @@
-"C:\Program Files\PostgreSQL\9.4\bin\initdb.exe" -U postgres "C:\Users\Promethean\Documents\MEEQS_Sane\data"
-"C:\Program Files\PostgreSQL\9.4\bin\psql.exe" -U postgres -d postgres
-"C:\Program Files\PostgreSQL\9.4\bin\pg_ctl.exe" -D "C:\Users\Promethean\Documents\MEEQS_Sane\data" -l logfile start
+"D:\Programs\PostgreSQL\9.4\bin\initdb.exe" -U postgres "D:\Google Drive\workspace\Website Workspace\MEEQS_Sane\data"
+"D:\Programs\PostgreSQL\9.4\bin\psql.exe" -U postgres -d postgres
+"D:\Programs\PostgreSQL\9.4\bin\pg_ctl.exe" -D "D:\Google Drive\workspace\Website Workspace\MEEQS_Sane\data" -l logfile start

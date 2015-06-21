@@ -53,5 +53,9 @@ module.exports = function(environment) {
     'media-src': "'self'"
   }
 
+  ENV['simple-auth'] = {
+    authorizer: 'authorizer:passport'
+  };
+
   return ENV;
 };

@@ -8,15 +8,33 @@
             </h1>
         </div>
         <div class="six wide right aligned column">
-            {{#link-to "user" }}
-                <i class="bordered large user icon"></i>
-            {{/link-to}}
-            {{#link-to "restaurants" }}
-                <i class="bordered large food icon"></i>
-            {{/link-to}}
-            {{#link-to "ratings" }}
-                <i class="bordered large star icon"></i>
-            {{/link-to}}
+            <div class="row">
+                {{#if session.isAuthenticated}}
+                    <a {{ action 'invalidateSession' }}>
+                        <i class="bordered large food icon"></i>
+                    </a>
+                {{else}}
+                    {{#link-to 'login'}}
+                        Login
+                    {{/link-to}}
+                    {{#link-to 'register'}}
+                        Register
+                    {{/link-to}}
+                {{/if}}
+            </div>
+            <div class="row">
+                {{#if session.isAuthenticated}}
+                    {{#link-to "user" }}
+                        <i class="bordered large user icon"></i>
+                    {{/link-to}}
+                {{/if}}
+                {{#link-to "restaurants" }}
+                    <i class="bordered large food icon"></i>
+                {{/link-to}}
+                {{#link-to "ratings" }}
+                    <i class="bordered large star icon"></i>
+                {{/link-to}}
+            </div>
         </div>
     </div>
 </header>
