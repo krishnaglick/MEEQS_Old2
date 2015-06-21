@@ -14,8 +14,10 @@ module.exports = function ( req, res, next ) {
         return true;
     }
 
-    if(isAdmin())
+    if(isAdmin()) {
         return next();
-    else
+    }
+    else {
         res.redirect('/');
+    }
 };
