@@ -5,13 +5,11 @@
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
 
+var bcrypt = require('bcryptjs');
+
 module.exports = {
   protectedAttributes: function () {
       return [ "userID", "isAdmin" ];
-  },
-
-  find: function(data){
-    return data;
   },
 
   attributes: {
@@ -29,6 +27,7 @@ module.exports = {
   	},
   	password: {
   		type: 'string',
+      minLength: 6,
   		required: true
   	},
   	email: {
@@ -42,7 +41,25 @@ module.exports = {
   	isAdmin: {
   		type: 'boolean',
   		defaultsTo: false
-  	}
+  	},
+    toJSON: function() {
+        var obj = this.toObject();
+        delete obj.password;
+        return obj;
+    }
+  },
+  beforeCreate: function(user, cb) {
+      bcrypt.genSalt(10, function(err, salt) {
+          bcrypt.hash(user.password, salt, function(err, hash) {
+              if (err) {
+                  console.log(err);
+                  cb(err);
+              } else {
+                  user.password = hash;
+                  cb();
+              }
+          });
+      });
   }
 };
 

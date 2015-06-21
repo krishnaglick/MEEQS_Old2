@@ -26,26 +26,37 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  '*': 'protectedAttributes',
-
-  /***************************************************************************
-  *                                                                          *
-  * Here's an example of mapping some policies to run before a controller    *
-  * and its actions                                                          *
-  *                                                                          *
-  ***************************************************************************/
-	// RabbitController: {
-
-		// Apply the `false` policy as the default for all of RabbitController's actions
-		// (`false` prevents all access, which ensures that nothing bad happens to our rabbits)
-		// '*': false,
-
-		// For the action `nurture`, apply the 'isRabbitMother' policy
-		// (this overrides `false` above)
-		// nurture	: 'isRabbitMother',
-
-		// Apply the `isNiceToAnimals` AND `hasRabbitFood` policies
-		// before letting any users feed our rabbits
-		// feed : ['isNiceToAnimals', 'hasRabbitFood']
-	// }
+  AuthController: {
+    '*': true
+  },
+  RatingsController: {
+    '*': ['isAuthenticated', 'protectedAttributes'],
+    'destroy': 'isAdmin',
+    'remove': 'isAdmin'
+  },
+  RestaurantLocationsController: {
+    '*': ['isAuthenticated', 'protectedAttributes'],
+    'destroy': 'isAdmin',
+    'remove': 'isAdmin'
+  },
+  RestaurantsController: {
+    '*': ['isAuthenticated', 'protectedAttributes'],
+    'destroy': 'isAdmin',
+    'remove': 'isAdmin'
+  },
+  TagCategoriesController: {
+    '*': ['isAuthenticated', 'protectedAttributes'],
+    'destroy': 'isAdmin',
+    'remove': 'isAdmin'
+  },
+  TagsController: {
+    '*': ['isAuthenticated', 'protectedAttributes'],
+    'destroy': 'isAdmin',
+    'remove': 'isAdmin'
+  },
+  UsersController: {
+    '*': ['isAuthenticated', 'protectedAttributes'],
+    'destroy': 'isAdmin',
+    'remove': 'isAdmin'
+  }
 };
