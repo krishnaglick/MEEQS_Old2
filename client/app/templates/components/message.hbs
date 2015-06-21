@@ -1,0 +1,11 @@
+
+{{#if messages }}
+    <div class="ui message {{extraClass}}">
+        {{#if title}}<div class="header">{{ title }}</div>{{/if}}
+        <ul class="list">
+            {{#each messages as |message|}}
+                <li>{{ message }}!</li>
+            {{/each}}
+        </ul>
+    </div>
+{{/if}}

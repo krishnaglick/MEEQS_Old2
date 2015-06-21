@@ -1,0 +1,18 @@
+
+<form class="ui form" {{action 'register' on='submit' }}>
+    <h3 class="ui dividing header">Register</h3>
+    <div class="field">
+        <label>Username</label>
+        {{ input type=text value=model.username }}
+    </div>
+    <div class="field">
+        <label>Password</label>
+        {{ input type=password value=model.password }}
+    </div>
+    <div class="field">
+        <label>Email</label>
+        {{ input type=text value=model.email }}
+    </div>
+    {{ message title="There was a problem" messages=serverMessages extraClass="red" }}
+    <button class="ui submit button" {{action 'register'}}>Register</button>
+</form>
