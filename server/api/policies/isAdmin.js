@@ -7,14 +7,18 @@
  *
  */
 
-var actionUtil = require( '../../node_modules/sails/lib/hooks/blueprints/actionUtil' );
-
 module.exports = function ( req, res, next ) {
-    function isAdmin() {
-        return true;
+    function isAdmin(username) {
+        Users.findOne({ username: username }, function (err, user) {
+            if (err || !user) {
+                return false;
+            }
+
+            return user.isAdmin;
+        });
     }
 
-    if(isAdmin()) {
+    if(isAdmin(req.user.username)) {
         return next();
     }
     else {
