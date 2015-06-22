@@ -24,7 +24,7 @@ module.exports = {
   		required: true
   	},
   	tagCategoryID: {
-  		model: 'Users',
+  		model: 'TagCategories',
   		columnName: 'tagCategoryID',
   		type: 'integer',
   		required: false

@@ -10,16 +10,10 @@
         <div class="six wide right aligned column">
             <div class="row">
                 {{#if session.isAuthenticated}}
-                    <a {{ action 'invalidateSession' }}>
-                        <i class="bordered large food icon"></i>
-                    </a>
+                    <a href {{ action 'invalidateSession' }}>Logout</a>
                 {{else}}
-                    {{#link-to 'login'}}
-                        Login
-                    {{/link-to}}
-                    {{#link-to 'register'}}
-                        Register
-                    {{/link-to}}
+                    {{#link-to 'login'}}Login{{/link-to}}
+                    {{#link-to 'register'}}Register{{/link-to}}
                 {{/if}}
             </div>
             <div class="row">

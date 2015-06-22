@@ -22,36 +22,10 @@
 
 module.exports.routes = {
 
-  /***************************************************************************
-  *                                                                          *
-  * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
-  * etc. depending on your default view engine) your home page.              *
-  *                                                                          *
-  * (Alternatively, remove this and add an `index.html` file in your         *
-  * `assets` directory)                                                      *
-  *                                                                          *
-  ***************************************************************************/
+  'post /login': 'AuthController.login',
 
-  //'/': {
-  //  view: 'homepage'
-  //}
+  '/logout': 'AuthController.logout',
 
-  /***************************************************************************
-  *                                                                          *
-  * Custom routes here...                                                    *
-  *                                                                          *
-  *  If a request to a URL doesn't match any of the custom routes above, it  *
-  * is matched against Sails route blueprints. See `config/blueprints.js`    *
-  * for configuration options and examples.                                  *
-  *                                                                          *
-  ***************************************************************************/
-
-
-  //This automatically serves all routes, apart from /api/** routes to ember
-  //(which will be initialized in assets/index.html). This route needs to be
-  //at the very bottom if you want to server other routes through Sails, because they are matched in order
   '/*': { controller: 'App', action: 'serve', skipAssets: true, skipRegex: /^\/api\/.*$/ }
 
-  //You could also just serve the index view directly if you want
-  //'/*': { view: 'index', skipAssets: true, skipRegex: /^\/api\/.*$/ }
 };

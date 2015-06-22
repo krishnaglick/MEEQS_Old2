@@ -1,13 +1,12 @@
 import Ember from 'ember';
 import Base from 'simple-auth/authenticators/base';
-import config from '../config/environment';
 
 export default Base.extend({
     restore: function(data) {
         return new Ember.RSVP.Promise(function(resolve, reject) {
             if (!Ember.isEmpty(data.token)) {
                 Ember.$.ajax({
-                    url: config.APP.api_host + '/validate',
+                    url: '/validate',
                     type: 'POST',
                     data: JSON.stringify({
                         token: data.token
@@ -26,16 +25,20 @@ export default Base.extend({
     authenticate: function(credentials) {
         return new Ember.RSVP.Promise(function(resolve, reject) {
             Ember.$.ajax({
-                url: config.APP.api_host + '/auth',
+                url: '/login',
                 type: 'POST',
                 data: JSON.stringify({
                     username: credentials.username,
                     password: credentials.password
                 }),
                 contentType: 'application/json'
-            }).then(function(response) {
+            }).then(function(response, data1, data2) {
                 Ember.run(function() {
-                    resolve({ token: response.token });
+                    if(response.user){
+                        resolve({ token: response.token, user: response.user });
+                    } else {
+                        reject()
+                    }
                 });
             }, function(xhr, status, error) {
                 Ember.run(function() {
@@ -44,10 +47,10 @@ export default Base.extend({
             });
         });
     },
-    invalidate: function(/* data */) {
+    invalidate: function(data) {
         return new Ember.RSVP.Promise(function(resolve, reject) {
             Ember.$.ajax({
-                url: config.APP.api_host + '/logout',
+                url: '/logout',
                 type: 'GET'
             }).then(function() {
                 Ember.run(function() {
