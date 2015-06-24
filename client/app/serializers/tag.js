@@ -1,5 +1,5 @@
-import DS from 'ember-data';
+import AppSerializer from './application';
 
-export default DS.RESTSerializer.extend({
+export default AppSerializer.extend({
     primaryKey: 'tagID'
 });

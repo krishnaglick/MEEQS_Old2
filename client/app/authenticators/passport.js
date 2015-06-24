@@ -2,8 +2,8 @@ import Ember from 'ember';
 import Base from 'simple-auth/authenticators/base';
 
 export default Base.extend({
-    restore: function(data) {
-        return new Ember.RSVP.Promise(function(resolve, reject) {
+    restore: function(data){
+        return new Ember.RSVP.Promise((resolve, reject) => {
             if (!Ember.isEmpty(data.token)) {
                 Ember.$.ajax({
                     url: '/validate',
@@ -12,9 +12,9 @@ export default Base.extend({
                         token: data.token
                     }),
                     contentType: 'application/json'
-                }).then(function() {
+                }).then(() => {
                     resolve(data);
-                }, function(err) {
+                }, (err) => {
                     reject(err);
                 });
             } else {
@@ -22,8 +22,8 @@ export default Base.extend({
             }
         });
     },
-    authenticate: function(credentials) {
-        return new Ember.RSVP.Promise(function(resolve, reject) {
+    authenticate: function(credentials){
+        return new Ember.RSVP.Promise((resolve, reject) => {
             Ember.$.ajax({
                 url: '/login',
                 type: 'POST',
@@ -32,32 +32,32 @@ export default Base.extend({
                     password: credentials.password
                 }),
                 contentType: 'application/json'
-            }).then(function(response, data1, data2) {
-                Ember.run(function() {
+            }).then((response, data1, data2) => {
+                Ember.run(() => {
                     if(response.user){
                         resolve({ token: response.token, user: response.user });
                     } else {
                         reject()
                     }
                 });
-            }, function(xhr, status, error) {
-                Ember.run(function() {
+            }, (xhr, status, error) => {
+                Ember.run(() => {
                     reject(error);
                 });
             });
         });
     },
-    invalidate: function(data) {
-        return new Ember.RSVP.Promise(function(resolve, reject) {
+    invalidate: function(data){
+        return new Ember.RSVP.Promise((resolve, reject) => {
             Ember.$.ajax({
                 url: '/logout',
                 type: 'GET'
-            }).then(function() {
-                Ember.run(function() {
+            }).then(() => {
+                Ember.run(() => {
                     resolve();
                 });
-            }, function(err) {
-                Ember.run(function() {
+            }, (err) => {
+                Ember.run(() => {
                     reject(err);
                 });
             });

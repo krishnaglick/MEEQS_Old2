@@ -9,5 +9,10 @@
         <label>Password</label>
         {{ input type='password' value=model.password }}
     </div>
+    {{#if message }}
+        <div class="ui red message">
+            <div class="header">{{message}}</div>
+        </div>
+    {{/if}}
     <button class="ui submit button">Login</button>
 </form>

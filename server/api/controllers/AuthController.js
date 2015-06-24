@@ -30,6 +30,10 @@ module.exports = {
 
     logout: function(req, res) {
         req.logout();
+        return res.send({
+            message: "Logged out.",
+            user: false
+        });
     }
 };
 

@@ -1,6 +1,6 @@
 
 <div class="ui cards">
-    {{#each model as |restaurant| }}
+    {{#each restaurant in model }}
         <div class="card">
             {{#link-to "restaurant" restaurant class="image"}}
                 <img src="http://placehold.it/200x200">
