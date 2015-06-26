@@ -1,7 +1,7 @@
 /**
  * isAdmin
  *
- * @module      :: Policy
+ * @module      :: isAdmin
  * @description :: Policy to check if the requesting user is an admin
  * @docs        :: http://sailsjs.org/#!documentation/policies
  *
@@ -22,6 +22,7 @@ module.exports = function ( req, res, next ) {
         return next();
     }
     else {
-        res.redirect('/');
+        res.status(401);
+        res.send('You\'re not an admin!')
     }
 };

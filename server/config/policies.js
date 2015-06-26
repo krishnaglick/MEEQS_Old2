@@ -29,8 +29,8 @@ module.exports.policies = {
     'create': ['isAuthenticated', 'protectedAttributes'],
     'update': ['isAuthenticated', 'protectedAttributes'],
     'add': ['isAuthenticated', 'protectedAttributes'],
-    'destroy': 'isAdmin',
-    'remove': 'isAdmin'
+    'destroy': ['isAuthenticated', 'isAdmin'],
+    'remove': ['isAuthenticated', 'isAdmin']
   },
   RestaurantLocationsController: {
     'find': 'isAuthenticated',
@@ -39,8 +39,8 @@ module.exports.policies = {
     'create': ['isAuthenticated', 'protectedAttributes'],
     'update': ['isAuthenticated', 'protectedAttributes'],
     'add': ['isAuthenticated', 'protectedAttributes'],
-    'destroy': 'isAdmin',
-    'remove': 'isAdmin'
+    'destroy': ['isAuthenticated', 'isAdmin'],
+    'remove': ['isAuthenticated', 'isAdmin']
   },
   RestaurantsController: {
     'find': 'isAuthenticated',
@@ -49,8 +49,8 @@ module.exports.policies = {
     'create': ['isAuthenticated', 'protectedAttributes'],
     'update': ['isAuthenticated', 'protectedAttributes'],
     'add': ['isAuthenticated', 'protectedAttributes'],
-    'destroy': 'isAdmin',
-    'remove': 'isAdmin'
+    'destroy': ['isAuthenticated', 'isAdmin'],
+    'remove': ['isAuthenticated', 'isAdmin']
   },
   TagCategoriesController: {
     'find': 'isAuthenticated',
@@ -59,8 +59,8 @@ module.exports.policies = {
     'create': ['isAuthenticated', 'protectedAttributes'],
     'update': ['isAuthenticated', 'protectedAttributes'],
     'add': ['isAuthenticated', 'protectedAttributes'],
-    'destroy': 'isAdmin',
-    'remove': 'isAdmin'
+    'destroy': ['isAuthenticated', 'isAdmin'],
+    'remove': ['isAuthenticated', 'isAdmin']
   },
   TagsController: {
     'find': 'isAuthenticated',
@@ -69,8 +69,8 @@ module.exports.policies = {
     'create': ['isAuthenticated', 'protectedAttributes'],
     'update': ['isAuthenticated', 'protectedAttributes'],
     'add': ['isAuthenticated', 'protectedAttributes'],
-    'destroy': 'isAdmin',
-    'remove': 'isAdmin'
+    'destroy': ['isAuthenticated', 'isAdmin'],
+    'remove': ['isAuthenticated', 'isAdmin']
   },
   UsersController: {
     'find': 'isAuthenticated',
@@ -79,7 +79,7 @@ module.exports.policies = {
     'create': 'protectedAttributes',
     'update': ['isAuthenticated', 'protectedAttributes'],
     'add': 'protectedAttributes',
-    'destroy': 'isAdmin',
-    'remove': 'isAdmin'
+    'destroy': ['isAuthenticated', 'isAdmin'],
+    'remove': ['isAuthenticated', 'isAdmin']
   }
 };

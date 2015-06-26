@@ -32,5 +32,8 @@
     "url": "git://github.com/anonymous node/sails user/server.git"
   },
   "author": "Prometheus",
-  "license": ""
+  "license": "",
+  "devDependencies": {
+    "supertest": "^1.0.1"
+  }
 }
