@@ -1,1 +1,7 @@
-define users in here for testing
+[
+  {
+    "id": 1,
+    "username": "test",
+    "password": "test"
+  }
+]

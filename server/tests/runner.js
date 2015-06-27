@@ -14,7 +14,7 @@ function addFiles(mocha, files) {
   glob.sync(root + files).forEach(mocha.addFile.bind(mocha));
 }
 
-addFiles(mocha, '/**/*-test.js');
+addFiles(mocha, '/**/*.test.js');
 
 mocha.run(function(failures) {
   process.exit(failures);
