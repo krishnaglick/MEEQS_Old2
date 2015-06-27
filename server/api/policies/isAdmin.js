@@ -1,23 +1,28 @@
 /**
  * isAdmin
  *
- * @module      :: Policy
+ * @module      :: isAdmin
  * @description :: Policy to check if the requesting user is an admin
  * @docs        :: http://sailsjs.org/#!documentation/policies
  *
  */
 
-var actionUtil = require( '../../node_modules/sails/lib/hooks/blueprints/actionUtil' );
-
 module.exports = function ( req, res, next ) {
-    function isAdmin() {
-        return true;
+    function isAdmin(username) {
+        Users.findOne({ username: username }, function (err, user) {
+            if (err || !user) {
+                return false;
+            }
+
+            return user.isAdmin;
+        });
     }
 
-    if(isAdmin()) {
+    if(isAdmin(req.user.username)) {
         return next();
     }
     else {
-        res.redirect('/');
+        res.status(401);
+        res.send('You\'re not an admin!')
     }
 };

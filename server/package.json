@@ -23,6 +23,8 @@
     "sails-postgresql": "^0.10.15"
   },
   "scripts": {
+    "test-w": "mocha -R spec --ui bdd --watch ./tests/**/*-test.js",
+    "test": "node tests/runner.js",
     "debug": "node debug app.js",
     "start": "node app.js"
   },
@@ -32,5 +34,15 @@
     "url": "git://github.com/anonymous node/sails user/server.git"
   },
   "author": "Prometheus",
-  "license": ""
+  "license": "",
+  "devDependencies": {
+    "babel-eslint": "^2.0.2",
+    "barrels": "^1.4.1",
+    "chai": "^2.1.0",
+    "glob": "^4.4.1",
+    "mocha": "^2.1.0",
+    "mocha-traceur": "^2.1.0",
+    "sinon": "^1.12.2",
+    "supertest": "^1.0.1"
+  }
 }

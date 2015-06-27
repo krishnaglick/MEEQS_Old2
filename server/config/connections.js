@@ -85,7 +85,7 @@ module.exports.connections = {
   //docker host uses db, otherwise use localhost or the IP of your db
   //credentials for docker are defined in the fig.yml
   //otherwise dependent on your setup
-  PrometheusDesktopDB: {
+  meeqs: {
     adapter: 'sails-postgresql',
     host: 'localhost',
     port: 5432,
@@ -93,13 +93,13 @@ module.exports.connections = {
     password: 'swordfish',
     database: 'MEEQS'
   },
-  postgres: {
+  test: {
     adapter: 'sails-postgresql',
     host: 'localhost',
     port: 5432,
     user: 'postgres',
-    password: '',
-    database: 'postgres'
+    password: 'swordfish',
+    database: 'test'
   },
 
   /***************************************************************************
