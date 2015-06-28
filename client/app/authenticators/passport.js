@@ -37,12 +37,12 @@ export default Base.extend({
                     if(response.user){
                         resolve({ token: response.token, user: response.user });
                     } else {
-                        reject()
+                        reject(response.message);
                     }
                 });
             }, (xhr, status, error) => {
                 Ember.run(() => {
-                    reject(error);
+                    reject(xhr.responseJSON.message);
                 });
             });
         });
@@ -52,13 +52,13 @@ export default Base.extend({
             Ember.$.ajax({
                 url: '/logout',
                 type: 'GET'
-            }).then(() => {
+            }).then((response, data1, data2) => {
                 Ember.run(() => {
                     resolve();
                 });
-            }, (err) => {
+            }, (xhr, status, error) => {
                 Ember.run(() => {
-                    reject(err);
+                    reject(xhr.responseJSON.message);
                 });
             });
         });

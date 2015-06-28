@@ -1,15 +1,15 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-    message: undefined,
+    message: '',
     actions: {
         login: function(credentials){
-            this.message = "";
+            this.set('message', '');
             this.get('session').authenticate('authenticator:passport', credentials)
                 .then(() => {
                     this.transitionToRoute('index');
-                }, () => {
-                    this.message = "Login failed.";
+                }, (error) => {
+                    this.set('message', error);
                 });
         }
     }

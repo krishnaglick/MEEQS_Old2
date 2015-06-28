@@ -13,5 +13,15 @@
         <label>Email</label>
         {{ input type='text' value=model.email }}
     </div>
+
+    {{#if model.errors.messages }}
+        <div class="ui red message">
+            <ui class="list">
+            {{#each model.errors.messages as |message|}}
+                <li>{{message}}</li>
+            {{/each}}
+            </ui>
+        </div>
+    {{/if}}
     <button class="ui submit button">Register</button>
 </form>

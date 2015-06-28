@@ -6,7 +6,7 @@ export default Ember.Controller.extend({
             var credentials = {
                 username: this.model.get('username'),
                 password: this.model.get('password')
-            }
+            };
             this.model.save().then(() => {
                 this.get('session').authenticate('authenticator:passport', credentials)
                     .then(() => {
