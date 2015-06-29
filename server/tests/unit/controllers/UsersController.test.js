@@ -1,32 +1,42 @@
 var request = require('supertest');
-var assert = require("assert");
+var assert = require('assert');
 
-var Sails = require('sails');
-var sails;
-before(function(done) { 
-	Sails.lift({ }, function(err, server) { 
-		sails = server; if (err) return done(err);
-		done(err, sails);
-	});
-}); 
-
-describe('UsersController', function() {
-
-  describe('#create()', function() {
-    it('should create a user', function(done) {
-      request(sails.hooks.http.app)
-        .post('/api/v1/users')
-        .send({ name: 'test', password: 'test' })
-        .expect(201);
-        done();
+describe('UsersController', () => {
+	var createdUserID;
+	it('should create a user', (done) => {
+		request(sails.hooks.http.app)
+    .post('/api/v1/users')
+    .send({users: { username: 'test', password: 'test12' }})
+    .end((err, res) => {
+    	assert(res.statusCode == 201, 'User was not created');
+    	let users = res.body.users;
+    	assert.ok(users, 'User was not created');
+    	createdUserID = users.userID
+    	assert.ok(createdUserID, 'Don\'t have user id');
+    	done();
     });
-  });
+	});
 
-  describe('failingTest', function() {
-  	it('should fail', function(done) {
-  		assert('a' == 'b');
-  		done();
-  	});
-  });
+	it('should find the created test user', (done) => {
+		request(sails.hooks.http.app)
+    .get(`/api/v1/users/${createdUserID}`)
+    .end((err, res) => {
+    	assert(res.statusCode == 200, 'User not found');
+    	let users = res.body.users;
+    	assert.ok(users, 'User not found');
+    	assert(users.username == 'test', 'Wrong username pulled');
+    	done();
+    });
+	});
+
+	it('should delete created test user', (done) => {
+		request(sails.hooks.http.app)
+    .get(`/api/v1/users/destroy/${createdUserID}`)
+    .end((err, res) => {
+    	assert(res.statusCode == 200, 'User not found');
+    	assert(res.body == null, 'User not destroyed');
+    	done();
+    });
+	});
 
 });

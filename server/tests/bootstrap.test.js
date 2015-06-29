@@ -1,9 +1,13 @@
 var Sails = require('sails'),
-  sails;
+    sails;
 
 before(function(done) {
   Sails.lift({
     // configuration for testing purposes
+    models: {
+      connection: 'test',
+      migrate: 'drop'
+    }
   }, function(err, server) {
     sails = server;
     if (err) return done(err);

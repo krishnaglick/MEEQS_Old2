@@ -91,7 +91,7 @@ module.exports.connections = {
     port: 5432,
     user: 'postgres',
     password: 'swordfish',
-    database: 'MEEQS'
+    database: 'meeqs'
   },
   test: {
     adapter: 'sails-postgresql',
