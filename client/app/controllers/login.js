@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
     message: '',
     actions: {
-        login: function(credentials){
+        login(credentials){
             this.set('message', '');
             this.get('session').authenticate('authenticator:passport', credentials)
                 .then(() => {

@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
     actions: {
-        register: function(){
+        register(){
             var credentials = {
                 username: this.model.get('username'),
                 password: this.model.get('password')

@@ -2,7 +2,7 @@ import Ember from 'ember';
 import Base from 'simple-auth/authenticators/base';
 
 export default Base.extend({
-    restore: function(data){
+    restore(data){
         return new Ember.RSVP.Promise((resolve, reject) => {
             if (!Ember.isEmpty(data.token)) {
                 Ember.$.ajax({
@@ -22,7 +22,7 @@ export default Base.extend({
             }
         });
     },
-    authenticate: function(credentials){
+    authenticate(credentials){
         return new Ember.RSVP.Promise((resolve, reject) => {
             Ember.$.ajax({
                 url: '/login',
@@ -47,7 +47,7 @@ export default Base.extend({
             });
         });
     },
-    invalidate: function(data){
+    invalidate(data){
         return new Ember.RSVP.Promise((resolve, reject) => {
             Ember.$.ajax({
                 url: '/logout',
