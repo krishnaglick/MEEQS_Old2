@@ -1,4 +1,4 @@
-/*describe.only('UsersModel', function() {
+/*describe('UsersModel', function() {
 
   describe('#find()', function() {
     it('should check find function', function (done) {

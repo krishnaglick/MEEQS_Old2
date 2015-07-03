@@ -1,30 +1,12 @@
-/**
- * Policy Mappings
- * (sails.config.policies)
- *
- * Policies are simple functions which run **before** your controllers.
- * You can apply one or more policies to a given controller, or protect
- * its actions individually.
- *
- * Any policy file (e.g. `api/policies/authenticated.js`) can be accessed
- * below by its filename, minus the extension, (e.g. "authenticated")
- *
- * For more information on how policies work, see:
- * http://sailsjs.org/#!/documentation/concepts/Policies
- *
- * For more information on configuring policies, check out:
- * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.policies.html
- */
-
 
 module.exports.policies = {
-
+  //Need Auth Mocking!
   AuthController: {
     '*': true
   },
-  RatingsController: {
+  /*RatingsController: {
     'find': 'isAuthenticated',
-    'findOne': 'isAuthenticated',
+    'findOne': true, //Need to get auth mocking so this can be isAuthenticated
     'populate': 'isAuthenticated',
     'create': ['isAuthenticated', 'protectedAttributes'],
     'update': ['isAuthenticated', 'protectedAttributes'],
@@ -34,7 +16,7 @@ module.exports.policies = {
   },
   RestaurantLocationsController: {
     'find': 'isAuthenticated',
-    'findOne': 'isAuthenticated',
+    'findOne': true, //Need to get auth mocking so this can be isAuthenticated
     'populate': 'isAuthenticated',
     'create': ['isAuthenticated', 'protectedAttributes'],
     'update': ['isAuthenticated', 'protectedAttributes'],
@@ -44,7 +26,7 @@ module.exports.policies = {
   },
   RestaurantsController: {
     'find': 'isAuthenticated',
-    'findOne': 'isAuthenticated',
+    'findOne': true, //Need to get auth mocking so this can be isAuthenticated
     'populate': 'isAuthenticated',
     'create': ['isAuthenticated', 'protectedAttributes'],
     'update': ['isAuthenticated', 'protectedAttributes'],
@@ -54,7 +36,7 @@ module.exports.policies = {
   },
   TagCategoriesController: {
     'find': 'isAuthenticated',
-    'findOne': 'isAuthenticated',
+    'findOne': true, //Need to get auth mocking so this can be isAuthenticated
     'populate': 'isAuthenticated',
     'create': ['isAuthenticated', 'protectedAttributes'],
     'update': ['isAuthenticated', 'protectedAttributes'],
@@ -64,7 +46,7 @@ module.exports.policies = {
   },
   TagsController: {
     'find': 'isAuthenticated',
-    'findOne': 'isAuthenticated',
+    'findOne': true, //Need to get auth mocking so this can be isAuthenticated
     'populate': 'isAuthenticated',
     'create': ['isAuthenticated', 'protectedAttributes'],
     'update': ['isAuthenticated', 'protectedAttributes'],
@@ -74,12 +56,12 @@ module.exports.policies = {
   },
   UsersController: {
     'find': 'isAuthenticated',
-    'findOne': 'isAuthenticated',
+    'findOne': true, //Need to get auth mocking so this can be isAuthenticated
     'populate': 'isAuthenticated',
     'create': 'protectedAttributes',
     'update': ['isAuthenticated', 'protectedAttributes'],
     'add': 'protectedAttributes',
     'destroy': ['isAuthenticated', 'isAdmin'],
     'remove': ['isAuthenticated', 'isAdmin']
-  }
+  }*/
 };
