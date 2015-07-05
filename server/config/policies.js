@@ -1,12 +1,11 @@
 
 module.exports.policies = {
-  //Need Auth Mocking!
   AuthController: {
     '*': true
   },
-  /*RatingsController: {
+  RatingsController: {
     'find': 'isAuthenticated',
-    'findOne': true, //Need to get auth mocking so this can be isAuthenticated
+    'findOne': 'isAuthenticated',
     'populate': 'isAuthenticated',
     'create': ['isAuthenticated', 'protectedAttributes'],
     'update': ['isAuthenticated', 'protectedAttributes'],
@@ -16,7 +15,7 @@ module.exports.policies = {
   },
   RestaurantLocationsController: {
     'find': 'isAuthenticated',
-    'findOne': true, //Need to get auth mocking so this can be isAuthenticated
+    'findOne': 'isAuthenticated',
     'populate': 'isAuthenticated',
     'create': ['isAuthenticated', 'protectedAttributes'],
     'update': ['isAuthenticated', 'protectedAttributes'],
@@ -26,7 +25,7 @@ module.exports.policies = {
   },
   RestaurantsController: {
     'find': 'isAuthenticated',
-    'findOne': true, //Need to get auth mocking so this can be isAuthenticated
+    'findOne': 'isAuthenticated',
     'populate': 'isAuthenticated',
     'create': ['isAuthenticated', 'protectedAttributes'],
     'update': ['isAuthenticated', 'protectedAttributes'],
@@ -36,7 +35,7 @@ module.exports.policies = {
   },
   TagCategoriesController: {
     'find': 'isAuthenticated',
-    'findOne': true, //Need to get auth mocking so this can be isAuthenticated
+    'findOne': 'isAuthenticated',
     'populate': 'isAuthenticated',
     'create': ['isAuthenticated', 'protectedAttributes'],
     'update': ['isAuthenticated', 'protectedAttributes'],
@@ -46,7 +45,7 @@ module.exports.policies = {
   },
   TagsController: {
     'find': 'isAuthenticated',
-    'findOne': true, //Need to get auth mocking so this can be isAuthenticated
+    'findOne': 'isAuthenticated',
     'populate': 'isAuthenticated',
     'create': ['isAuthenticated', 'protectedAttributes'],
     'update': ['isAuthenticated', 'protectedAttributes'],
@@ -56,12 +55,12 @@ module.exports.policies = {
   },
   UsersController: {
     'find': 'isAuthenticated',
-    'findOne': true, //Need to get auth mocking so this can be isAuthenticated
+    'findOne': 'isAuthenticated',
     'populate': 'isAuthenticated',
     'create': 'protectedAttributes',
     'update': ['isAuthenticated', 'protectedAttributes'],
     'add': 'protectedAttributes',
     'destroy': ['isAuthenticated', 'isAdmin'],
     'remove': ['isAuthenticated', 'isAdmin']
-  }*/
+  }
 };

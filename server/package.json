@@ -25,7 +25,7 @@
   "scripts": {
     "test-w": "mocha -R spec --ui bdd --watch ./tests/bootstrap.test.js ./tests/**/*-test.js",
     "test": "mocha --compilers js:mocha-traceur --timeout 15000 tests/bootstrap.test.js tests/unit/**/*.test.js",
-    "debug": "node debug app.js",
+    "debug": "node-inspector debug app.js",
     "start": "node app.js"
   },
   "main": "app.js",

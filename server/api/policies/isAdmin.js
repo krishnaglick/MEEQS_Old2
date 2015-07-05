@@ -7,13 +7,19 @@
  *
  */
 
-module.exports = function ( req, res, next ) {
+module.exports = ( req, res, next ) => {
     function isAdmin(username) {
+        debugger;
         Users.findOne({ username: username }, function (err, user) {
             if (err || !user) {
+                console.log('Error: ', err);
+                console.log('User: ', user);
+                debugger;
                 return false;
             }
 
+            console.log('isAdmin:', user.isAdmin);
+            debugger;
             return user.isAdmin;
         });
     }
@@ -23,6 +29,7 @@ module.exports = function ( req, res, next ) {
     }
     else {
         res.status(401);
+        debugger;
         res.send('You\'re not an admin!')
     }
 };
