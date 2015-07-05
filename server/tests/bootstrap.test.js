@@ -15,13 +15,29 @@ before(function(done) {
     sails = server;
     if (err) return done(err);
     // here you can load fixtures, etc.
-    sails.models.users.create({
+    sails.models.users.create([
+    {
       username: 'testadmin',
       password: 'testadmin',
-      email: 'test@test.com',
+      email: 'testadmin@test.com',
       isVerified: true,
       isAdmin: true
-    }).exec((err, data) => {
+    },
+    {
+      username: 'testuserverified',
+      password: 'testuserverified',
+      email: 'testuserverified@test.com',
+      isVerified: true,
+      isAdmin: false
+    },
+    {
+      username: 'testusernotverified',
+      password: 'testusernotverified',
+      email: 'testusernotverified@test.com',
+      isVerified: false,
+      isAdmin: false
+    }
+    ]).exec((err, data) => {
       if(err) {
         done(err, sails);
       }
