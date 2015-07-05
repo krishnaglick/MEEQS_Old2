@@ -44,9 +44,8 @@ describe('UsersController', () => {
 
 	it('should delete created test user', (done) => {
 		agent
-    .get(`/api/v1/users/destroy/${createdUserID}`)
+    .del(`/api/v1/users/${createdUserID}`)
     .end((err, res) => {
-    	//console.log(err);
     	assert(res.statusCode == 200, 'User not found, did not delete');
     	assert(res.body == null, 'User not destroyed');
     	done();

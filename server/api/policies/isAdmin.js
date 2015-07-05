@@ -8,28 +8,17 @@
  */
 
 module.exports = ( req, res, next ) => {
-    function isAdmin(username) {
-        debugger;
-        Users.findOne({ username: username }, function (err, user) {
-            if (err || !user) {
-                console.log('Error: ', err);
-                console.log('User: ', user);
-                debugger;
-                return false;
-            }
-
-            console.log('isAdmin:', user.isAdmin);
-            debugger;
-            return user.isAdmin;
-        });
-    }
-
-    if(isAdmin(req.user.username)) {
-        return next();
-    }
-    else {
-        res.status(401);
-        debugger;
-        res.send('You\'re not an admin!')
-    }
+    Users.findOne({ username: req.user.username }).exec((err, user) => {
+        if(err) {
+            res.status(400);
+            res.send(err);
+        }
+        if(user && !user.isAdmin) {
+            res.status(401);
+            res.send('You\'re not an admin!');
+        }
+        if(user && user.isAdmin) {
+            return next();
+        }
+    });
 };
