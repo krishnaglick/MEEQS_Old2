@@ -4,63 +4,63 @@ module.exports.policies = {
     '*': true
   },
   RatingsController: {
-    'find': 'isAuthenticated',
-    'findOne': 'isAuthenticated',
-    'populate': 'isAuthenticated',
-    'create': ['isAuthenticated', 'protectedAttributes'],
-    'update': ['isAuthenticated', 'protectedAttributes'],
-    'add': ['isAuthenticated', 'protectedAttributes'],
-    'destroy': ['isAuthenticated', 'isAdmin'],
-    'remove': ['isAuthenticated', 'isAdmin']
+    'find': ['isAuthenticated', 'isVerified'],
+    'findOne': ['isAuthenticated', 'isVerified'],
+    'populate': ['isAuthenticated', 'isVerified'],
+    'create': ['isAuthenticated', 'isVerified', 'protectedAttributes'],
+    'update': ['isAuthenticated', 'isVerified', 'protectedAttributes'],
+    'add': ['isAuthenticated', 'isVerified', 'protectedAttributes'],
+    'destroy': ['isAuthenticated', 'isVerified', 'isAdmin'],
+    'remove': ['isAuthenticated', 'isVerified', 'isAdmin']
   },
   RestaurantLocationsController: {
-    'find': 'isAuthenticated',
-    'findOne': 'isAuthenticated',
-    'populate': 'isAuthenticated',
-    'create': ['isAuthenticated', 'protectedAttributes'],
-    'update': ['isAuthenticated', 'protectedAttributes'],
-    'add': ['isAuthenticated', 'protectedAttributes'],
-    'destroy': ['isAuthenticated', 'isAdmin'],
-    'remove': ['isAuthenticated', 'isAdmin']
+    'find': ['isAuthenticated', 'isVerified'],
+    'findOne': ['isAuthenticated', 'isVerified'],
+    'populate': ['isAuthenticated', 'isVerified'],
+    'create': ['isAuthenticated', 'isVerified', 'protectedAttributes'],
+    'update': ['isAuthenticated', 'isVerified', 'protectedAttributes'],
+    'add': ['isAuthenticated', 'isVerified', 'protectedAttributes'],
+    'destroy': ['isAuthenticated', 'isVerified', 'isAdmin'],
+    'remove': ['isAuthenticated', 'isVerified', 'isAdmin']
   },
   RestaurantsController: {
-    'find': 'isAuthenticated',
-    'findOne': 'isAuthenticated',
-    'populate': 'isAuthenticated',
-    'create': ['isAuthenticated', 'protectedAttributes'],
-    'update': ['isAuthenticated', 'protectedAttributes'],
-    'add': ['isAuthenticated', 'protectedAttributes'],
-    'destroy': ['isAuthenticated', 'isAdmin'],
-    'remove': ['isAuthenticated', 'isAdmin']
+    'find': ['isAuthenticated', 'isVerified'],
+    'findOne': ['isAuthenticated', 'isVerified'],
+    'populate': ['isAuthenticated', 'isVerified'],
+    'create': ['isAuthenticated', 'isVerified', 'protectedAttributes'],
+    'update': ['isAuthenticated', 'isVerified', 'protectedAttributes'],
+    'add': ['isAuthenticated', 'isVerified', 'protectedAttributes'],
+    'destroy': ['isAuthenticated', 'isVerified', 'isAdmin'],
+    'remove': ['isAuthenticated', 'isVerified', 'isAdmin']
   },
   TagCategoriesController: {
-    'find': 'isAuthenticated',
-    'findOne': 'isAuthenticated',
-    'populate': 'isAuthenticated',
-    'create': ['isAuthenticated', 'protectedAttributes'],
-    'update': ['isAuthenticated', 'protectedAttributes'],
-    'add': ['isAuthenticated', 'protectedAttributes'],
-    'destroy': ['isAuthenticated', 'isAdmin'],
-    'remove': ['isAuthenticated', 'isAdmin']
+    'find': ['isAuthenticated', 'isVerified'],
+    'findOne': ['isAuthenticated', 'isVerified'],
+    'populate': ['isAuthenticated', 'isVerified'],
+    'create': ['isAuthenticated', 'isVerified', 'protectedAttributes'],
+    'update': ['isAuthenticated', 'isVerified', 'protectedAttributes'],
+    'add': ['isAuthenticated', 'isVerified', 'protectedAttributes'],
+    'destroy': ['isAuthenticated', 'isVerified', 'isAdmin'],
+    'remove': ['isAuthenticated', 'isVerified', 'isAdmin']
   },
   TagsController: {
-    'find': 'isAuthenticated',
-    'findOne': 'isAuthenticated',
-    'populate': 'isAuthenticated',
-    'create': ['isAuthenticated', 'protectedAttributes'],
-    'update': ['isAuthenticated', 'protectedAttributes'],
-    'add': ['isAuthenticated', 'protectedAttributes'],
-    'destroy': ['isAuthenticated', 'isAdmin'],
-    'remove': ['isAuthenticated', 'isAdmin']
+    'find': ['isAuthenticated', 'isVerified'],
+    'findOne': ['isAuthenticated', 'isVerified'],
+    'populate': ['isAuthenticated', 'isVerified'],
+    'create': ['isAuthenticated', 'isVerified', 'protectedAttributes'],
+    'update': ['isAuthenticated', 'isVerified', 'protectedAttributes'],
+    'add': ['isAuthenticated', 'isVerified', 'protectedAttributes'],
+    'destroy': ['isAuthenticated', 'isVerified', 'isAdmin'],
+    'remove': ['isAuthenticated', 'isVerified', 'isAdmin']
   },
   UsersController: {
-    'find': 'isAuthenticated',
-    'findOne': 'isAuthenticated',
-    'populate': 'isAuthenticated',
-    'create': 'protectedAttributes',
-    'update': ['isAuthenticated', 'protectedAttributes'],
-    'add': 'protectedAttributes',
-    'destroy': ['isAuthenticated', 'isAdmin'],
-    'remove': ['isAuthenticated', 'isAdmin']
+    'find': ['isAuthenticated', 'isVerified'],
+    'findOne': ['isAuthenticated', 'isVerified'],
+    'populate': ['isAuthenticated', 'isVerified'],
+    'create': ['isAuthenticated', 'isVerified', 'protectedAttributes'],
+    'update': ['isAuthenticated', 'isVerified', 'protectedAttributes'],
+    'add': ['isAuthenticated', 'isVerified', 'protectedAttributes'],
+    'destroy': ['isAuthenticated', 'isVerified', 'isAdmin'],
+    'remove': ['isAuthenticated', 'isVerified', 'isAdmin']
   }
 };

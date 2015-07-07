@@ -1,27 +1,34 @@
 var request = require('supertest'),
-		agent;
+		admin,
+    user;
 var assert = require('chai').assert;
 
-describe('AdminLogin', () => {
-	it('should login as admin', (done) => {
-		agent = request.agent(sails.hooks.http.app);
-		agent
-			.post('/login')
-			.send({username: 'testadmin', password: 'testadmin'})
-			.end((err, res) => {
-			  done();
-			});
-	});
+describe('Setup Users', () => {
+  it('should login as an admin', (done) => {
+    admin = request.agent(sails.hooks.http.app);
+    admin
+      .post('/login')
+      .send({username: 'testadmin', password: 'testadmin'})
+      .end((err, res) => { done(); });
+  });
+
+  it('should login as a user', (done) => {
+    user = request.agent(sails.hooks.http.app);
+    user
+      .post('/login')
+      .send({username: 'testuserverified', password: 'testuserverified'})
+      .end((err, res) => { done(); });
+  });
 });
 
 describe('UsersController', () => {
 	var createdUserID;
 	it('should create a user', (done) => {
-		agent
+   admin
     .post('/api/v1/users')
     .send({users: { username: 'test', password: 'test12' }})
     .end((err, res) => {
-    	assert(res.statusCode == 201, 'User was not created');
+    	assert(res.statusCode == 201, 'User was not created, status code');
     	let users = res.body.users;
     	assert.ok(users, 'User was not created');
     	createdUserID = users.userID
@@ -31,7 +38,7 @@ describe('UsersController', () => {
 	});
 
 	it('should find the created test user', (done) => {
-		agent
+		admin
     .get(`/api/v1/users/${createdUserID}`)
     .end((err, res) => {
     	assert(res.statusCode == 200, 'User not found, status code.');
@@ -43,7 +50,7 @@ describe('UsersController', () => {
 	});
 
 	it('should delete created test user', (done) => {
-		agent
+		admin
     .del(`/api/v1/users/${createdUserID}`)
     .end((err, res) => {
     	assert(res.statusCode == 200, 'User not found, did not delete');
