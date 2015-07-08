@@ -31,7 +31,7 @@ describe('UsersController', () => {
     	assert(res.statusCode == 201, 'User was not created, status code');
     	let users = res.body.users;
     	assert.ok(users, 'User was not created');
-    	createdUserID = users.userID
+    	createdUserID = users.userID;
     	assert.ok(createdUserID, 'Don\'t have user id');
     	done();
     });
@@ -53,8 +53,11 @@ describe('UsersController', () => {
 		admin
     .del(`/api/v1/users/${createdUserID}`)
     .end((err, res) => {
-    	assert(res.statusCode == 200, 'User not found, did not delete');
-    	assert(res.body == null, 'User not destroyed');
+      assert.notOk(err, `Error deleting user: \n${err}`);
+    	assert(res.statusCode == 200,
+        `User not found, did not delete.
+        \nStatus Code: ${res.statusCode}`);
+    	assert.ok(res.body, 'User not destroyed');
     	done();
     });
 	});

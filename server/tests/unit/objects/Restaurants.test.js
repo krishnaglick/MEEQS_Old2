@@ -28,7 +28,10 @@ describe('Restaurant Tests', () => {
     .post('/api/v1/restaurants')
     .send({restaurants: { name: 'test restaurant', description: 'I am a test restaurant!' }})
     .end((err, res) => {
-    	assert(res.statusCode == 201, 'Restaurant was not created, status code');
+    	assert.notOk(err, `Error creating restaurant: \n${err}`);
+    	assert(res.statusCode == 201,
+    		`Restaurant was not created.
+    		\nStatus Code: ${res.statusCode}`);
     	let restaurant = res.body.restaurants;
     	assert.ok(restaurant, 'Restaurant was not created, returned restaurant');
     	createdRestaurantID = restaurant.restaurantID;
@@ -41,11 +44,28 @@ describe('Restaurant Tests', () => {
 		user
 			.del(`/api/v1/restaurants/${createdRestaurantID}`)
 			.end((err, res) => {
-				assert.ok(err, 'No error when user tries to delete something!');
+				assert.ok(err, 'User did not receive error when trying to perform admin action (deleting a restaurant)');
 				assert.ok(createdRestaurantID, 'Restaurant ID lost :/');
-				assert(res.statusCode == 401, 'User is somehow authorized to delete things');
+				assert(res.statusCode == 401,
+					`User is somehow authorized to delete things.
+					\nStatus Code: ${res.statusCode}`);
 				done();
 			});
+	});
+
+	it('should create test tag categories', (done) => {
+		user
+		.post('/api/v1/tagCategories')
+		.send({tagCategories: {name: 'testTagCategory1', description: 'testTagCategoryDesc1'}})
+		//Below two lines did not work, need to be able to post arrays!
+		//.send({tagCategories: {name: 'testTagCategory2', description: 'testTagCategoryDesc2'}})
+		//.send({tagCategories: {name: 'testTagCategory3', description: 'testTagCategoryDesc3'}})
+		.end((err, res) => {
+			assert.notOk(err, `There was an error: ${err}`);
+			assert(res.statusCode == 201, 
+				`Not created. Status Code: ${res.statusCode}`);
+			done();
+		});
 	});
 
 	it('should create test tags', (done) => {
@@ -54,12 +74,16 @@ describe('Restaurant Tests', () => {
 			.send({tags: {name: 'test'}})
 			.end((err, res) => {
 				//WIP
-				if(err) console.log(err);
+				assert.notOk(
+					err,
+					`Error creating test tags.
+					\nError: \n${err}`);
 				done();
 			});
 	});
 
 	it('should create a restaurant location', (done) => {
+		assert.ok(createdRestaurantID, 'what the fuck');
 		user
 			.post('/api/v1/restaurantLocations')
 			.send({
@@ -68,7 +92,11 @@ describe('Restaurant Tests', () => {
 				placeID: 'WIP'
 			})
 			.end((err, res) => {
-				if(err) console.log(err);
+				assert.notOk(
+					err,
+					`There was an error creating a restaurant location.
+					Restaurant ID: ${createdRestaurantID}
+					Error: ${console.log(err)}`);
 				done(); //WIP
 			});
 	});
@@ -79,7 +107,7 @@ describe('Restaurant Tests', () => {
 			.end((err, res) => {
 				assert.notOk(err, `There was an error: ${err}`);
 				assert(res.statusCode == 200, 'Restaurant was not deleted');
-				assert(res.body == null, 'Restaurant not destroyed');
+				assert.ok(res.body, 'Restaurant not destroyed');
 				done();
 			});
 	});
