@@ -23,9 +23,9 @@
     "sails-postgresql": "^0.10.15"
   },
   "scripts": {
-    "test-w": "mocha -R spec --ui bdd --watch ./tests/**/*-test.js",
-    "test": "node tests/runner.js",
-    "debug": "node debug app.js",
+    "test-w": "mocha -R spec --ui bdd --watch ./tests/bootstrap.test.js ./tests/**/*-test.js",
+    "test": "mocha --compilers js:mocha-traceur --timeout 15000 tests/bootstrap.test.js tests/unit/**/*.test.js",
+    "debug": "node-inspector debug app.js",
     "start": "node app.js"
   },
   "main": "app.js",

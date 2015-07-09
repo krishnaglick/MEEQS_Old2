@@ -31,8 +31,7 @@ module.exports = {
   		required: true
   	},
   	email: {
-  		type: 'string',
-  		required: false
+  		type: 'string'
   	},
   	isVerified: {
   		type: 'boolean',
