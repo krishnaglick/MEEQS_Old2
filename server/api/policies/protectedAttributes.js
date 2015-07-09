@@ -11,6 +11,9 @@ var actionUtil = require( '../../node_modules/sails/lib/hooks/blueprints/actionU
 
 module.exports = function ( req, res, next ) {
 
+    if(!req.options.model)
+        return next();
+    
     var Model = actionUtil.parseModel( req );
 
     if ( Model.protectedAttributes && req) {

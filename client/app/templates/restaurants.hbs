@@ -1,1 +1,28 @@
-{{outlet}}
+
+<div class="ui cards">
+    {{#each restaurant in model }}
+        <div class="card">
+            {{#link-to "restaurant" restaurant class="image"}}
+                <img src="http://placehold.it/200x200">
+            {{/link-to}}
+            <div class="content">
+                {{#link-to "restaurant" restaurant class="header" }}{{ restaurant.name }}{{/link-to}}
+                <div class="meta">
+                    meta info
+                </div>
+                <div class="description">
+                    {{ restaurant.description }}
+                </div>
+            </div>
+            <div class="extra content">
+                <div class="ui labels">
+                    {{#each restaurant.tags as |tag| }}
+                        <div class="label">
+                            {{ tag.name }}
+                        </div>
+                    {{/each }}
+                </div>
+            </div>
+        </div>
+    {{/each }}
+</div>

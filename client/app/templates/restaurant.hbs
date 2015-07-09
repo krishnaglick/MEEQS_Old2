@@ -1,0 +1,38 @@
+
+<img src="http://placehold.it/200x200">
+<h2 class="ui header">{{ restaurant.name }}</h2>
+<p>{{ restaurant.description }}</p>
+
+<div class="ui labels">
+    {{#each restaurant.tags as |tag| }}
+        <div class="label">
+            {{ tag.name }}
+        </div>
+    {{/each }}
+</div>
+
+{{#each model.location as |location| }}
+    <div class="card">
+        {{#link-to "restaurant-location" location class="image"}}
+            <img src="http://placehold.it/200x200">
+        {{/link-to}}
+        <div class="content">
+            {{#link-to "restaurant-location" location class="header" }}{{ location.name }}{{/link-to}}
+            <div class="meta">
+                meta info
+            </div>
+            <div class="description">
+                {{ location.description }}
+            </div>
+        </div>
+        <div class="extra content">
+            <div class="ui labels">
+                {{#each location.tags as |tag| }}
+                    <div class="label">
+                        {{ tag.name }}
+                    </div>
+                {{/each }}
+            </div>
+        </div>
+    </div>
+{{/each }}
