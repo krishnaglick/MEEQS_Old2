@@ -53,11 +53,11 @@ describe('UsersController', () => {
 		admin
     .del(`/api/v1/users/${createdUserID}`)
     .end((err, res) => {
+      if(err) console.log(err);
       assert.notOk(err, `Error deleting user: \n${err}`);
     	assert(res.statusCode == 200,
         `User not found, did not delete.
         \nStatus Code: ${res.statusCode}`);
-    	assert.ok(res.body, 'User not destroyed');
     	done();
     });
 	});

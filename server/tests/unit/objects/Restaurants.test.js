@@ -68,16 +68,19 @@ describe('Restaurant Tests', () => {
 		});
 	});
 
+	var createdTagID;
 	it('should create test tags', (done) => {
 		user
 			.post('/api/v1/tags')
 			.send({tags: {name: 'test'}})
 			.end((err, res) => {
-				//WIP
 				assert.notOk(
 					err,
 					`Error creating test tags.
 					\nError: \n${err}`);
+				let tag = res.body.tags;
+				createdTagID = tag.tagID;
+				assert.ok(createdTagID, 'No tag ID!');
 				done();
 			});
 	});
@@ -86,18 +89,19 @@ describe('Restaurant Tests', () => {
 		assert.ok(createdRestaurantID, 'what the fuck');
 		user
 			.post('/api/v1/restaurantLocations')
-			.send({
+			.send({restaurantLocations: {
 				restaurantID: createdRestaurantID,
-				tags: 'test',
+				tags: createdTagID,
 				placeID: 'WIP'
-			})
+			}})
 			.end((err, res) => {
+				if(err) console.log(err);
 				assert.notOk(
 					err,
 					`There was an error creating a restaurant location.
 					Restaurant ID: ${createdRestaurantID}
-					Error: ${console.log(err)}`);
-				done(); //WIP
+					Error: ${err}`);
+				done();
 			});
 	});
 
@@ -105,9 +109,9 @@ describe('Restaurant Tests', () => {
 		admin
 			.del(`/api/v1/restaurants/${createdRestaurantID}`)
 			.end((err, res) => {
+				if(err) console.log(err);
 				assert.notOk(err, `There was an error: ${err}`);
 				assert(res.statusCode == 200, 'Restaurant was not deleted');
-				assert.ok(res.body, 'Restaurant not destroyed');
 				done();
 			});
 	});
