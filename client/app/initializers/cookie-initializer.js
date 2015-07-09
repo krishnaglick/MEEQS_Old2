@@ -6,7 +6,7 @@ export function initialize(container, application) {
 }
 
 export default Ember.Application.initializer({
-    name: 'cookie-initializer',
-    after: 'cookie',
+    name: 'cookies',
+    after: ['cookie'],
     initialize: initialize
 });

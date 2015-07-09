@@ -9,7 +9,7 @@ export function initialize(container, application) {
 }
 
 export default Ember.Application.initializer({
-    name: 'authentication',
+    name: 'authorization',
     before: 'simple-auth',
     initialize: initialize
 });
