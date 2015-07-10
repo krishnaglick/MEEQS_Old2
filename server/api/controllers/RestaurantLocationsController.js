@@ -10,10 +10,33 @@ var GooglePlaces = require('../../node_modules/googleplaces/index.js');
 var googlePlaces = new GooglePlaces(config.apiKey, config.outputFormat);
 
 module.exports = {
+  google : (req, res) => {
+    var coords = req.cookies.location;
+
+    req.query.types = config.placeTypes;
+    req.query.location = coords;
+
+    googlePlaces.placeSearch(req.query, (err, gRes) => {
+      if(err) throw err;
+      if(gRes.results.length === 0) {
+        res.status(400);
+        res.send({
+          message: 'Place search must not return 0 results.',
+          status: gRes.status,
+          error: gRes.error_message
+        });
+      }
+      else {
+        res.status(200);
+        res.send(gRes.results);
+      }
+    });
+  },
+
   findRecords : (req, res) => {
     // Look up the model
     var Model = actionUtil.parseModel(req);
-
+    debugger;
 
     // If an `id` param was specified, use the findOne blueprint action
     // to grab the particular instance with its primary key === the value
