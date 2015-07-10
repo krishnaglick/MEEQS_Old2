@@ -87,19 +87,19 @@ module.exports.connections = {
   //otherwise dependent on your setup
   meeqs: {
     adapter: 'sails-postgresql',
-    host: 'localhost',
+    host: '99.125.202.24',
     port: 5432,
-    user: 'postgres',
-    password: 'swordfish',
+    user: 'pi',
+    password: '',
     database: 'meeqs'
   },
   test: {
     adapter: 'sails-postgresql',
-    host: 'localhost',
+    host: '99.125.202.24',
     port: 5432,
-    user: 'postgres',
-    password: 'swordfish',
-    database: 'test'
+    user: 'pi',
+    password: '',
+    database: 'meeqs_test'
   },
 
   /***************************************************************************
