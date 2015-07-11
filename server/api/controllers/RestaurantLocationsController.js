@@ -9,34 +9,36 @@ var config = require('../../config/googleplaces.config.js');
 var GooglePlaces = require('../../node_modules/googleplaces/index.js');
 var googlePlaces = new GooglePlaces(config.apiKey, config.outputFormat);
 
-module.exports = {
-  google : (req, res) => {
-    var coords = req.cookies.location;
+var actionUtil = require('../../node_modules/sails/lib/hooks/blueprints/actionUtil.js'),
+  _ = require('lodash');
 
-    req.query.types = config.placeTypes;
-    req.query.location = coords;
+var getGoogleData = (records, req, res) => {
+  var coords = req.cookies.location;
 
-    googlePlaces.placeSearch(req.query, (err, gRes) => {
-      if(err) throw err;
-      if(gRes.results.length === 0) {
-        res.status(400);
-        res.send({
-          message: 'Place search must not return 0 results.',
-          status: gRes.status,
-          error: gRes.error_message
-        });
-      }
-      else {
-        res.status(200);
-        res.send(gRes.results);
-      }
+  req.query.types = config.placeTypes;
+  req.query.location = coords;
+  var bad = 0;
+  _.each(records, (record) => {
+    if(record && record.placeID) req.query.placeid = record.placeID;
+    googlePlaces.placeDetailsRequest(req.query, (err, gRes) => {
+        if(err) throw err;
+        if(gRes.result) {
+          record.googleData = gRes.result;
+        }
+
+        bad++;
+        if(bad == records.length) {
+          res.ok(records);
+        }
     });
-  },
+  });
+};
 
-  findRecords : (req, res) => {
+module.exports = {
+  find : (req, res) => {
     // Look up the model
     var Model = actionUtil.parseModel(req);
-    debugger;
+    //debugger;
 
     // If an `id` param was specified, use the findOne blueprint action
     // to grab the particular instance with its primary key === the value
@@ -54,19 +56,10 @@ module.exports = {
       .sort( actionUtil.parseSort(req) );
     // TODO: .populateEach(req.options);
     query = actionUtil.populateEach(query, req);
+    //debugger;
     query.exec(function found(err, matchingRecords) {
       if (err) return res.serverError(err);
-      // Only `.watch()` for new instances of the model if
-      // `autoWatch` is enabled.
-      if (req._sails.hooks.pubsub && req.isSocket) {
-        Model.subscribe(req, matchingRecords);
-        if (req.options.autoWatch) { Model.watch(req); }
-        // Also subscribe to instances of all associated models
-        _.each(matchingRecords, function (record) {
-          actionUtil.subscribeDeep(req, record);
-        });
-      }
-      res.ok(matchingRecords);
+      getGoogleData(matchingRecords, req, res);
     });
   }
 };
