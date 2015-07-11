@@ -32,7 +32,7 @@ export default Base.extend({
                     password: credentials.password
                 }),
                 contentType: 'application/json'
-            }).then((response, data1, data2) => {
+            }).then((response) => {
                 Ember.run(() => {
                     if(response.user){
                         resolve({ token: response.token, user: response.user });
@@ -40,23 +40,23 @@ export default Base.extend({
                         reject(response.message);
                     }
                 });
-            }, (xhr, status, error) => {
+            }, (xhr) => {
                 Ember.run(() => {
                     reject(xhr.responseJSON.message);
                 });
             });
         });
     },
-    invalidate(data){
+    invalidate(){
         return new Ember.RSVP.Promise((resolve, reject) => {
             Ember.$.ajax({
                 url: '/logout',
                 type: 'GET'
-            }).then((response, data1, data2) => {
+            }).then(() => {
                 Ember.run(() => {
                     resolve();
                 });
-            }, (xhr, status, error) => {
+            }, (xhr) => {
                 Ember.run(() => {
                     reject(xhr.responseJSON.message);
                 });

@@ -1,18 +1,7 @@
 
-<form class="ui form" {{action 'login' model on='submit' }}>
-    <h3 class="ui dividing header">Login</h3>
-    <div class="field">
-        <label>Username</label>
-        {{ input type='text' value=model.username }}
-    </div>
-    <div class="field">
-        <label>Password</label>
-        {{ input type='password' value=model.password }}
-    </div>
-    {{#if message }}
-        <div class="ui red message">
-            <div class="header">{{ message }}</div>
-        </div>
-    {{/if}}
-    <button class="ui submit button">Login</button>
-</form>
+{{#model-form action='login' submitLabel='Login' formLabel='Login'}}
+    {{form-field type='text' value=model.username label='Username'}}
+    {{form-field type='password' value=model.password label='Password'}}
+    
+    {{message-widget messages=messages color='red'}}
+{{/model-form}}
