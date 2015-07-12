@@ -6,28 +6,37 @@
 */
 
 module.exports = {
-	protectedAttributes: function () {
-	    return [ "restaurantID" ];
-	},
+  protectedAttributes: function () {
+      return [ "restaurantID" ];
+  },
 
-	attributes: {
-		restaurantID: {
-			type: 'integer',
-			index: true,
-			primaryKey: true,
-			unique: true,
-			autoIncrement: true
-		},
-		name: {
-			type: 'string',
-			unique: false,
-			required: true
-		},
-		description: {
-			type: 'string',
-			required: false,
-			unique: false
-		}
-	}
+  attributes: {
+    restaurantID: {
+      type: 'integer',
+      index: true,
+      primaryKey: true,
+      unique: true,
+      autoIncrement: true
+    },
+    name: {
+      type: 'string',
+      unique: false,
+      required: true
+    },
+    description: {
+      type: 'string',
+      required: false,
+      unique: false
+    },
+    isDeleted: {
+      type: 'boolean',
+      required: false,
+      default: false
+    },
+    toJSON : function() {
+      var obj = this.toObject();
+      return obj.isDeleted ? {} : obj;
+    }
+  }
 };
 

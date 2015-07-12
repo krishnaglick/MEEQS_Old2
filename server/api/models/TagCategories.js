@@ -26,7 +26,16 @@ module.exports = {
   	description: {
   		type: 'string',
   		required: false
-  	}
+  	},
+    isDeleted: {
+      type: 'boolean',
+      required: false,
+      default: false
+    },
+    toJSON : function() {
+      var obj = this.toObject();
+      return obj.isDeleted ? {} : obj;
+    }
   }
 };
 

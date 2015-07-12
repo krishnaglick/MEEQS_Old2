@@ -41,10 +41,15 @@ module.exports = {
   		type: 'boolean',
   		defaultsTo: false
   	},
+    isDeleted: {
+      type: 'boolean',
+      required: false,
+      default: false
+    },
     toJSON: function() {
         var obj = this.toObject();
         delete obj.password;
-        return obj;
+        return obj.isDeleted ? {} : obj;
     }
   },
   beforeCreate: function(user, cb) {

@@ -80,7 +80,7 @@ module.exports = {
         if(gRes.result) {
           let googleData = Utils.deleteUnwantedProperties(gRes.result, unwantedProperties);
           _.merge(matchingRecord, googleData);
-          res.ok(matchingRecord);
+          res.ok({restaurantLocations: matchingRecord});
         }
         else {
           res.status(204);
