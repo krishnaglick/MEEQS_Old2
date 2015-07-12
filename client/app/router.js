@@ -8,7 +8,9 @@ var Router = Ember.Router.extend({
 Router.map(function() {
     this.route('index', { path: '/' });
 
-    this.route('restaurant-locations', { path: '/restaurantLocations' });
+    this.route('restaurant-locations', { path: '/restaurantLocations' }, function(){
+        this.route('results', { path: '/search' });
+    });
     this.route('restaurant-location', { path: '/restaurantLocations/:restaurantLocation_id' });
     this.route('restaurants', { path: '/restaurants' });
     this.route('restaurant', { path: '/restaurants/:restaurant_id' });
@@ -18,6 +20,7 @@ Router.map(function() {
     this.route('login', { path: '/login' });
     this.route('register', { path: '/register' });
     this.route('profile', { path: '/profile' });
+    this.route('logout', { path: '/logout' });
 });
 
 export default Router;
