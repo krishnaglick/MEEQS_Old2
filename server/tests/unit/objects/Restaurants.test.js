@@ -92,7 +92,7 @@ describe('Restaurant Tests', () => {
 			.send({restaurantLocations: {
 				restaurantID: createdRestaurantID,
 				tags: createdTagID,
-				placeID: 'WIP'
+				place_id: 'WIP'
 			}})
 			.end((err, res) => {
 				if(err) console.log(err);

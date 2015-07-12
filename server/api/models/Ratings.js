@@ -63,6 +63,20 @@ module.exports = {
         type: 'integer',
         required: true,
         defaultsTo: 0
+    },
+    getAverageRating : function() {
+        return (
+            this.menuSelection +
+            this.environment +
+            this.costEfficiency +
+            this.productQuality +
+            this.service
+        ) / 5;
+    },
+    toJSON : function() {
+        var obj = this.toObject();
+        obj.averageRating = this.getAverageRating();
+        return obj;
     }
   }
 };

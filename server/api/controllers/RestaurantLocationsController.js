@@ -5,61 +5,88 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-var config = require('../../config/googleplaces.config.js');
-var GooglePlaces = require('../../node_modules/googleplaces/index.js');
-var googlePlaces = new GooglePlaces(config.apiKey, config.outputFormat);
+var actionUtil = require('../../node_modules/sails/lib/hooks/blueprints/actionUtil.js');
 
-var actionUtil = require('../../node_modules/sails/lib/hooks/blueprints/actionUtil.js'),
-  _ = require('lodash');
-
-var getGoogleData = (records, req, res) => {
-  var coords = req.cookies.location;
-
-  req.query.types = config.placeTypes;
-  req.query.location = coords;
-  var bad = 0;
-  _.each(records, (record) => {
-    if(record && record.placeID) req.query.placeid = record.placeID;
-    googlePlaces.placeDetailsRequest(req.query, (err, gRes) => {
-        if(err) throw err;
-        if(gRes.result) {
-          record.googleData = gRes.result;
-        }
-
-        bad++;
-        if(bad == records.length) {
-          res.ok(records);
-        }
-    });
-  });
-};
+var unwantedProperties = [
+  'rating',
+  'ratings',
+  'scope',
+  'reference',
+  'id',
+  'adr_address',
+  'formatted_address',
+  'international_phone_number',
+  'reviews',
+  'user_ratings_total'
+];
 
 module.exports = {
   find : (req, res) => {
-    // Look up the model
-    var Model = actionUtil.parseModel(req);
-    //debugger;
+    let searchOptions = req.query;
+    searchOptions.location = req.cookies.locations;
 
-    // If an `id` param was specified, use the findOne blueprint action
-    // to grab the particular instance with its primary key === the value
-    // of the `id` param.   (mainly here for compatibility for 0.9, where
-    // there was no separate `findOne` action)
-    if ( actionUtil.parsePk(req) ) {
-      return require('./findOne')(req,res);
-    }
-
-    // Lookup for records that match the specified criteria
-    var query = Model.find()
-      .where( actionUtil.parseCriteria(req) )
-      .limit( actionUtil.parseLimit(req) )
-      .skip( actionUtil.parseSkip(req) )
-      .sort( actionUtil.parseSort(req) );
-    // TODO: .populateEach(req.options);
-    query = actionUtil.populateEach(query, req);
-    //debugger;
-    query.exec(function found(err, matchingRecords) {
+    Google.getPlacesNearMe(searchOptions, (err, gRes) => {
       if (err) return res.serverError(err);
-      getGoogleData(matchingRecords, req, res);
+      if(gRes.results) {
+        mergeGoogleResultsIntoMEEQS(gRes.results, res);
+      }
+      else {
+        res.status(204);
+        res.send({message: 'No results'});
+      }
+    });
+
+    var mergeGoogleResultsIntoMEEQS = (googleData, res) => {
+      let Model = actionUtil.parseModel(req);
+
+      if ( actionUtil.parsePk(req) ) {
+        return require('./findOne')(req,res);
+      }
+
+      var query = Model.find()
+        .where( actionUtil.parseCriteria(req) )
+        .limit( actionUtil.parseLimit(req) )
+        .skip( actionUtil.parseSkip(req) )
+        .sort( actionUtil.parseSort(req) );
+
+      query = actionUtil.populateEach(query, req);
+
+      query.exec((err, records) => {
+        if (err) return res.serverError(err);
+
+        let cleanedRecords = Utils.deleteUnwantedProperties(records, unwantedProperties);
+        let cleanedGoogleData = Utils.deleteUnwantedProperties(googleData, unwantedProperties);
+
+        let mergedResults = Utils.mergeObjectArraysOnProperty(cleanedGoogleData, cleanedRecords, 'place_id');
+
+        res.ok(mergedResults);
+      });
+    };
+  },
+
+  findOne : (req, res) => {
+    let Model = actionUtil.parseModel(req);
+    let pk = actionUtil.requirePk(req);
+
+    var query = Model.findOne(pk);
+    query = actionUtil.populateEach(query, req);
+    query.exec(function found(err, matchingRecord) {
+      if (err) return res.serverError(err);
+      if(!matchingRecord) return res.notFound('No record found with the specified `id`.');
+      if(!matchingRecord.place_id) matchingRecord.place_id = '';
+
+      Google.getPlaceDetails(matchingRecord.place_id, (err, gRes) => {
+        if (err) return res.serverError(err);
+        if(gRes.result) {
+          let googleData = Utils.deleteUnwantedProperties(gRes.result, unwantedProperties);
+          _.merge(matchingRecord, googleData);
+          res.ok(matchingRecord);
+        }
+        else {
+          res.status(204);
+          res.send({message: 'No results'});
+        }
+      });
     });
   }
 };
