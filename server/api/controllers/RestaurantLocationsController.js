@@ -59,7 +59,7 @@ module.exports = {
 
         let mergedResults = Utils.mergeObjectArraysOnProperty(cleanedGoogleData, cleanedRecords, 'place_id');
 
-        res.ok(mergedResults);
+        res.ok({restaurantLocations: mergedResults});
       });
     };
   },
@@ -80,7 +80,7 @@ module.exports = {
         if(gRes.result) {
           let googleData = Utils.deleteUnwantedProperties(gRes.result, unwantedProperties);
           _.merge(matchingRecord, googleData);
-          res.ok({restaurantLocations: matchingRecord});
+          res.ok(matchingRecord);
         }
         else {
           res.status(204);
