@@ -30,7 +30,7 @@ module.exports = {
   		type: 'integer',
   		required: false
   	},
-  	placeID: {
+  	place_id: {
   		type: 'string',
   		required: true
   	}
