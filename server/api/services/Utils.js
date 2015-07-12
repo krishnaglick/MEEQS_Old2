@@ -24,5 +24,20 @@ module.exports = {
     }
 
     return alpha;
+  },
+
+  deleteUnwantedProperties : (alpha, properties) => {
+    if(Array.isArray(alpha)) {
+      for (var i = alpha.length - 1; i >= 0; i--) {
+        alpha[i] = Utils.deleteUnwantedProperties(alpha[i], properties);
+      }
+    }
+    else {
+      _.each(properties, (property) => {
+        delete alpha[property];
+      });
+    }
+
+    return alpha;
   }
 };

@@ -30,6 +30,10 @@ module.exports = {
   		type: 'integer',
   		required: false
   	},
+    ratings: {
+      collection: 'Ratings',
+      via: 'restaurantLocationID'
+    },
   	place_id: {
   		type: 'string',
   		required: true

@@ -16,5 +16,9 @@ module.exports = {
     searchOptions.types = config.placeTypes;
 
     googlePlaces.placeSearch(searchOptions, callback);
+  },
+
+  getPlaceDetails : (place_id, callback) => {
+    googlePlaces.placeDetailsRequest({placeid: place_id}, callback);
   }
 };
