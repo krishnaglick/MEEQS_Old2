@@ -37,7 +37,16 @@ module.exports = {
   	place_id: {
   		type: 'string',
   		required: true
-  	}
+  	},
+    isDeleted: {
+      type: 'boolean',
+      required: false,
+      default: false
+    },
+    toJSON : function() {
+      var obj = this.toObject();
+      return obj.isDeleted ? {} : obj;
+    }
   }
 };
 

@@ -64,6 +64,11 @@ module.exports = {
         required: true,
         defaultsTo: 0
     },
+    isDeleted: {
+      type: 'boolean',
+      required: false,
+      default: false
+    },
     getAverageRating : function() {
         return (
             this.menuSelection +
@@ -76,7 +81,7 @@ module.exports = {
     toJSON : function() {
         var obj = this.toObject();
         obj.averageRating = this.getAverageRating();
-        return obj;
+        return obj.isDeleted ? {} : obj;
     }
   }
 };
