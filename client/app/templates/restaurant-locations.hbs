@@ -1,0 +1,13 @@
+
+{{#segment-widget}}
+    {{#model-form action='restaurantSearch' submitLabel='Search!' formLabel='Search for Restaurants'}}
+        {{form-field type='text' value=keyword label='Keyword'}}
+        {{form-field type='number' value=minprice label='Minimum Price'}}
+        {{form-field type='number' value=maxprice label='Maximum Price'}}
+        {{message-widget messages=messages color='red'}}
+    {{/model-form}}
+{{/segment-widget}}
+
+{{#segment-widget}}
+    {{location-list-widget locations=model}}
+{{/segment-widget}}

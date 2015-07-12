@@ -2,7 +2,7 @@
     <div class="ui centered grid">
         <div class="six wide column">
             <h1 class="ui header" id="title">
-                {{#link-to "index" }}
+                {{#link-to "index"}}
                     MEEQS
                 {{/link-to}}
             </h1>
@@ -10,7 +10,7 @@
         <div class="six wide right aligned column">
             <div class="row">
                 {{#if session.isAuthenticated}}
-                    <a href {{ action 'invalidateSession' }}>Logout</a>
+                    <a href {{action 'invalidateSession'}}>Logout</a>
                 {{else}}
                     {{#link-to 'login'}}Login{{/link-to}}
                     {{#link-to 'register'}}Register{{/link-to}}
@@ -18,14 +18,14 @@
             </div>
             <div class="row">
                 {{#if session.isAuthenticated}}
-                    {{#link-to "user" }}
+                    {{#link-to "profile"}}
                         <i class="bordered large user icon"></i>
                     {{/link-to}}
                 {{/if}}
-                {{#link-to "restaurants" }}
+                {{#link-to "restaurant-locations"}}
                     <i class="bordered large food icon"></i>
                 {{/link-to}}
-                {{#link-to "ratings" }}
+                {{#link-to "ratings"}}
                     <i class="bordered large star icon"></i>
                 {{/link-to}}
             </div>
