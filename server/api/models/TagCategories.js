@@ -34,7 +34,11 @@ module.exports = {
     },
     toJSON : function() {
       var obj = this.toObject();
-      return obj.isDeleted ? {} : obj;
+      if(!obj.isDeleted) {
+        delete obj.isDeleted;
+        return obj;
+      }
+      return null;
     }
   }
 };

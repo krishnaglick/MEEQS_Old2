@@ -17,7 +17,8 @@ var unwantedProperties = [
   'formatted_address',
   'international_phone_number',
   'reviews',
-  'user_ratings_total'
+  'user_ratings_total',
+  'isDeleted'
 ];
 
 module.exports = {

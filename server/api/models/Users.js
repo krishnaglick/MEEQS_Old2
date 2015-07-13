@@ -13,43 +13,47 @@ module.exports = {
   },
 
   attributes: {
-  	userID: {
-  		type: 'integer',
-  		index: true,
-  		primaryKey: true,
-  		unique: true,
-  		autoIncrement: true
-  	},
-  	username: {
-  		type: 'string',
-  		unique: true,
-  		required: true
-  	},
-  	password: {
-  		type: 'string',
+    userID: {
+      type: 'integer',
+      index: true,
+      primaryKey: true,
+      unique: true,
+      autoIncrement: true
+    },
+    username: {
+      type: 'string',
+      unique: true,
+      required: true
+    },
+    password: {
+      type: 'string',
       minLength: 6,
-  		required: true
-  	},
-  	email: {
-  		type: 'string'
-  	},
-  	isVerified: {
-  		type: 'boolean',
-  		defaultsTo: false
-  	},
-  	isAdmin: {
-  		type: 'boolean',
-  		defaultsTo: false
-  	},
+      required: true
+    },
+    email: {
+      type: 'string'
+    },
+    isVerified: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+    isAdmin: {
+      type: 'boolean',
+      defaultsTo: false
+    },
     isDeleted: {
       type: 'boolean',
       required: false,
       default: false
     },
-    toJSON: function() {
-        var obj = this.toObject();
+    toJSON : function() {
+      var obj = this.toObject();
+      if(!obj.isDeleted) {
+        delete obj.isDeleted;
         delete obj.password;
-        return obj.isDeleted ? {} : obj;
+        return obj;
+      }
+      return null;
     }
   },
   beforeCreate: function(user, cb) {

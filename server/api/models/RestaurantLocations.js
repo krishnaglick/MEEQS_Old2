@@ -11,33 +11,32 @@ module.exports = {
   },
 
   attributes: {
-  	restaurantLocationID: {
-  		type: 'integer',
-  		index: true,
-  		primaryKey: true,
-  		unique: true,
-  		autoIncrement: true
-  	},
-  	restaurantID: {
-  		model: 'Restaurants',
-  		columnName: 'restaurantID',
-  		type: 'integer',
-  		required: true
-  	},
-  	tags: {
-  		model: 'Tags',
-  		columnName: 'tagID',
-  		type: 'integer',
-  		required: false
-  	},
-    ratings: {
-      collection: 'Ratings',
-      via: 'restaurantLocationID'
+    restaurantLocationID: {
+      type: 'integer',
+      index: true,
+      primaryKey: true,
+      unique: true,
+      autoIncrement: true
     },
-  	place_id: {
-  		type: 'string',
-  		required: true
-  	},
+    restaurant: {
+      model: 'restaurants',
+      columnName: 'restaurantID',
+      type: 'integer',
+      required: true
+    },
+    tags: {
+      model: 'tags',
+      columnName: 'tagID',
+      type: 'integer'
+    },
+    ratings: {
+      collection: 'ratings',
+      via: 'ratingID'
+    },
+    place_id: {
+      type: 'string',
+      required: true
+    },
     isDeleted: {
       type: 'boolean',
       required: false,
@@ -45,7 +44,12 @@ module.exports = {
     },
     toJSON : function() {
       var obj = this.toObject();
-      return obj.isDeleted ? {} : obj;
+      if(!obj.isDeleted) {
+        delete obj.isDeleted;
+        debugger;
+        return obj;
+      }
+      return null;
     }
   }
 };
