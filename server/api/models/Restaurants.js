@@ -28,6 +28,10 @@ module.exports = {
       required: false,
       unique: false
     },
+    restaurantLocations: {
+      collection: 'restaurantLocations',
+      via: 'restaurant'
+    },
     isDeleted: {
       type: 'boolean',
       required: false,
@@ -35,7 +39,14 @@ module.exports = {
     },
     toJSON : function() {
       var obj = this.toObject();
-      return obj.isDeleted ? {} : obj;
+      if(!obj.isDeleted) {
+        delete obj.isDeleted;
+        if(obj.restaurantLocations && obj.restaurantLocations[0] && obj.restaurantLocations[0] == null) {
+          obj.restaurantLocations[0] = 'potato';
+        }
+        return obj;
+      }
+      return null;
     }
   }
 };

@@ -11,24 +11,21 @@ module.exports = {
   },
 
   attributes: {
-	tagID: {
-  		type: 'integer',
-  		index: true,
-  		primaryKey: true,
-  		unique: true,
-  		autoIncrement: true
-  	},
-  	name: {
-  		type: 'string',
-  		unique: true,
-  		required: true
-  	},
-  	tagCategoryID: {
-  		model: 'TagCategories',
-  		columnName: 'tagCategoryID',
-  		type: 'integer',
-  		required: false
-  	},
+    tagID: {
+      type: 'integer',
+      index: true,
+      primaryKey: true,
+      unique: true,
+      autoIncrement: true
+    },
+    name: {
+      type: 'string',
+      unique: true,
+      required: true
+    },
+    tagCategoryID: {
+      model: 'tagCategories'
+    },
     isDeleted: {
       type: 'boolean',
       required: false,
@@ -36,7 +33,11 @@ module.exports = {
     },
     toJSON : function() {
       var obj = this.toObject();
-      return obj.isDeleted ? {} : obj;
+      if(!obj.isDeleted) {
+        delete obj.isDeleted;
+        return obj;
+      }
+      return null;
     }
   }
 };

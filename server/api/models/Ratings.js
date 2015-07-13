@@ -19,16 +19,10 @@ module.exports = {
         autoIncrement: true
     },
     restaurantLocationID: {
-        model: 'RestaurantLocations',
-        columnName: 'restaurantLocationID',
-        type: 'integer',
-        required: true
+        model: 'RestaurantLocations'
     },
     userID: {
-        model: 'Users',
-        columnName: 'userID',
-        type: 'integer',
-        required: true
+        model: 'Users'
     },
     comment: {
         type: 'string',
@@ -79,9 +73,13 @@ module.exports = {
         ) / 5;
     },
     toJSON : function() {
-        var obj = this.toObject();
+      var obj = this.toObject();
+      if(!obj.isDeleted) {
+        delete obj.isDeleted;
         obj.averageRating = this.getAverageRating();
-        return obj.isDeleted ? {} : obj;
+        return obj;
+      }
+      return null;
     }
   }
 };
