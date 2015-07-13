@@ -6,6 +6,11 @@ export default Ember.Controller.extend({
     actions: {
         searchLocations(){
             this.transitionToRoute('restaurant-locations.results');
+        },
+        clearSearch(){
+            debugger;
+            this.set('searchParams', {});
+            this.transitionToRoute('restaurant-locations.results');
         }
     }
 });

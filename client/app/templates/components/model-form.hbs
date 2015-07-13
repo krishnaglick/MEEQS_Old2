@@ -1,6 +1,10 @@
 
 <form class='ui form' {{action 'submit' on='submit'}}>
-    <div class='ui dividing header'>{{formLabel}}</div>
+    {{#if formLabel}}
+        <div class='ui dividing header'>{{formLabel}}</div>
+    {{/if}}
     {{yield}}
-    <button class='ui submit button'>{{submitLabel}}</button>
+    {{#if submitLabel}}
+        <button class='ui submit button'>{{submitLabel}}</button>
+    {{/if}}
 </form>

@@ -4,12 +4,11 @@ import config from './config/environment';
 var Router = Ember.Router.extend({
     location: config.locationType
 });
-
 Router.map(function() {
     this.route('index', { path: '/' });
 
-    this.route('restaurant-locations', { path: '/restaurantLocations' }, function(){
-        this.route('results', { path: '/search' });
+    this.route('restaurant-locations', function(){
+        this.route('results');
     });
     this.route('restaurant-location', { path: '/restaurantLocations/:restaurantLocation_id' });
     this.route('restaurants', { path: '/restaurants' });

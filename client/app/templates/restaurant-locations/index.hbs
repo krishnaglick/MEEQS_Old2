@@ -1,11 +1,10 @@
 
 {{#segment-widget}}
-    {{#model-form action='searchLocations' submitLabel='Search!' formLabel='Search for Restaurants'}}
-        {{form-field type='text' value=keyword label='Keyword'}}
-        {{form-field type='number' value=minprice label='Minimum Price'}}
-        {{form-field type='number' value=maxprice label='Maximum Price'}}
-        {{message-widget messages=messages color='red'}}
+    {{#model-form action='searchLocations' formLabel='Search for Restaurants'}}
+        {{form-field type='text' value=searchParams.keyword label='Keyword'}}
+        {{form-field type='number' value=searchParams.minprice label='Minimum Price'}}
+        {{form-field type='number' value=searchParams.maxprice label='Maximum Price'}}
+        <button class='ui submit button'>Search!</button>
+        <button class='ui button' {{action 'clearSearch'}}>Clear!</button>
     {{/model-form}}
 {{/segment-widget}}
-
-{{outlet}}
