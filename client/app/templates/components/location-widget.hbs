@@ -23,10 +23,10 @@
         <p>{{location.description}}</p>
     </div>
     <div class="extra">
-        {{#each location.tags as |tag|}}
+        {{#each location.types as |type|}}
             <div class="ui labels">
                 <div class="label">
-                    {{ tag.name }}
+                    {{type}}
                 </div>
             </div>
         {{/each}}
