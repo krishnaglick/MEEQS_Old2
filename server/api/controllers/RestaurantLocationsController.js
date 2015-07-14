@@ -24,7 +24,8 @@ var unwantedProperties = [
 module.exports = {
   find : (req, res) => {
     let searchOptions = req.query;
-    searchOptions.location = req.cookies.locations;
+
+    searchOptions.location = req.cookies.location || searchOptions.location;
 
     Google.getPlacesNearMe(searchOptions, (err, gRes) => {
       if (err) return res.serverError(err);
@@ -53,7 +54,8 @@ module.exports = {
       query = actionUtil.populateEach(query, req);
 
       query.exec((err, records) => {
-        if (err) return res.serverError(err);
+        //TODO: Handle this better
+        if (err && !records && !googleData) return res.serverError(err);
 
         let cleanedRecords = Utils.deleteUnwantedProperties(records, unwantedProperties);
         let cleanedGoogleData = Utils.deleteUnwantedProperties(googleData, unwantedProperties);
