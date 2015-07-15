@@ -38,7 +38,7 @@ var googleRequestParams = [
 
 module.exports = {
   find : (req, res) => {
-    let googleSearchOptions = Utils.deletePropertiesByWhitelist(req.params, googleRequestParams);
+    let googleSearchOptions = Utils.deletePropertiesByWhitelist(req.params.all(), googleRequestParams);
     googleSearchOptions.location = req.cookies.location || googleSearchOptions.location;
 
     Google.getPlacesNearMe(googleSearchOptions, (err, gRes) => {
