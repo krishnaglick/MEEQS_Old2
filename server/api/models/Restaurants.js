@@ -41,9 +41,6 @@ module.exports = {
       var obj = this.toObject();
       if(!obj.isDeleted) {
         delete obj.isDeleted;
-        if(obj.restaurantLocations && obj.restaurantLocations[0] && obj.restaurantLocations[0] == null) {
-          obj.restaurantLocations[0] = 'potato';
-        }
         return obj;
       }
       return null;
