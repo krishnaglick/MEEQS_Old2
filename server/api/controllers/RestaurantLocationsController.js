@@ -20,14 +20,28 @@ var unwantedProperties = [
   'user_ratings_total',
   'isDeleted'
 ];
+var googleRequestParams = [
+  'location',
+  'radius',
+  'rankby',
+  'keyword',
+  'language',
+  'minprice',
+  'maxprice',
+  'name',
+  'opennow',
+  'rankby',
+  'types',
+  'pagetoken',
+  'zagatselected'
+];
 
 module.exports = {
   find : (req, res) => {
-    let searchOptions = req.query;
+    let googleSearchOptions = Utils.deletePropertiesByWhitelist(req.params, googleRequestParams);
+    googleSearchOptions.location = req.cookies.location || googleSearchOptions.location;
 
-    searchOptions.location = req.cookies.location || searchOptions.location;
-
-    Google.getPlacesNearMe(searchOptions, (err, gRes) => {
+    Google.getPlacesNearMe(googleSearchOptions, (err, gRes) => {
       if (err) return res.serverError(err);
       if(gRes.results) {
         mergeGoogleResultsIntoMEEQS(gRes.results, res);
@@ -42,8 +56,12 @@ module.exports = {
       let Model = actionUtil.parseModel(req);
 
       if ( actionUtil.parsePk(req) ) {
-        return require('./findOne')(req,res);
+        return require('./findOne')(req, res);
       }
+
+      if(!req.options) req.options = {};
+      if(!req.options.criteria) req.options.criteria = {};
+      req.options.criteria.blacklist = googleRequestParams;
 
       var query = Model.find()
         .where( actionUtil.parseCriteria(req) )
@@ -54,11 +72,10 @@ module.exports = {
       query = actionUtil.populateEach(query, req);
 
       query.exec((err, records) => {
-        //TODO: Handle this better
-        if (err && !records && !googleData) return res.serverError(err);
+        if (err) return res.serverError(err);
 
-        let cleanedRecords = Utils.deleteUnwantedProperties(records, unwantedProperties);
-        let cleanedGoogleData = Utils.deleteUnwantedProperties(googleData, unwantedProperties);
+        let cleanedRecords = Utils.deletePropertiesByBlacklist(records, unwantedProperties);
+        let cleanedGoogleData = Utils.deletePropertiesByBlacklist(googleData, unwantedProperties);
 
         let mergedResults = Utils.mergeObjectArraysOnProperty(cleanedGoogleData, cleanedRecords, 'place_id');
 
@@ -81,7 +98,7 @@ module.exports = {
       Google.getPlaceDetails(matchingRecord.place_id, (err, gRes) => {
         if (err) return res.serverError(err);
         if(gRes.result) {
-          let googleData = Utils.deleteUnwantedProperties(gRes.result, unwantedProperties);
+          let googleData = Utils.deletePropertiesByBlacklist(gRes.result, unwantedProperties);
           _.merge(matchingRecord, googleData);
           res.ok(matchingRecord);
         }

@@ -28,20 +28,29 @@ module.exports = {
     return alpha;
   },
 
-  deleteUnwantedProperties : (alpha, properties) => {
+  deletePropertiesByBlacklist : (alpha, blacklist) => {
     if(!alpha) return alpha;
 
     if(Array.isArray(alpha)) {
       for (var i = alpha.length - 1; i >= 0; i--) {
-        alpha[i] = Utils.deleteUnwantedProperties(alpha[i], properties);
+        alpha[i] = Utils.deletePropertiesByBlacklist(alpha[i], blacklist);
       }
     }
     else {
-      _.each(properties, (property) => {
+      _.each(blacklist, (property) => {
         delete alpha[property];
       });
     }
 
     return alpha;
+  },
+
+  deletePropertiesByWhitelist : (alpha, whitelist, cleanedObject = {}) => {
+    _.each(whitelist, (property) => {
+      if(property in alpha) {
+        cleanedObject[property] = alpha[property];
+      }
+    });
+    return cleanedObject;
   }
 };
