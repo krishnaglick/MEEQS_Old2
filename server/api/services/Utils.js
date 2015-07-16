@@ -37,9 +37,7 @@ module.exports = {
       }
     }
     else {
-      _.each(blacklist, (property) => {
-        delete alpha[property];
-      });
+      _.pick(alpha, blacklist);
     }
 
     return alpha;
@@ -50,6 +48,7 @@ module.exports = {
       if(property in alpha) {
         cleanedObject[property] = alpha[property];
       }
+      //_.omit
     });
     return cleanedObject;
   }
