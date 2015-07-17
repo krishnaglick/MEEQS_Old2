@@ -1,0 +1,33 @@
+this.store.find('restaurant-location').then(function(results){console.log(global = results)});
+
+store = global.store;
+mellow = store.createRecord('restaurant');
+mellow.set('name', 'Mellow Mushroom');
+mellow.save();
+
+model = store.createRecord('restaurant');
+model.set('name', 'Pizza Hut');
+model.save();
+
+model = store.createRecord('restaurant');
+model.set('name', 'Moon River');
+model.save();
+
+model = store.createRecord('restaurant');
+model.set('name', 'Little Caesar\'s');
+model.save();
+
+model = store.createRecord('restaurant');
+model.set('name', 'Cici\'s Pizza');
+model.save();
+
+
+location = store.createRecord('restaurant-location');
+location.set('restaurant', mellow);
+location.set('place_id', 'ChIJ4bjxqDjF5YgRBY471icM0f4');
+location.save();
+
+rating = store.createRecord('rating');
+rating.set('restaurant-location', location);
+rating.set('user', 1);
+rating.save();

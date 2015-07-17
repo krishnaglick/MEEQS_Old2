@@ -14,7 +14,12 @@ var googlePlaces = new GooglePlaces(config.apiKey, config.outputFormat);
 module.exports = {
   getPlacesNearMe : (searchOptions, callback) => {
     searchOptions.types = config.placeTypes;
+    searchOptions.rankby = 'distance';
+    if(searchOptions.location && typeof searchOptions.location == "string"){
+        searchOptions.location = searchOptions.location.split(',').map(Number);
+    }
 
+    console.log(searchOptions);
     googlePlaces.placeSearch(searchOptions, callback);
   },
 

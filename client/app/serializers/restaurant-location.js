@@ -2,20 +2,41 @@ import AppSerializer from './application';
 
 export default AppSerializer.extend({
     primaryKey: 'restaurantLocationID',
-    extractArray(store, primaryTypeClass, rawPayload){
-        var highest_id = Math.max.apply(Math, rawPayload['restaurantLocations'].map((result) => { return result.restaurantLocationID; }));
-        if(isNaN(highest_id)){
-            highest_id = 0;
-        }
-        rawPayload['restaurantLocations'].forEach((result) => {
-            if(!result[this.primaryKey]){
-                result.soft = true;
-                result[this.primaryKey] = highest_id;
+    extractArray(store, type, payload){
+        var highest_id = Math.max.apply(Math, payload['restaurantLocations'].map((result) => {
+            return result.restaurantLocationID || 0;
+        }));
+        var highest_restaurant_id = Math.max.apply(Math, payload['restaurantLocations'].map((result) => {
+            return result.restaurant ? (result.restaurant.restaurantID || 0) : 0;
+        }));
+
+        //can't be done in normalizeHash due to existence of non-created restaurants and created restaurants in same payload
+        payload['restaurantLocations'].forEach((result, index, array) => {
+            var item = array[index];
+
+            if(item.photos){
+                item.photo_reference = item.photos[0].photo_reference;
+            }
+
+            if(!item[this.primaryKey]){
+                item.soft = true;
+                item.restaurant = {
+                    restaurantID: highest_restaurant_id,
+                    name: item.name
+                };
+                item.tags = item.types;
+                item.placeID = item.place_id;
+
+                delete item.place_id;
+                delete item.name;
+                delete item.types;
+
+                item[this.primaryKey] = highest_id;
+                highest_restaurant_id++;
                 highest_id++;
             }
         });
 
-        var results = this._super(store, primaryTypeClass, rawPayload);
-        return results;
+        return this._super(store, type, payload);
     }
 });

@@ -1,26 +1,26 @@
 
 {{#if link}}
     {{#link-to "restaurant-location" location class="image"}}
-        <img src="http://placehold.it/100x100">
+        <img src="{{location.photo}}">
     {{/link-to}}
 {{else}}
     <div class="image">
-        <img src="http://placehold.it/100x100">
+        <img src="{{location.photo}}">
     </div>
 {{/if}}
 <div class="content">
     {{#if link}}
         {{#link-to "restaurant-location" location class="header"}}
-            {{location.name}}
+            {{location.restaurant.name}}
         {{/link-to}}
     {{else}}
-        <div class="header">{{location.name}}</div>
+        <div class="header">{{location.restaurant.name}}</div>
     {{/if}}
     <div class="meta">
         meta info
     </div>
     <div class="description">
-        <p>{{location.description}}</p>
+        <p>{{location.restaurant.description}}</p>
     </div>
     <div class="extra">
         {{#each location.types as |type|}}

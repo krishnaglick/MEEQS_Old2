@@ -57,5 +57,13 @@ module.exports = function(environment) {
         authorizer: 'authorizer:passport'
     };
 
+    ENV.GOOGLE = {
+        API_KEY: "AIzaSyALJ2HzrbmrjgIMRKu7VzcY3508_6FcVWU",
+        PHOTO_WIDTH: 480,
+        PHOTO_HEIGHT: 640,
+        DEFAULT_PHOTO: "http://placehold.it/300x200"
+    }
+
+
     return ENV;
 };
