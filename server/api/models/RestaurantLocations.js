@@ -18,11 +18,8 @@ module.exports = {
       unique: true,
       autoIncrement: true
     },
-    restaurant: {
-      model: 'restaurants',
-      columnName: 'restaurantID',
-      type: 'integer',
-      required: true
+    restaurants: {
+      model: 'restaurants'
     },
     tags: {
       model: 'tags',
@@ -46,7 +43,6 @@ module.exports = {
       var obj = this.toObject();
       if(!obj.isDeleted) {
         delete obj.isDeleted;
-        debugger;
         return obj;
       }
       return null;

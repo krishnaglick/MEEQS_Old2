@@ -30,7 +30,7 @@ module.exports = {
     },
     restaurantLocations: {
       collection: 'restaurantLocations',
-      via: 'restaurant'
+      via: 'restaurants'
     },
     isDeleted: {
       type: 'boolean',
