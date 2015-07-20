@@ -22,17 +22,16 @@ module.exports = {
       model: 'restaurants'
     },
     tags: {
-      model: 'tags',
-      columnName: 'tagID',
-      type: 'integer'
+      model: 'tags'
     },
     ratings: {
       collection: 'ratings',
-      via: 'ratingID'
+      via: 'restaurantLocations'
     },
     place_id: {
       type: 'string',
-      required: true
+      required: true,
+      unique: true
     },
     isDeleted: {
       type: 'boolean',

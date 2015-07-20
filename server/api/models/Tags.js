@@ -23,7 +23,7 @@ module.exports = {
       unique: true,
       required: true
     },
-    tagCategoryID: {
+    tagCategories: {
       model: 'tagCategories'
     },
     isDeleted: {
