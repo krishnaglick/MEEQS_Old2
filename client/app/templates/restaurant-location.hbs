@@ -1,5 +1,30 @@
 
-<!--temporary-->
-{{location-widget location=model}}
+<div class="ui two column grid">
+    <div class="ui six wide column">
+        <div class="ui card">
+            <div class="image">
+                <img src="{{model.photo}}">
+            </div>
+            <div class="content">
+                <div class="header">{{model.restaurant.name}}</div>
+                <div class="meta">
+                    meta info
+                </div>
+                <div class="description">
+                    <p>{{model.restaurant.description}}</p>
+                </div>
+                <div class="extra">
+                    {{tag-list-widget add='addTag' remove='removeTag' tags=model.tags}}
 
-{{rating-list-widget ratings=model.ratings}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui ten wide column">
+        I don't show up yet!
+        {{#segment-widget}}
+            {{rating-widget rating=newRating}}
+        {{/segment-widget}}
+        {{rating-list-widget ratings=model.ratings}}
+    </div>
+</div>

@@ -7,4 +7,7 @@
     {{#if submitLabel}}
         <button class='ui submit button'>{{submitLabel}}</button>
     {{/if}}
+    {{#if cancelLabel}}
+        <button class='ui cancel button' {{action 'cancel'}}>{{cancelLabel}}</button>
+    {{/if}}
 </form>

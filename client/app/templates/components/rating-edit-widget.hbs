@@ -1,0 +1,12 @@
+
+{{#model-form action='submit' submitLabel='Rate!' formLabel='Submit a Rating'}}
+    {{form-field type='number' value=model.password label='Menu Selection'}}
+    {{form-field type='number' value=model.password label='Environment'}}
+    {{form-field type='number' value=model.password label='Cost Efficiency'}}
+    {{form-field type='number' value=model.password label='Food Quality'}}
+    {{form-field type='number' value=model.password label='Service'}}
+
+    {{form-field type='textarea' value=model.username label='Comment'}}
+    
+    {{message-widget messages=messages color='red'}}
+{{/model-form}}

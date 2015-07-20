@@ -10,6 +10,7 @@ export default AppSerializer.extend({
             return result.restaurant ? (result.restaurant.restaurantID || 0) : 0;
         }));
 
+
         //can't be done in normalizeHash due to existence of non-created restaurants and created restaurants in same payload
         payload['restaurantLocations'].forEach((result, index, array) => {
             var item = array[index];
@@ -24,7 +25,14 @@ export default AppSerializer.extend({
                     restaurantID: highest_restaurant_id,
                     name: item.name
                 };
-                item.tags = item.types;
+                item.types = item.types.filter((type) => {
+                    return ['food', 'point_of_interest', 'store', 'establishment'].indexOf(type) === -1;
+                });
+                item.tags = item.types.map((type) => {
+                    var obj = {};
+                    obj.name = type;
+                    return obj;
+                });
                 item.placeID = item.place_id;
 
                 delete item.place_id;

@@ -1,13 +1,33 @@
-this.store.find('restaurant-location').then(function(results){console.log(global = results)});
+global = store;
 
-store = global.store;
+
+store.find('user', 1).then(function(usr){
+    user = usr;
+
+    store.find('restaurant', 6).then(function(res){
+        mellow = res;
+
+        location = store.createRecord('restaurant-location');
+        location.set('restaurant', mellow);
+        location.set('place_id', 'ChIJ4bjxqDjF5YgRBY471icM0f4');
+        location.save();
+
+        rating = store.createRecord('rating');
+        rating.set('restaurant-location', location);
+        rating.set('user', user);
+        rating.save();
+    });
+})
+
+
+
 mellow = store.createRecord('restaurant');
 mellow.set('name', 'Mellow Mushroom');
 mellow.save();
 
-model = store.createRecord('restaurant');
-model.set('name', 'Pizza Hut');
-model.save();
+hut = store.createRecord('restaurant');
+hut.set('name', 'Pizza Hut');
+hut.save();
 
 model = store.createRecord('restaurant');
 model.set('name', 'Moon River');
@@ -20,14 +40,3 @@ model.save();
 model = store.createRecord('restaurant');
 model.set('name', 'Cici\'s Pizza');
 model.save();
-
-
-location = store.createRecord('restaurant-location');
-location.set('restaurant', mellow);
-location.set('place_id', 'ChIJ4bjxqDjF5YgRBY471icM0f4');
-location.save();
-
-rating = store.createRecord('rating');
-rating.set('restaurant-location', location);
-rating.set('user', 1);
-rating.save();

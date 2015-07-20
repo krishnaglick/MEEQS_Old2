@@ -4,9 +4,6 @@ export default Ember.Component.extend({
     actions: {
         submit(){
             this.sendAction();
-        },
-        cancel(){
-            this.sendAction();
         }
     }
 });

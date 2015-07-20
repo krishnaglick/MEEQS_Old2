@@ -23,12 +23,6 @@
         <p>{{location.restaurant.description}}</p>
     </div>
     <div class="extra">
-        {{#each location.types as |type|}}
-            <div class="ui labels">
-                <div class="label">
-                    {{type}}
-                </div>
-            </div>
-        {{/each}}
+        {{tag-list-widget tags=location.tags}}
     </div>
 </div>
