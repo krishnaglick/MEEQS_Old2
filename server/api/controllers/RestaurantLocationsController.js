@@ -53,7 +53,7 @@ module.exports = {
           if (err) return res.serverError(err);
           if(!matchingRecords) return res.ok(gRes.results);
 
-          return res.ok(Utils.mergeOn(matchingRecords, gRes.results, 'place_id', unwantedProperties));
+          return res.ok(Utils.mergeOn(matchingRecords, gRes.results, 'place_id', _.omit, unwantedProperties));
         });
     });
   },
