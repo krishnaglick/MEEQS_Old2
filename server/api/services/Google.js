@@ -19,7 +19,6 @@ module.exports = {
         searchOptions.location = searchOptions.location.split(',').map(Number);
     }
 
-    console.log(searchOptions);
     googlePlaces.placeSearch(searchOptions, callback);
   },
 

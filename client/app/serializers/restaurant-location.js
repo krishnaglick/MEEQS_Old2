@@ -20,7 +20,7 @@ export default AppSerializer.extend({
             }
 
             if(!item[this.primaryKey]){
-                item.soft = true;
+                item.softLoad = true;
                 item.restaurant = {
                     restaurantID: highest_restaurant_id,
                     name: item.name

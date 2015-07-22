@@ -1,12 +1,8 @@
 
 <a class='item'>Filter Settings</a>
-<a class='item'>
-    <!-- //HACK keep model implementation, but define it better; shouldn't be used here regardless -->
-    {{#model-form action='setFilter' formLabel='Placeholder Filter Form'}}
-        {{form-field type='text' value=searchParams.keyword label='Keyword'}}
-        {{form-field type='number' value=searchParams.minprice label='Minimum Price'}}
-        {{form-field type='number' value=searchParams.maxprice label='Maximum Price'}}
-        <button class='ui submit button'>Search!</button>
-        <button class='ui button' {{action 'clearSearch'}}>Clear!</button>
-    {{/model-form}}
-</a>
+{{form-field type='text' value=searchParams.keyword label='Keyword' class='item'}}
+{{form-field type='number' value=searchParams.minprice label='Minimum Price' class='item'}}
+{{form-field type='number' value=searchParams.maxprice label='Maximum Price' class='item'}}
+
+<a class='item' {{action 'setFilter'}}>Reapply Search</a>
+<a class='item' {{action 'clearFilter'}}>Clear Search</a>
