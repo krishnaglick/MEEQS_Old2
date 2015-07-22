@@ -53,7 +53,7 @@ module.exports = {
           if (err) return res.serverError(err);
           if(!matchingRecords) return res.ok(gRes.results);
 
-          return res.ok(Utils.mergeOn(matchingRecords, gRes.results, 'place_id', _.omit, unwantedProperties));
+          return res.ok(Utils.mergeOn(matchingRecords, gRes.results, 'place_id', Utils.removePropertiesByBlacklist, unwantedProperties));
         });
     });
   },
@@ -65,8 +65,12 @@ module.exports = {
     if(!req.options) req.options = {};
     if(!req.options.criteria) req.options.criteria = {};
     req.options.criteria.blacklist = googleRequestParams;
+    
+    //let associations = actionUtil.getAssociationConfiguration(Model, 'detail');
 
     var query = Model.findOne(pk);
+
+    //query = actionUtil.populateRecords(query, associations);
     query = actionUtil.populateEach(query, req);
 
     query.exec((err, matchingRecord) => {

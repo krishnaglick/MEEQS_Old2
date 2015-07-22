@@ -19,10 +19,12 @@ module.exports = {
       autoIncrement: true
     },
     restaurants: {
-      model: 'restaurants'
+      collection: 'restaurants',
+      via: 'restaurantLocations'
     },
     tags: {
-      model: 'tags'
+      collection: 'tags',
+      via: 'restaurantLocations'
     },
     ratings: {
       collection: 'ratings',

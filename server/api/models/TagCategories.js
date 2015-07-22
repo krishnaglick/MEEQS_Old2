@@ -27,6 +27,10 @@ module.exports = {
       type: 'string',
       required: false
     },
+    tags: {
+      collection: 'tags',
+      via: 'tagCategories'
+    },
     isDeleted: {
       type: 'boolean',
       required: false,

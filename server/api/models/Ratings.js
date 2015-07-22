@@ -19,7 +19,8 @@ module.exports = {
       autoIncrement: true
     },
     restaurantLocations: {
-      model: 'restaurantLocations'
+      collection: 'restaurantLocations',
+      via: 'ratings'
     },
     userID: {
       model: 'Users'

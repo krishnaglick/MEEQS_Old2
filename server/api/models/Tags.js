@@ -24,7 +24,12 @@ module.exports = {
       required: true
     },
     tagCategories: {
-      model: 'tagCategories'
+      collection: 'tagCategories',
+      via: 'tags'
+    },
+    restaurantLocations: {
+      collection: 'restaurantLocations',
+      via: 'tags'
     },
     isDeleted: {
       type: 'boolean',
