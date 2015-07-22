@@ -8,10 +8,5 @@ export default Ember.Controller.extend({
             let combinedLatLng = `${latLng.coords.latitude},${latLng.coords.longitude}`;
             this.get('cookie').setCookie('location', combinedLatLng);
         });
-    },
-    actions: {
-        invalidateSession: function(){
-            this.get('session').invalidate('authenticator:passport');
-        }
     }
 });

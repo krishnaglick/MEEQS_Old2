@@ -1,2 +1,6 @@
 
-{{outlet}}
+{{sidebar-filter id='filtermenu' searchParams=searchParams setFilter='setFilter' clearFilter='clearFilter'}}
+
+{{#segment-widget}}
+    {{location-list-widget locations=model}}
+{{/segment-widget}}

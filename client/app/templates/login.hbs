@@ -1,7 +1,9 @@
 
-{{#model-form action='login' submitLabel='Login' formLabel='Login'}}
-    {{form-field type='text' value=model.username label='Username'}}
-    {{form-field type='password' value=model.password label='Password'}}
-    
-    {{message-widget messages=messages color='red'}}
-{{/model-form}}
+{{#modal-widget ok='login' okLabel='Login' modalLabel='Login' cancelLabel='Cancel'}}
+    <div class='ui form'>
+        {{form-field type='text' value=model.username label='Username'}}
+        {{form-field type='password' value=model.password label='Password'}}
+        
+        {{message-widget messages=messages color='red'}}
+    </div>
+{{/modal-widget}}

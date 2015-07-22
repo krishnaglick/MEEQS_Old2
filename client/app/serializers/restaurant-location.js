@@ -26,7 +26,7 @@ export default AppSerializer.extend({
                     name: item.name
                 };
                 item.types = item.types.filter((type) => {
-                    return ['food', 'point_of_interest', 'store', 'establishment'].indexOf(type) === -1;
+                    return ['food', 'point_of_interest', 'establishment', 'restaurant'].indexOf(type) === -1;
                 });
                 item.tags = item.types.map((type) => {
                     var obj = {};

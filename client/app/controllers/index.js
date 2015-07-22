@@ -4,12 +4,12 @@ export default Ember.Controller.extend({
     //convert me to a mixin later
     searchParams: {},
     actions: {
-        searchLocations(){
-            this.transitionToRoute('restaurant-locations.results');
+        setFilter(){
+            this.set('model', this.store.find('restaurant-location', this.get('searchParams')));
         },
-        clearSearch(){
+        clearFilter(){
             this.set('searchParams', {});
-            this.transitionToRoute('restaurant-locations.results');
+            this.send('setFilter');
         }
     }
 });

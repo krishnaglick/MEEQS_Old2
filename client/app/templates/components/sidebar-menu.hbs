@@ -1,0 +1,9 @@
+
+{{#link-to 'index' class='item'}}MEEQS{{/link-to}}
+{{#if session.isAuthenticated}}
+    <a class='item' href {{action 'invalidateSession'}}>Logout</a>
+    {{#link-to 'profile' class='item'}}Profile{{/link-to}}
+{{else}}
+    <a class='item' href {{action 'openModal' 'login'}}>Login</a>
+    <a class='item' href {{action 'openModal' 'register'}}>Register</a>
+{{/if}}

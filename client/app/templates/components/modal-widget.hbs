@@ -1,0 +1,16 @@
+
+<i class="close icon" {{action 'closeModal'}}></i>
+<div class="header">
+    {{modalLabel}}
+</div>
+<div class="content">
+    {{yield}}
+</div>
+<div class="actions">
+    {{#if cancelLabel}}
+        <div class="ui black close button" {{action 'cancel'}}>{{cancelLabel}}</div>
+    {{/if}}
+    {{#if okLabel}}
+        <div class="ui positive right labeled icon button" {{action 'ok'}}>{{okLabel}}<i class="checkmark icon"></i></div>
+    {{/if}}
+</div>

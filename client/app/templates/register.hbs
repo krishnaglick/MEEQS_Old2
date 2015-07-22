@@ -1,7 +1,10 @@
 
-{{#model-form action='register' submitLabel='Register' formLabel='Register'}}
-    {{form-field type='text' value=model.username label='Username'}}
-    {{form-field type='password' value=model.password label='Password'}}
-    {{form-field type='text' value=model.email label='Email'}}
-    {{message-widget messages=messages color='red'}}
-{{/model-form}}
+{{#modal-widget ok='register' okLabel='Register' modalLabel='Register' cancelLabel='Cancel'}}
+    <div class='ui form'>
+        {{form-field type='text' value=model.username label='Username'}}
+        {{form-field type='password' value=model.password label='Password'}}
+        {{form-field type='text' value=model.email label='Email'}}
+
+        {{message-widget messages=messages color='red'}}
+    </div>
+{{/modal-widget}}

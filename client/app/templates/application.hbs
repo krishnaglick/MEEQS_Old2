@@ -1,48 +1,27 @@
-<header class="ui vertical segment">
-    <div class="ui centered grid">
-        <div class="six wide column">
-            <h1 class="ui header" id="title">
-                {{#link-to "index"}}
-                    MEEQS
-                {{/link-to}}
-            </h1>
-        </div>
-        <div class="six wide right aligned column">
-            <div class="row">
-                {{#if session.isAuthenticated}}
-                    <a href {{action 'invalidateSession'}}>Logout</a>
-                {{else}}
-                    {{#link-to 'login'}}Login{{/link-to}}
-                    {{#link-to 'register'}}Register{{/link-to}}
-                {{/if}}
+
+{{outlet 'modal'}}
+{{sidebar-menu id='sidemenu' openModal='openModal' closeModal='closeModal'}}
+
+<div class='pusher'>
+    <header class='ui vertical segment'>
+        <div class="ui centered grid">
+            <div class="twelve wide column">
+                {{topbar-menu}}
             </div>
-            <div class="row">
-                {{#if session.isAuthenticated}}
-                    {{#link-to "profile"}}
-                        <i class="bordered large user icon"></i>
-                    {{/link-to}}
-                {{/if}}
-                {{#link-to "restaurant-locations"}}
-                    <i class="bordered large food icon"></i>
-                {{/link-to}}
-                {{#link-to "ratings"}}
-                    <i class="bordered large star icon"></i>
-                {{/link-to}}
+        </div>
+    </header>
+    <div class="ui vertical segment">
+        <div class="ui centered grid">
+            <div class="twelve wide column">
+                {{outlet}}
             </div>
         </div>
     </div>
-</header>
-<div class="ui vertical segment">
-    <div class="ui centered grid">
-        <div class="twelve wide column">
-            {{outlet}}
+    <footer class="ui vertical segment">
+        <div class="ui centered grid">
+            <div class="twelve wide column">
+                footer stuff
+            </div>
         </div>
-    </div>
+    </footer>
 </div>
-<footer class="ui vertical segment">
-    <div class="ui centered grid">
-        <div class="twelve wide column">
-            footer stuff
-        </div>
-    </div>
-</footer>

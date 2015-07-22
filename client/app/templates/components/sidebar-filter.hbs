@@ -1,10 +1,12 @@
 
-{{#segment-widget}}
-    {{#model-form action='searchLocations' formLabel='Search for Restaurants'}}
+<a class='item'>Filter Settings</a>
+<a class='item'>
+    <!-- //HACK keep model implementation, but define it better; shouldn't be used here regardless -->
+    {{#model-form action='setFilter' formLabel='Placeholder Filter Form'}}
         {{form-field type='text' value=searchParams.keyword label='Keyword'}}
         {{form-field type='number' value=searchParams.minprice label='Minimum Price'}}
         {{form-field type='number' value=searchParams.maxprice label='Maximum Price'}}
         <button class='ui submit button'>Search!</button>
         <button class='ui button' {{action 'clearSearch'}}>Clear!</button>
     {{/model-form}}
-{{/segment-widget}}
+</a>

@@ -1,21 +1,9 @@
 
-{{#if link}}
-    {{#link-to "restaurant-location" location class="image"}}
-        <img src="{{location.photo}}">
-    {{/link-to}}
-{{else}}
-    <div class="image">
-        <img src="{{location.photo}}">
-    </div>
-{{/if}}
+<div class="image">
+    <img src="{{location.photo}}">
+</div>
 <div class="content">
-    {{#if link}}
-        {{#link-to "restaurant-location" location class="header"}}
-            {{location.restaurant.name}}
-        {{/link-to}}
-    {{else}}
-        <div class="header">{{location.restaurant.name}}</div>
-    {{/if}}
+    <div class="header">{{location.restaurant.name}}</div>
     <div class="meta">
         meta info
     </div>
