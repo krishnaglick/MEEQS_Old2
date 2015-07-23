@@ -10,6 +10,9 @@ export default Ember.Controller.extend({
         clearFilter(){
             this.set('searchParams', {});
             this.send('setFilter');
+        },
+        loadDetail(restaurantLocation){
+            
         }
     }
 });

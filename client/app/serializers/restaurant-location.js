@@ -19,6 +19,10 @@ export default AppSerializer.extend({
                 item.photo_reference = item.photos[0].photo_reference;
             }
 
+            item.latitude = item.geometry.location.lat;
+            item.longitude = item.geometry.location.lng;
+            delete item.geometry;
+
             if(!item[this.primaryKey]){
                 item.softLoad = true;
                 item.restaurant = {

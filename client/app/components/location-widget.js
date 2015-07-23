@@ -1,13 +1,26 @@
 import Ember from 'ember';
-import google from '../services/google';
 
 export default Ember.Component.extend({
     classNames: ['ui', 'item'],
-    photo: Ember.computed(function(){
-        return "http://placehold.it/300x200";
-        //google.getGooglePhotoURL(this.get('photo_reference'));
+    isExpanded: false,
+    photoUrl: Ember.computed(function(){
+        return this.get('google-service').getGooglePhotoURL(this.get('location').get('photo_reference'));
     }),
     directionsUrl: Ember.computed(function(){
-        return 'www.google.com';
-    })
+        let locationService = this.get('location-service');
+
+        let currentLocation = locationService.latLngToString(locationService.getLocation());
+        let targetLocation = locationService.latLngToString(this.get('location').get('location'));
+        return this.get('google-service').getGoogleDirectionsURL(currentLocation, targetLocation);
+    }),
+
+    actions: {
+        loadDetail(){
+            this.sendAction('loadDetail');
+        },
+        toggleExpand(){
+            this.sendAction('loadDetail', this.get('location'));
+            this.set('isExpanded', !this.get('isExpanded'));
+        }
+    }
 });

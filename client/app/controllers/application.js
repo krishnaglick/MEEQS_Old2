@@ -5,8 +5,7 @@ export default Ember.Controller.extend({
         this._super();
         //TODO: put this in a service
         this.get('geolocation').getGeoposition().then((latLng) => {
-            let combinedLatLng = `${latLng.coords.latitude},${latLng.coords.longitude}`;
-            this.get('cookie').setCookie('location', combinedLatLng);
+            this.get('location-service').setLocation(latLng.coords)
         });
     }
 });
