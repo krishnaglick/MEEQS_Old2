@@ -17,8 +17,7 @@ var unwantedProperties = [
   'international_phone_number',
   'reviews',
   'user_ratings_total',
-  'isDeleted',
-  'reviews'
+  'isDeleted'
 ];
 var googleRequestParams = [
   'location',
@@ -30,7 +29,6 @@ var googleRequestParams = [
   'maxprice',
   'name',
   'opennow',
-  'rankby',
   'types',
   'pagetoken',
   'zagatselected'
@@ -49,11 +47,15 @@ module.exports = {
       let Model = actionUtil.parseModel(req);
 
       Model.find({ where: { place_id: place_ids }})
+        .populate('restaurant')
+        .populate('tags')
+        .populate('ratings')
         .exec((err, matchingRecords) => {
           if (err) return res.serverError(err);
           if(!matchingRecords) return res.ok(gRes.results);
 
-          return res.ok(Utils.mergeOn(matchingRecords, gRes.results, 'place_id', Utils.removePropertiesByBlacklist, unwantedProperties));
+          //return res.ok({ restaurantLocations: Utils.mergeOn(matchingRecords, gRes.results, 'place_id', _.omit, unwantedProperties) });
+          return res.ok({ restaurantLocations: Utils.mergeOn(matchingRecords, gRes.results, 'place_id') });
         });
     });
   },

@@ -18,12 +18,13 @@ module.exports = {
       unique: true,
       autoIncrement: true
     },
-    restaurantLocations: {
-      collection: 'restaurantLocations',
-      via: 'ratings'
+    restaurantLocation: {
+      model: 'restaurantLocations',
+      required: true
     },
-    userID: {
-      model: 'Users'
+    user: {
+      model: 'users',
+      required: true
     },
     comment: {
       type: 'string',

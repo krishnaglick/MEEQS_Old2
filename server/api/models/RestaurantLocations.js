@@ -7,7 +7,7 @@
 
 module.exports = {
   protectedAttributes: function () {
-      return [ "restaurantLocationID" ];
+      return [ 'restaurantLocationID' ];
   },
 
   attributes: {
@@ -18,17 +18,16 @@ module.exports = {
       unique: true,
       autoIncrement: true
     },
-    restaurants: {
-      collection: 'restaurants',
-      via: 'restaurantLocations'
+    restaurant: {
+      model: 'restaurants'
     },
     tags: {
       collection: 'tags',
-      via: 'restaurantLocations'
+      via: 'restaurantLocation'
     },
     ratings: {
       collection: 'ratings',
-      via: 'restaurantLocations'
+      via: 'restaurantLocation'
     },
     place_id: {
       type: 'string',

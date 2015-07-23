@@ -9,7 +9,7 @@ var _ = require('lodash');
 
 module.exports = {
 
-  mergeOn : (uno, dos, property, mod, props) => {
+  mergeOn : (uno, dos, property, mod = (i) => { return i; }, props = []) => {
     var alpha = uno.length > dos.length ? uno : dos;
     var beta = uno.length > dos.length ? dos : uno;
 
