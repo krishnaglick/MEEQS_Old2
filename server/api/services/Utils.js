@@ -14,13 +14,13 @@ module.exports = {
     var beta = uno.length > dos.length ? dos : uno;
 
     for (var i = alpha.length - 1; i >= 0; i--) {
-      for (var q = beta.length - 1; i >= 0; i--) {
-        if(!alpha[i] || !beta[q]) break;
+      if(!alpha[i]) break;
 
-        if(mod && props) {
-          alpha[i] = mod(alpha[i], props);
-          beta[i] = mod(beta[i], props);
-        }
+      for (var q = beta.length - 1; q >= 0; q--) {
+        if(!beta[q]) break;
+
+        alpha[i] = mod(alpha[i], props);
+        beta[q] = mod(beta[q], props);
         
         if(alpha[i][property] == beta[q][property]) {
           _.merge(alpha[i], beta[q]);
@@ -36,13 +36,20 @@ module.exports = {
   removePropertiesByBlacklist : (alpha, blacklist) => {
     if(!alpha) return alpha;
 
-    if(Array.isArray(alpha)) {
+    if(_.isArray(alpha)) {
       for (var i = alpha.length - 1; i >= 0; i--) {
-        alpha[i] = Utils.deletePropertiesByBlacklist(alpha[i], blacklist);
+        alpha[i] = Utils.removePropertiesByBlacklist(alpha[i], blacklist);
       }
     }
-    else {
-      alpha = _.omit(alpha, blacklist);
+    else if(typeof alpha === 'object') {
+      _.each(alpha, (val, key) => {
+        if(_.contains(blacklist, key)) {
+          delete alpha[key];
+        }
+        else if(typeof alpha[key] === 'object') {
+          alpha[key] = Utils.removePropertiesByBlacklist(alpha[key], blacklist);
+        }
+      });
     }
 
     return alpha;
@@ -51,7 +58,7 @@ module.exports = {
   removePropertiesByWhitelist : (alpha, whitelist) => {
     if(!alpha) return alpha;
 
-    if(Array.isArray(alpha)) {
+    if(_.isArray(alpha)) {
       for (var i = alpha.length - 1; i >= 0; i--) {
         alpha[i] = Utils.deletePropertiesByWhitelist(alpha[i], whitelist);
       }

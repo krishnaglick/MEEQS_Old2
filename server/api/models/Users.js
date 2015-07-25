@@ -44,7 +44,7 @@ module.exports = {
     isDeleted: {
       type: 'boolean',
       required: false,
-      default: false
+      defaultsTo: false
     },
     toJSON : function() {
       var obj = this.toObject();

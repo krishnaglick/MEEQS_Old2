@@ -63,7 +63,7 @@ module.exports = {
     isDeleted: {
       type: 'boolean',
       required: false,
-      default: false
+      defaultsTo: false
     },
     getAverageRating : function() {
       return (

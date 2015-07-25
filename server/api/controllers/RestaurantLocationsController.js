@@ -54,8 +54,7 @@ module.exports = {
           if (err) return res.serverError(err);
           if(!matchingRecords) return res.ok(gRes.results);
 
-          //return res.ok({ restaurantLocations: Utils.mergeOn(matchingRecords, gRes.results, 'place_id', _.omit, unwantedProperties) });
-          return res.ok({ restaurantLocations: Utils.mergeOn(matchingRecords, gRes.results, 'place_id') });
+          return res.ok({ restaurantLocations: Utils.mergeOn(matchingRecords, gRes.results, 'place_id', Utils.removePropertiesByBlacklist, unwantedProperties) });
         });
     });
   },
@@ -67,12 +66,9 @@ module.exports = {
     if(!req.options) req.options = {};
     if(!req.options.criteria) req.options.criteria = {};
     req.options.criteria.blacklist = googleRequestParams;
-    
-    //let associations = actionUtil.getAssociationConfiguration(Model, 'detail');
 
     var query = Model.findOne(pk);
 
-    //query = actionUtil.populateRecords(query, associations);
     query = actionUtil.populateEach(query, req);
 
     query.exec((err, matchingRecord) => {
@@ -84,7 +80,7 @@ module.exports = {
         if (err) return res.serverError(err);
         if(!gRes || !gRes.result) return res.ok(matchingRecord);
 
-        let data = _.merge(_.omit(gRes.result, unwantedProperties), _.omit(matchingRecord, unwantedProperties));
+        let data = _.merge(Utils.removePropertiesByBlacklist(gRes.result, unwantedProperties), Utils.removePropertiesByBlacklist(matchingRecord, unwantedProperties));
 
         res.ok(data);
       });
