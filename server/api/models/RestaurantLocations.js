@@ -7,7 +7,7 @@
 
 module.exports = {
   protectedAttributes: function () {
-      return [ "restaurantLocationID" ];
+      return [ 'restaurantLocationID' ];
   },
 
   attributes: {
@@ -19,23 +19,20 @@ module.exports = {
       autoIncrement: true
     },
     restaurant: {
-      model: 'restaurants',
-      columnName: 'restaurantID',
-      type: 'integer',
-      required: true
+      model: 'restaurants'
     },
     tags: {
-      model: 'tags',
-      columnName: 'tagID',
-      type: 'integer'
+      collection: 'tags',
+      via: 'restaurantLocation'
     },
     ratings: {
       collection: 'ratings',
-      via: 'ratingID'
+      via: 'restaurantLocation'
     },
     place_id: {
       type: 'string',
-      required: true
+      required: true,
+      unique: true
     },
     isDeleted: {
       type: 'boolean',
@@ -46,7 +43,6 @@ module.exports = {
       var obj = this.toObject();
       if(!obj.isDeleted) {
         delete obj.isDeleted;
-        debugger;
         return obj;
       }
       return null;

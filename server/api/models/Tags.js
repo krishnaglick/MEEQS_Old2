@@ -23,8 +23,11 @@ module.exports = {
       unique: true,
       required: true
     },
-    tagCategoryID: {
+    tagCategories: {
       model: 'tagCategories'
+    },
+    restaurantLocation: {
+      model: 'restaurantLocations'
     },
     isDeleted: {
       type: 'boolean',

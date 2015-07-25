@@ -11,22 +11,22 @@ module.exports = {
   },
 
   attributes: {
-	tagCategoryID: {
-  		type: 'integer',
-  		index: true,
-  		primaryKey: true,
-  		unique: true,
-  		autoIncrement: true
-  	},
-  	name: {
-  		type: 'string',
-  		unique: true,
-  		required: true
-  	},
-  	description: {
-  		type: 'string',
-  		required: false
-  	},
+    tagCategoryID: {
+      type: 'integer',
+      index: true,
+      primaryKey: true,
+      unique: true,
+      autoIncrement: true
+    },
+    name: {
+      type: 'string',
+      unique: true,
+      required: true
+    },
+    description: {
+      type: 'string',
+      required: false
+    },
     isDeleted: {
       type: 'boolean',
       required: false,

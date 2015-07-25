@@ -12,51 +12,53 @@ module.exports = {
 
   attributes: {
     ratingID: {
-        type: 'integer',
-        index: true,
-        primaryKey: true,
-        unique: true,
-        autoIncrement: true
+      type: 'integer',
+      index: true,
+      primaryKey: true,
+      unique: true,
+      autoIncrement: true
     },
-    restaurantLocationID: {
-        model: 'RestaurantLocations'
+    restaurantLocation: {
+      model: 'restaurantLocations',
+      required: true
     },
-    userID: {
-        model: 'Users'
+    user: {
+      model: 'users',
+      required: true
     },
     comment: {
-        type: 'string',
-        required: false
+      type: 'string',
+      required: false
     },
     language: {
-        type: 'string',
-        required: false,
-        defaultsTo: 'en-US'
+      type: 'string',
+      required: false,
+      defaultsTo: 'en-US'
     },
     menuSelection: {
-        type: 'integer',
-        required: true,
-        defaultsTo: 0
+      type: 'integer',
+      required: true,
+      defaultsTo: 0
     },
     environment: {
-        type: 'integer',
-        required: true,
-        defaultsTo: 0
+      type: 'integer',
+      required: true,
+      defaultsTo: 0
     },
     costEfficiency: {
-        type: 'integer',
-        required: true,
-        defaultsTo: 0
+      type: 'integer',
+      required: true,
+      defaultsTo: 0
     },
     productQuality: {
-        type: 'integer',
-        required: true,
-        defaultsTo: 0
+      type: 'integer',
+      required: true,
+      defaultsTo: 0
     },
     service: {
-        type: 'integer',
-        required: true,
-        defaultsTo: 0
+      type: 'integer',
+      required: true,
+      defaultsTo: 0
     },
     isDeleted: {
       type: 'boolean',
@@ -64,13 +66,13 @@ module.exports = {
       default: false
     },
     getAverageRating : function() {
-        return (
-            this.menuSelection +
-            this.environment +
-            this.costEfficiency +
-            this.productQuality +
-            this.service
-        ) / 5;
+      return (
+        this.menuSelection +
+        this.environment +
+        this.costEfficiency +
+        this.productQuality +
+        this.service
+      ) / 5;
     },
     toJSON : function() {
       var obj = this.toObject();

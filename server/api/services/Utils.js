@@ -8,19 +8,24 @@
 var _ = require('lodash');
 
 module.exports = {
-  mergeObjectArraysOnProperty : (alpha, omega, property) => {
-    if(!alpha || !omega) return alpha || omega;
-    for(var i = alpha.length - 1; i >= 0; i--) {
-      if(property in alpha[i]) {
-        for(var q = omega.length - 1; q >= 0; q--) {
-          if(property in omega[q]) {
-            if(alpha[i][property] == omega[q][property]) {
-              _.merge(alpha[i], omega[q]);
-              delete omega[q];
-              break;
-            }
 
-          }
+  mergeOn : (uno, dos, property, mod = (i) => { return i; }, props = []) => {
+    var alpha = uno.length > dos.length ? uno : dos;
+    var beta = uno.length > dos.length ? dos : uno;
+
+    for (var i = alpha.length - 1; i >= 0; i--) {
+      for (var q = beta.length - 1; i >= 0; i--) {
+        if(!alpha[i] || !beta[q]) break;
+
+        if(mod && props) {
+          alpha[i] = mod(alpha[i], props);
+          beta[i] = mod(beta[i], props);
+        }
+        
+        if(alpha[i][property] == beta[q][property]) {
+          _.merge(alpha[i], beta[q]);
+          delete beta[q];
+          break;
         }
       }
     }
@@ -28,7 +33,7 @@ module.exports = {
     return alpha;
   },
 
-  deletePropertiesByBlacklist : (alpha, blacklist) => {
+  removePropertiesByBlacklist : (alpha, blacklist) => {
     if(!alpha) return alpha;
 
     if(Array.isArray(alpha)) {
@@ -37,20 +42,24 @@ module.exports = {
       }
     }
     else {
-      _.each(blacklist, (property) => {
-        delete alpha[property];
-      });
+      alpha = _.omit(alpha, blacklist);
     }
 
     return alpha;
   },
 
-  deletePropertiesByWhitelist : (alpha, whitelist, cleanedObject = {}) => {
-    _.each(whitelist, (property) => {
-      if(property in alpha) {
-        cleanedObject[property] = alpha[property];
+  removePropertiesByWhitelist : (alpha, whitelist) => {
+    if(!alpha) return alpha;
+
+    if(Array.isArray(alpha)) {
+      for (var i = alpha.length - 1; i >= 0; i--) {
+        alpha[i] = Utils.deletePropertiesByWhitelist(alpha[i], whitelist);
       }
-    });
-    return cleanedObject;
+    }
+    else {
+      alpha = _.pick(alpha, whitelist);
+    }
+
+    return alpha;
   }
 };

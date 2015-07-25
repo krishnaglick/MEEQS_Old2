@@ -9,7 +9,6 @@ var actionUtil = require('../../node_modules/sails/lib/hooks/blueprints/actionUt
 
 var unwantedProperties = [
   'rating',
-  'ratings',
   'scope',
   'reference',
   'id',
@@ -30,7 +29,6 @@ var googleRequestParams = [
   'maxprice',
   'name',
   'opennow',
-  'rankby',
   'types',
   'pagetoken',
   'zagatselected'
@@ -38,76 +36,60 @@ var googleRequestParams = [
 
 module.exports = {
   find : (req, res) => {
-    let googleSearchOptions = Utils.deletePropertiesByWhitelist(req.params.all(), googleRequestParams);
+    let googleSearchOptions = _.pick(req.params.all(), googleRequestParams);
     googleSearchOptions.location = req.cookies.location || googleSearchOptions.location;
 
     Google.getPlacesNearMe(googleSearchOptions, (err, gRes) => {
       if (err) return res.serverError(err);
-      if(gRes.results) {
-        mergeGoogleResultsIntoMEEQS(gRes.results, res);
-      }
-      else {
-        res.status(204);
-        res.send({message: 'No results'});
-      }
-    });
+      if(!gRes || !gRes.results) return res.notFound();
 
-    var mergeGoogleResultsIntoMEEQS = (googleData, res) => {
+      var place_ids = _.pluck(gRes.results, 'place_id');
       let Model = actionUtil.parseModel(req);
 
-      if ( actionUtil.parsePk(req) ) {
-        return require('./findOne')(req, res);
-      }
+      Model.find({ where: { place_id: place_ids }})
+        .populate('restaurant')
+        .populate('tags')
+        .populate('ratings')
+        .exec((err, matchingRecords) => {
+          if (err) return res.serverError(err);
+          if(!matchingRecords) return res.ok(gRes.results);
 
-      if(!req.options) req.options = {};
-      if(!req.options.criteria) req.options.criteria = {};
-      req.options.criteria.blacklist = googleRequestParams;
-
-      var query = Model.find()
-        .where( actionUtil.parseCriteria(req) )
-        .limit( actionUtil.parseLimit(req) )
-        .skip( actionUtil.parseSkip(req) )
-        .sort( actionUtil.parseSort(req) );
-
-      query = actionUtil.populateEach(query, req);
-
-      query.exec((err, records) => {
-        if (err) return res.serverError(err);
-
-        let cleanedRecords = Utils.deletePropertiesByBlacklist(records, unwantedProperties);
-        let cleanedGoogleData = Utils.deletePropertiesByBlacklist(googleData, unwantedProperties);
-
-        let mergedResults = Utils.mergeObjectArraysOnProperty(cleanedGoogleData, cleanedRecords, 'place_id');
-
-        res.ok({restaurantLocations: mergedResults});
-      });
-    };
+          //return res.ok({ restaurantLocations: Utils.mergeOn(matchingRecords, gRes.results, 'place_id', _.omit, unwantedProperties) });
+          return res.ok({ restaurantLocations: Utils.mergeOn(matchingRecords, gRes.results, 'place_id') });
+        });
+    });
   },
 
   findOne : (req, res) => {
     let Model = actionUtil.parseModel(req);
     let pk = actionUtil.requirePk(req);
 
+    if(!req.options) req.options = {};
+    if(!req.options.criteria) req.options.criteria = {};
+    req.options.criteria.blacklist = googleRequestParams;
+    
+    //let associations = actionUtil.getAssociationConfiguration(Model, 'detail');
+
     var query = Model.findOne(pk);
+
+    //query = actionUtil.populateRecords(query, associations);
     query = actionUtil.populateEach(query, req);
-    query.exec(function found(err, matchingRecord) {
+
+    query.exec((err, matchingRecord) => {
       if (err) return res.serverError(err);
-      if(!matchingRecord) return res.notFound('No record found with the specified `id`.');
-      if(!matchingRecord.place_id) matchingRecord.place_id = '';
+      if(!matchingRecord) return res.notFound('No record found with the specified id.');
+      if(!matchingRecord.place_id) return res.ok(matchingRecord);
 
       Google.getPlaceDetails(matchingRecord.place_id, (err, gRes) => {
         if (err) return res.serverError(err);
-        if(gRes.result) {
-          let googleData = Utils.deletePropertiesByBlacklist(gRes.result, unwantedProperties);
-          _.merge(matchingRecord, googleData);
-          res.ok(matchingRecord);
-        }
-        else {
-          res.status(204);
-          res.send({message: 'No results'});
-        }
+        if(!gRes || !gRes.result) return res.ok(matchingRecord);
+
+        let data = _.merge(_.omit(gRes.result, unwantedProperties), _.omit(matchingRecord, unwantedProperties));
+
+        res.ok(data);
       });
-    });
+    }); 
   }
+
 };
 
