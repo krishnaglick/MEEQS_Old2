@@ -4,6 +4,6 @@
     <a class='item' href {{action 'invalidateSession'}}>Logout</a>
     {{#link-to 'profile' class='item'}}Profile{{/link-to}}
 {{else}}
-    <a class='item' href {{action 'openModal' 'login'}}>Login</a>
-    <a class='item' href {{action 'openModal' 'register'}}>Register</a>
+    {{#link-to 'login' action='closeSidebar' class='item'}}Login{{/link-to}}
+    {{#link-to 'register' action='closeSidebar' class='item'}}Register{{/link-to}}
 {{/if}}

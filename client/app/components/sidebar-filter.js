@@ -6,12 +6,12 @@ export default Ember.Component.extend({
         setFilter(){
             this.sendAction('setFilter');
             //HACK
-            Ember.$('.ui.sidebar#filtermenu').sidebar('toggle');
+            Ember.$('.ui.sidebar#filtermenu').sidebar('hide');
         },
         clearFilter(){
             this.sendAction('clearFilter');
             //HACK
-            Ember.$('.ui.sidebar#filtermenu').sidebar('toggle');
+            Ember.$('.ui.sidebar#filtermenu').sidebar('hide');
         }
     }
 });

@@ -12,7 +12,17 @@ export default Ember.Controller.extend({
             this.send('setFilter');
         },
         loadDetail(restaurantLocation){
-            
+            if(restaurantLocation.get('softLoad')){
+                //service later
+                var location = this.store.createRecord('restaurantLocation', restaurantLocation.toJSON());
+
+                //temp
+                location.set('tags', undefined);
+                
+                var postback = location.save().then(function(data){
+                    console.log(data);
+                });
+            }
         }
     }
 });

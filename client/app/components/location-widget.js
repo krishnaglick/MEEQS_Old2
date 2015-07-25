@@ -13,10 +13,9 @@ export default Ember.Component.extend({
         let targetLocation = locationService.latLngToString(this.get('location').get('location'));
         return this.get('google-service').getGoogleDirectionsURL(currentLocation, targetLocation);
     }),
-
     actions: {
         loadDetail(){
-            this.sendAction('loadDetail');
+            this.sendAction('loadDetail', this.get('location'));
         },
         toggleExpand(){
             this.sendAction('loadDetail', this.get('location'));

@@ -6,11 +6,8 @@ export default Ember.Component.extend({
         invalidateSession(){
             this.get('session').invalidate('authenticator:passport');
         },
-        openModal(routeName){
-            this.sendAction('openModal', routeName);
-        },
-        closeModal(){
-            this.sendAction('closeModal');
+        closeSidebar(){
+            Ember.$('.ui.sidebar#sidemenu').sidebar('close');
         }
     }
 });

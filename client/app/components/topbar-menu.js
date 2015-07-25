@@ -5,11 +5,11 @@ export default Ember.Component.extend({
     actions: {
         toggleSidebarMenu: function(){
             //HACK
-            Ember.$('.ui.sidebar#sidemenu').sidebar('toggle');
+            Ember.$('.ui.sidebar#sidemenu').sidebar('show');
         },
         toggleSidebarFilter: function(){
             //HACK
-            Ember.$('.ui.sidebar#filtermenu').sidebar('toggle');
+            Ember.$('.ui.sidebar#filtermenu').sidebar('show');
         }
     }
 });

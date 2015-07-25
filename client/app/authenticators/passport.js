@@ -35,7 +35,7 @@ export default Base.extend({
             }).then((response) => {
                 Ember.run(() => {
                     if(response.user){
-                        resolve({ token: response.token, user: response.user });
+                        resolve({ user: response.user });
                     } else {
                         reject(response.message);
                     }

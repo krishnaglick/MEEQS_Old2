@@ -12,6 +12,9 @@ export default Ember.Controller.extend({
                 }, (error) => {
                     this.set('messages', [error]);
                 });
+        },
+        cancel(){
+            this.transitionToRoute('index');
         }
     }
 });
