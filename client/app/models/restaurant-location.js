@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
@@ -9,7 +8,6 @@ export default DS.Model.extend({
     tags: DS.attr(),
     ratings: DS.attr(),
 
-    softLoad: DS.attr('boolean'),
     hardLoad: DS.attr('boolean'),
     photo_reference: DS.attr('string'),
     latitude: DS.attr('string'),

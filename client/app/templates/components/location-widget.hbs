@@ -11,6 +11,8 @@
         {{#if isExpanded}}
             <div class='ui label'>ID: {{location.id}}</div>
             <p>{{location.description}}</p>
+            {{rating-edit-widget createRating='createRating'}}
+            {{rating-list-widget ratings=location.ratings}}
         {{/if}}
     </div>
     <div class="extra">

@@ -6,13 +6,10 @@ export default Ember.Controller.extend({
     actions: {
         loadDetail(restaurantLocation){
             //service later hardLoadModel()
-            if(restaurantLocation.get('softLoad')){
+            if(restaurantLocation.get('isNew')){
                 restaurantLocation.set('tags', undefined);
-                restaurantLocation.set('restaurantLocationID', undefined);
-                restaurantLocation.transitionTo('created.uncommitted');
 
                 restaurantLocation.save().then(function(data){
-                    restaurantLocation.set('softLoad', false);
                     restaurantLocation.set('hardLoad', true);
                 });
             } else if(!restaurantLocation.get('hardLoad')){
