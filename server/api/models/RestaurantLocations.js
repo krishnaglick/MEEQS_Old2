@@ -18,8 +18,9 @@ module.exports = {
       unique: true,
       autoIncrement: true
     },
-    restaurant: {
-      model: 'restaurants'
+    name: {
+      type: 'string',
+      required: false
     },
     tags: {
       collection: 'tags',

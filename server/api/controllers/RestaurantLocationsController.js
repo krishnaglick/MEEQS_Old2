@@ -17,7 +17,8 @@ var unwantedProperties = [
   'international_phone_number',
   'reviews',
   'user_ratings_total',
-  'isDeleted'
+  'isDeleted',
+  'types'
 ];
 var googleRequestParams = [
   'location',
@@ -44,17 +45,36 @@ module.exports = {
       if(!gRes || !gRes.results) return res.notFound();
 
       var place_ids = _.pluck(gRes.results, 'place_id');
+
+      var types = _.uniq(_.flatten(_.pluck(gRes.results, 'types')));
+      types = _.map(types, (type) => {
+        return {
+          name: type
+        };
+      });
+      Tags.create(types, (err, records) => {});
+
       let Model = actionUtil.parseModel(req);
 
       Model.find({ where: { place_id: place_ids }})
-        .populate('restaurant')
         .populate('tags')
         .populate('ratings')
         .exec((err, matchingRecords) => {
           if (err) return res.serverError(err);
           if(!matchingRecords) return res.ok(gRes.results);
 
-          return res.ok({ restaurantLocations: Utils.mergeOn(matchingRecords, gRes.results, 'place_id', Utils.removePropertiesByBlacklist, unwantedProperties) });
+          //Need to refactor this so the tags are actually attached and the data is returned correctly.
+          let mergedResults = Utils.mergeOn(matchingRecords, gRes.results, 'place_id');
+          for (var i = mergedResults.length - 1; i >= 0; i--) {
+            let types = mergedResults[i].types;
+            var q = i;
+            Tags.find({name: types}).exec((err, records) => {
+              mergedResults[q].tags = mergedResults[q].tags ? _.merge({}, records, mergedResults[q].tags) : records;
+              if(q == matchingRecords.length-1) {
+                return res.ok({ restaurantLocations: Utils.removePropertiesByBlacklist(mergedResults, unwantedProperties) });
+              }
+            });
+          }
         });
     });
   },
@@ -80,7 +100,7 @@ module.exports = {
         if (err) return res.serverError(err);
         if(!gRes || !gRes.result) return res.ok(matchingRecord);
 
-        let data = _.merge(Utils.removePropertiesByBlacklist(gRes.result, unwantedProperties), Utils.removePropertiesByBlacklist(matchingRecord, unwantedProperties));
+        let data = Utils.mergeOn(matchingRecord, gRes.result, 'place_id', Utils.removePropertiesByBlacklist, unwantedProperties);
 
         res.ok(data);
       });
