@@ -60,11 +60,18 @@ module.exports = {
 
     if(_.isArray(alpha)) {
       for (var i = alpha.length - 1; i >= 0; i--) {
-        alpha[i] = Utils.deletePropertiesByWhitelist(alpha[i], whitelist);
+        alpha[i] = Utils.removePropertiesByWhitelist(alpha[i], whitelist);
       }
     }
-    else {
-      alpha = _.pick(alpha, whitelist);
+    else if(typeof alpha === 'object') {
+      _.each(alpha, (val, key) => {
+        if(!_.contains(whitelist, key)) {
+          delete alpha[key];
+        }
+        else if(typeof alpha[key] === 'object') {
+          alpha[key] = Utils.removePropertiesByWhitelist(alpha[key], whitelist);
+        }
+      });
     }
 
     return alpha;

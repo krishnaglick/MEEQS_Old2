@@ -35,6 +35,13 @@ var googleRequestParams = [
   'zagatselected'
 ];
 
+var unwantedTypes = [
+  'establishment',
+  'point_of_interest',
+  'food',
+  'restaurant'
+];
+
 module.exports = {
   find : (req, res) => {
     let googleSearchOptions = _.pick(req.params.all(), googleRequestParams);
@@ -47,11 +54,7 @@ module.exports = {
       var place_ids = _.pluck(gRes.results, 'place_id');
 
       var types = _.uniq(_.flatten(_.pluck(gRes.results, 'types')));
-      types = _.map(types, (type) => {
-        return {
-          name: type
-        };
-      });
+      types = 
       Tags.create(types, (err, records) => {});
 
       let Model = actionUtil.parseModel(req);
@@ -61,20 +64,23 @@ module.exports = {
         .populate('ratings')
         .exec((err, matchingRecords) => {
           if (err) return res.serverError(err);
-          if(!matchingRecords) return res.ok(gRes.results);
+          if(!matchingRecords) return res.ok(Utils.removePropertiesByBlacklist(gRes.results, unwantedProperties));
 
-          //Need to refactor this so the tags are actually attached and the data is returned correctly.
           let mergedResults = Utils.mergeOn(matchingRecords, gRes.results, 'place_id');
+
           for (var i = mergedResults.length - 1; i >= 0; i--) {
-            let types = mergedResults[i].types;
-            var q = i;
-            Tags.find({name: types}).exec((err, records) => {
-              mergedResults[q].tags = mergedResults[q].tags ? _.merge({}, records, mergedResults[q].tags) : records;
-              if(q == matchingRecords.length-1) {
-                return res.ok({ restaurantLocations: Utils.removePropertiesByBlacklist(mergedResults, unwantedProperties) });
-              }
-            });
+            mergedResults[i].tags = mergedResults[i].tags || [];
+            for (var q = mergedResults[i].types.length - 1; q >= 0; q--) {
+              if(_.contains(unwantedTypes, mergedResults[i].types[q])) break;
+              mergedResults[i].tags.push(
+                {
+                  name: mergedResults[i].types[q]
+                }
+              );
+            }
           }
+
+          return res.ok({ restaurantLocations: Utils.removePropertiesByBlacklist(mergedResults, unwantedProperties) });
         });
     });
   },
