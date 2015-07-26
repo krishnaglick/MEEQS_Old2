@@ -8,8 +8,6 @@ Router.map(function() {
     this.route('index', { path: '/' });
 
     //this.route('restaurant-location', { path: '/restaurant-locations/:restaurantLocation_id' });
-    //this.route('restaurants');
-    //this.route('restaurant', { path: '/restaurants/:restaurant_id' });
 
     this.route('login');
     this.route('register');

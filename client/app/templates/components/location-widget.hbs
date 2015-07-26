@@ -3,14 +3,14 @@
     <img src="{{photoUrl}}">
 </a>
 <div class="content">
-    <a class="header" href {{action 'toggleExpand'}}>{{location.restaurant.name}}</a>
+    <a class="header" href {{action 'toggleExpand'}}>{{location.name}}</a>
     <div class="meta">
         <a class='ui button' href='{{directionsUrl}}'><i class='map icon'></i></a>
     </div>
     <div class="description">
         {{#if isExpanded}}
-            <p>{{location.restaurant.description}}</p>
-            some extra content here because we expanded it yeah!
+            <div class='ui label'>ID: {{location.id}}</div>
+            <p>{{location.description}}</p>
         {{/if}}
     </div>
     <div class="extra">

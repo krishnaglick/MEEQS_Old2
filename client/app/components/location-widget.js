@@ -18,7 +18,7 @@ export default Ember.Component.extend({
             this.sendAction('loadDetail', this.get('location'));
         },
         toggleExpand(){
-            this.sendAction('loadDetail', this.get('location'));
+            this.send('loadDetail');
             this.set('isExpanded', !this.get('isExpanded'));
         }
     }
