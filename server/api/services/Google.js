@@ -15,6 +15,7 @@ module.exports = {
   getPlacesNearMe : (searchOptions, callback) => {
     searchOptions.types = config.placeTypes;
     searchOptions.rankby = 'distance';
+    searchOptions.location = searchOptions.location || config.defaultLocation;
     if(searchOptions.location && typeof searchOptions.location == "string"){
         searchOptions.location = searchOptions.location.split(',').map(Number);
     }
