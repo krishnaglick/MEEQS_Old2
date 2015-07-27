@@ -1,0 +1,8 @@
+
+{{#each ratings as |rating|}}
+    {{#ui-segment}}
+        {{rating-widget rating=rating}}
+    {{/ui-segment}}
+{{else}}
+    There doesn't appear to be anything here...
+{{/each}}

@@ -1,17 +1,15 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-    needs: ['cookie'],
     init(){
+        this._super();
+
+        //shhhhh it'll be okay
+        Ember.store = this.store;
+
         //TODO: put this in a service
         this.get('geolocation').getGeoposition().then((latLng) => {
-            let combinedLatLng = `${latLng.coords.latitude},${latLng.coords.longitude}`;
-            this.get('cookie').setCookie('location', combinedLatLng);
+            this.get('location-service').setLocation(latLng.coords)
         });
-    },
-    actions: {
-        invalidateSession: function(){
-            this.get('session').invalidate('authenticator:passport');
-        }
     }
 });

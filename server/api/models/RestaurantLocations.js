@@ -7,33 +7,47 @@
 
 module.exports = {
   protectedAttributes: function () {
-      return [ "restaurantLocationID" ];
+      return [ 'restaurantLocationID' ];
   },
 
   attributes: {
-  	restaurantLocationID: {
-  		type: 'integer',
-  		index: true,
-  		primaryKey: true,
-  		unique: true,
-  		autoIncrement: true
-  	},
-  	restaurantID: {
-  		model: 'Restaurants',
-  		columnName: 'restaurantID',
-  		type: 'integer',
-  		required: true
-  	},
-  	tags: {
-  		model: 'Tags',
-  		columnName: 'tagID',
-  		type: 'integer',
-  		required: false
-  	},
-  	placeID: {
-  		type: 'string',
-  		required: true
-  	}
+    restaurantLocationID: {
+      type: 'integer',
+      index: true,
+      primaryKey: true,
+      unique: true,
+      autoIncrement: true
+    },
+    name: {
+      type: 'string',
+      required: false
+    },
+    tags: {
+      collection: 'tags',
+      via: 'restaurantLocation'
+    },
+    ratings: {
+      collection: 'ratings',
+      via: 'restaurantLocation'
+    },
+    place_id: {
+      type: 'string',
+      required: true,
+      unique: true
+    },
+    isDeleted: {
+      type: 'boolean',
+      required: false,
+      defaultsTo: false
+    },
+    toJSON : function() {
+      var obj = this.toObject();
+      if(!obj.isDeleted) {
+        delete obj.isDeleted;
+        return obj;
+      }
+      return null;
+    }
   }
 };
 

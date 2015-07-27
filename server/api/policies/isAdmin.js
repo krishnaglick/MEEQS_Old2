@@ -15,7 +15,7 @@ module.exports = ( req, res, next ) => {
         }
         if(user && !user.isAdmin) {
             res.status(401);
-            res.send('You\'re not an admin!');
+            res.send({message: 'You\'re not an admin!'});
         }
         if(user && user.isAdmin) {
             return next();

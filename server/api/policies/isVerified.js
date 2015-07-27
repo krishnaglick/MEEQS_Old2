@@ -15,7 +15,7 @@ module.exports = ( req, res, next ) => {
         }
         if(user && !user.isVerified) {
             res.status(401);
-            res.send('You\'re not verified!');
+            res.send({message: 'You\'re not verified!'});
         }
         if(user && user.isVerified) {
             return next();

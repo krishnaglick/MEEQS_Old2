@@ -1,27 +1,10 @@
 
-<form class="ui form" {{action 'register' on='submit' }}>
-    <h3 class="ui dividing header">Register</h3>
-    <div class="field">
-        <label>Username</label>
-        {{ input type='text' value=model.username }}
-    </div>
-    <div class="field">
-        <label>Password</label>
-        {{ input type='password' value=model.password }}
-    </div>
-    <div class="field">
-        <label>Email</label>
-        {{ input type='text' value=model.email }}
-    </div>
+{{#modal-widget submit='register' cancel='cancel' submitLabel='Register' modalLabel='Register' cancelLabel='Cancel'}}
+    <div class='ui form'>
+        {{ui-field type='text' value=model.username label='Username'}}
+        {{ui-field type='password' value=model.password label='Password'}}
+        {{ui-field type='text' value=model.email label='Email'}}
 
-    {{#if model.errors.messages }}
-        <div class="ui red message">
-            <ui class="list">
-            {{#each model.errors.messages as |message|}}
-                <li>{{message}}</li>
-            {{/each}}
-            </ui>
-        </div>
-    {{/if}}
-    <button class="ui submit button">Register</button>
-</form>
+        {{message-widget messages=messages color='red'}}
+    </div>
+{{/modal-widget}}

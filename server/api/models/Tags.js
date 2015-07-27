@@ -11,24 +11,37 @@ module.exports = {
   },
 
   attributes: {
-	tagID: {
-  		type: 'integer',
-  		index: true,
-  		primaryKey: true,
-  		unique: true,
-  		autoIncrement: true
-  	},
-  	name: {
-  		type: 'string',
-  		unique: true,
-  		required: true
-  	},
-  	tagCategoryID: {
-  		model: 'TagCategories',
-  		columnName: 'tagCategoryID',
-  		type: 'integer',
-  		required: false
-  	}
+    tagID: {
+      type: 'integer',
+      index: true,
+      primaryKey: true,
+      unique: true,
+      autoIncrement: true
+    },
+    name: {
+      type: 'string',
+      unique: true,
+      required: true
+    },
+    tagCategories: {
+      model: 'tagCategories'
+    },
+    restaurantLocation: {
+      model: 'restaurantLocations'
+    },
+    isDeleted: {
+      type: 'boolean',
+      required: false,
+      defaultsTo: false
+    },
+    toJSON : function() {
+      var obj = this.toObject();
+      if(!obj.isDeleted) {
+        delete obj.isDeleted;
+        return obj;
+      }
+      return null;
+    }
   }
 };
 

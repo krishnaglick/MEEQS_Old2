@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+    messages: [],
     actions: {
         register(){
             var credentials = {
@@ -11,8 +12,13 @@ export default Ember.Controller.extend({
                 this.get('session').authenticate('authenticator:passport', credentials)
                     .then(() => {
                         this.transitionToRoute('index');
+                    }, (error) => {
+                        this.set('messages', error);
                     });
             });
+        },
+        cancel(){
+            this.transitionToRoute('index');
         }
     }
 });

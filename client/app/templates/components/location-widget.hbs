@@ -1,0 +1,21 @@
+
+<a class="image" href {{action 'toggleExpand'}}>
+    <img src="{{photoUrl}}">
+</a>
+<div class="content">
+    <a class="header" href {{action 'toggleExpand'}}>{{location.name}}</a>
+    <div class="meta">
+        <a class='ui button' href='{{directionsUrl}}'><i class='map icon'></i></a>
+    </div>
+    <div class="description">
+        {{#if isExpanded}}
+            {{#ui-label}}ID: {{location.id}}{{/ui-label}}
+            <p>{{location.description}}</p>
+            {{rating-edit-widget location=location}}
+            {{rating-list-widget ratings=location.ratings}}
+        {{/if}}
+    </div>
+    <div class="extra">
+        {{tag-list-widget tags=location.tags}}
+    </div>
+</div>

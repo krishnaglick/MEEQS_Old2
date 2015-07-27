@@ -1,0 +1,14 @@
+
+{{#each tags as |tag|}}
+    {{#ui-label}}
+        {{tag.name}}
+        {{#if removeTag}}
+            <i class="delete icon" {{action 'removeTag' tag.tagID on='click'}}></i>
+        {{/if}}
+    {{/ui-label}}
+{{/each}}
+{{#if addTag}}
+    {{#ui-label action='addTag'}}
+        <i class="add icon"></i>
+    {{/ui-label}}
+{{/if}}

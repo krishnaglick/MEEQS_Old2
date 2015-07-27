@@ -1,0 +1,13 @@
+
+<form class='ui form' {{action 'submit' on='submit'}}>
+    {{#if formLabel}}
+        <div class='ui dividing header'>{{formLabel}}</div>
+    {{/if}}
+    {{yield}}
+    {{#if submitLabel}}
+        <button class='ui submit button'>{{submitLabel}}</button>
+    {{/if}}
+    {{#if cancelLabel}}
+        <button class='ui cancel button' {{action 'cancel'}}>{{cancelLabel}}</button>
+    {{/if}}
+</form>

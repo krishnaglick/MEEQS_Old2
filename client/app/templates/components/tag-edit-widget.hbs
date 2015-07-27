@@ -1,0 +1,11 @@
+
+{{#if editing}}
+    {{#model-form action='createTag' submitLabel='Add' cancelLabel='Cancel'}}
+        {{ui-field type='dropdown' options=categoryOptions value=newTag.category label='Type'}}
+        {{ui-field type='text' value=newTag.name label='Password'}}
+    {{/model-form}}
+{{else}}
+    {{#ui-label action='addTag'}}
+        <i class="add icon"></i>
+    {{/ui-label}}
+{{/if}}
