@@ -20,18 +20,6 @@ export default AppSerializer.extend({
             delete item.geometry;
             delete item.place_id;
 
-            //HACK, currently no restaurant associations are bieng handled
-            item.types = item.types.filter((type) => {
-                return ['food', 'point_of_interest', 'establishment', 'restaurant'].indexOf(type) === -1;
-            });
-            item.tags = item.types.map((type) => {
-                var obj = {};
-                obj.name = type;
-                return obj;
-            });
-            
-            delete item.types;
-
 
             if(!item[this.primaryKey]){
                 store.createRecord('restaurant-location', item);

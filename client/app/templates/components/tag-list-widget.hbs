@@ -1,14 +1,14 @@
 
 {{#each tags as |tag|}}
-    <div class="ui label">
+    {{#ui-label}}
         {{tag.name}}
         {{#if removeTag}}
             <i class="delete icon" {{action 'removeTag' tag.tagID on='click'}}></i>
         {{/if}}
-    </div>
+    {{/ui-label}}
 {{/each}}
 {{#if addTag}}
-    <div class="ui label" {{action 'addTag'}}>
+    {{#ui-label action='addTag'}}
         <i class="add icon"></i>
-    </div>
+    {{/ui-label}}
 {{/if}}

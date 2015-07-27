@@ -1,8 +1,32 @@
 
-{{model.userID}}
-{{model.comment}}
-{{model.menuSelection}}
-{{model.environment}}
-{{model.costEfficiency}}
-{{model.quality}}
-{{model.service}}
+<div class='ui form'>
+    {{#ui-label}}
+        <strong>User:</strong> {{rating.user}}
+    {{/ui-label}}
+    {{#ui-label}}
+        <strong>Average Rating:</strong> {{rating.averageRating}}
+    {{/ui-label}}
+    {{#ui-label}}
+        <strong>Create Date:</strong> {{rating.createdAt}}
+    {{/ui-label}}
+
+    {{#ui-field label='Comment' enabled=false}}
+        <p>{{rating.comment}}</p>
+    {{/ui-field}}
+
+    {{#ui-field label='Menu Selection'}}
+        {{ui-rating value=rating.menuSelection enabled=false}}
+    {{/ui-field}}
+    {{#ui-field label='Environment'}}
+        {{ui-rating value=rating.environment enabled=false}}
+    {{/ui-field}}
+    {{#ui-field label='Cost Efficiency'}}
+        {{ui-rating value=rating.costEfficiency enabled=false}}
+    {{/ui-field}}
+    {{#ui-field label='Product Quality'}}
+        {{ui-rating value=rating.productQuality enabled=false}}
+    {{/ui-field}}
+    {{#ui-field label='Service'}}
+        {{ui-rating value=rating.service enabled=false}}
+    {{/ui-field}}
+</div>

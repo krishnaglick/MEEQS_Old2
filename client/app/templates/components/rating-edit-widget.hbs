@@ -1,18 +1,28 @@
 
-{{#segment-widget}}
-    {{#if isEditing}}
-        {{#model-form submit='submit' cancel='cancel' submitLabel='Rate!' cancelLabel='Cancel' formLabel='Submit a Rating'}}
-            {{form-field type='number' value=model.password label='Menu Selection'}}
-            {{form-field type='number' value=model.password label='Environment'}}
-            {{form-field type='number' value=model.password label='Cost Efficiency'}}
-            {{form-field type='number' value=model.password label='Food Quality'}}
-            {{form-field type='number' value=model.password label='Service'}}
+{{#if isEditing}}
+    {{#ui-segment}}
+        {{#model-form submit='saveRating' cancel='cancel' submitLabel='Rate!' cancelLabel='Cancel' formLabel='Submit a Rating'}}
+            {{#ui-field label='Menu Selection'}}
+                {{ui-rating value=model.menuSelection}}
+            {{/ui-field}}
+            {{#ui-field label='Environment'}}
+                {{ui-rating value=model.environment}}
+            {{/ui-field}}
+            {{#ui-field label='Cost Efficiency'}}
+                {{ui-rating value=model.costEfficiency}}
+            {{/ui-field}}
+            {{#ui-field label='Product Quality'}}
+                {{ui-rating value=model.productQuality}}
+            {{/ui-field}}
+            {{#ui-field label='Service'}}
+                {{ui-rating value=model.service}}
+            {{/ui-field}}
 
-            {{form-field type='textarea' value=model.username label='Comment'}}
-            
+            {{ui-field type='textarea' value=model.comment label='Comment'}}
+
             {{message-widget messages=messages color='red'}}
         {{/model-form}}
-    {{else}}
-        <div class='ui button' {{action 'edit'}}>Have an opinion to share? Rate this restaurant now!</div>
-    {{/if}}
-{{/segment-widget}}
+    {{/ui-segment}}
+{{else}}
+    <div class='ui button' {{action 'edit'}}>Have an opinion to share? Rate this restaurant now!</div>
+{{/if}}

@@ -9,9 +9,9 @@
     </div>
     <div class="description">
         {{#if isExpanded}}
-            <div class='ui label'>ID: {{location.id}}</div>
+            {{#ui-label}}ID: {{location.id}}{{/ui-label}}
             <p>{{location.description}}</p>
-            {{rating-edit-widget createRating='createRating'}}
+            {{rating-edit-widget location=location}}
             {{rating-list-widget ratings=location.ratings}}
         {{/if}}
     </div>

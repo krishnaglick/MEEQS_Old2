@@ -4,8 +4,8 @@ export default Ember.Component.extend({
     classNames: ['ui', 'modal'],
     suppressClose: false,
     actions: {
-        ok(){
-            this.sendAction('ok');
+        submit(){
+            this.sendAction('submit');
         },
         cancel(){
             this.sendAction('cancel');

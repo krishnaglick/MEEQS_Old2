@@ -1,8 +1,8 @@
 
-{{#modal-widget ok='login' cancel='cancel' okLabel='Login' modalLabel='Login' cancelLabel='Cancel'}}
+{{#modal-widget submit='login' cancel='cancel' submitLabel='Login' modalLabel='Login' cancelLabel='Cancel'}}
     <div class='ui form'>
-        {{form-field type='text' value=model.username label='Username'}}
-        {{form-field type='password' value=model.password label='Password'}}
+        {{ui-field type='text' value=model.username label='Username'}}
+        {{ui-field type='password' value=model.password label='Password'}}
         
         {{message-widget messages=messages color='red'}}
     </div>

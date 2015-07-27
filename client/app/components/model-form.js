@@ -3,10 +3,10 @@ import Ember from 'ember';
 export default Ember.Component.extend({
     actions: {
         submit(){
-            this.sendAction();
+            this.sendAction('submit');
         },
         cancel(){
-            this.sendAction();
+            this.sendAction('cancel');
         }
     }
 });
