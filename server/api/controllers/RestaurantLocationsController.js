@@ -108,7 +108,7 @@ module.exports = {
 
         let data = Utils.mergeOn(matchingRecord, gRes.result, 'place_id', Utils.removePropertiesByBlacklist, unwantedProperties);
 
-        res.ok(data);
+        res.ok({restaurantLocations: data});
       });
     }); 
   }
