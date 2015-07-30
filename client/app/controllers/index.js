@@ -6,7 +6,11 @@ export default Ember.Controller.extend({
     actions: {
         loadDetail(restaurantLocation){
             //service later hardLoadModel()
+            if(restaurantLocation.get('id')) {
+                debugger;
+            }
             if(restaurantLocation.get('isNew')){
+                debugger;
                 restaurantLocation.set('tags', undefined);
 
                 restaurantLocation.save().then(function(data){
@@ -14,6 +18,7 @@ export default Ember.Controller.extend({
                 });
             } else if(!restaurantLocation.get('hardLoad')){
                 this.store.find('restaurant-location', restaurantLocation.get('id')).then(function(data){
+                    debugger;
                     restaurantLocation = data;
                     restaurantLocation.set('hardLoad', true);
                 });

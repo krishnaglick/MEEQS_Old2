@@ -4,7 +4,7 @@ export default AppSerializer.extend({
     primaryKey: 'restaurantLocationID',
     extractArray(store, type, payload){
         var ignore_indicies = [];
-
+        debugger;
         //can't be done in normalizeHash due to existence of non-created restaurants and created restaurants in same payload
         payload['restaurantLocations'].forEach((result, index, array) => {
             var item = array[index];
