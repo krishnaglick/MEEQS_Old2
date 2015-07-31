@@ -64,6 +64,7 @@ module.exports = {
           if (err) return res.serverError(err);
           if(!matchingRecords) return res.ok(Utils.removePropertiesByBlacklist(gRes.results, unwantedProperties));
 
+          //TODO: Refactor
           var improvedRatings = _.map(matchingRecords, (record) => {
             return new Promise((res, rej) => {
               if(!record.ratings || _.isEmpty(record.ratings)) res();
