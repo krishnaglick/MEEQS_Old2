@@ -3,9 +3,8 @@ import AppSerializer from './application';
 export default AppSerializer.extend({
     primaryKey: 'restaurantLocationID',
     extractArray(store, type, payload){
-        var ignore_indicies = [];
 
-        //can't be done in normalizeHash due to existence of non-created restaurants and created restaurants in same payload
+        //this doesn't need to be done here now; look into extractSingle
         payload['restaurantLocations'].forEach((result, index, array) => {
             var item = array[index];
 
@@ -19,18 +18,7 @@ export default AppSerializer.extend({
             delete item.id;
             delete item.geometry;
             delete item.place_id;
-
-
-            if(!item[this.primaryKey]){
-                store.createRecord('restaurant-location', item);
-                ignore_indicies.push(index);
-            }
         });
-
-        ignore_indicies.forEach((result, index, array) => {
-            delete payload['restaurantLocations'][array[index]];
-        });
-        payload['restaurantLocations'] = payload['restaurantLocations'].filter(Boolean);
 
         return this._super(store, type, payload);
     },
