@@ -65,12 +65,13 @@ module.exports = {
           if(!matchingRecords) return res.ok(Utils.removePropertiesByBlacklist(gRes.results, unwantedProperties));
 
           var improvedRatings = _.map(matchingRecords, (record) => {
-            return new Promise((uRes, uRej) => {
-              if(!record.ratings || _.isEmpty(record.ratings)) uRes();
+            return new Promise((res, rej) => {
+              if(!record.ratings || _.isEmpty(record.ratings)) res();
               var changedRatings = _.map(record.ratings, (rating) => {
                 return new Promise((res, rej) => {
                   Users.find({where: {userID: rating.user}})
                   .exec((err, user) => {
+                    //TODO: Change this to display name when that gets populated.
                     if(!err) rating.user = user[0].username;
                     res();
                   });
@@ -78,7 +79,7 @@ module.exports = {
               });
 
               Promise.all(changedRatings).then((vals) => {
-                uRes();
+                res();
               });
             });
           });

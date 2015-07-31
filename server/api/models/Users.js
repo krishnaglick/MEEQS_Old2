@@ -30,6 +30,9 @@ module.exports = {
       minLength: 6,
       required: true
     },
+    displayName: {
+      type: 'string'
+    },
     email: {
       type: 'string'
     },
