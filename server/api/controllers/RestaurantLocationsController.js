@@ -54,8 +54,6 @@ module.exports = {
       var place_ids = _.pluck(gRes.results, 'place_id');
 
       var types = _.uniq(_.flatten(_.pluck(gRes.results, 'types')));
-      types = 
-      Tags.create(types, (err, records) => {});
 
       let Model = actionUtil.parseModel(req);
 
@@ -66,21 +64,42 @@ module.exports = {
           if (err) return res.serverError(err);
           if(!matchingRecords) return res.ok(Utils.removePropertiesByBlacklist(gRes.results, unwantedProperties));
 
-          let mergedResults = Utils.mergeOn(matchingRecords, gRes.results, 'place_id');
+          var improvedRatings = _.map(matchingRecords, (record) => {
+            return new Promise((uRes, uRej) => {
+              if(!record.ratings || _.isEmpty(record.ratings)) uRes();
+              var changedRatings = _.map(record.ratings, (rating) => {
+                return new Promise((res, rej) => {
+                  Users.find({where: {userID: rating.user}})
+                  .exec((err, user) => {
+                    if(!err) rating.user = user[0].username;
+                    res();
+                  });
+                });
+              });
 
-          for (var i = mergedResults.length - 1; i >= 0; i--) {
-            mergedResults[i].tags = mergedResults[i].tags || [];
-            for (var q = mergedResults[i].types.length - 1; q >= 0; q--) {
-              if(_.contains(unwantedTypes, mergedResults[i].types[q])) break;
-              mergedResults[i].tags.push(
-                {
-                  name: mergedResults[i].types[q]
-                }
-              );
+              Promise.all(changedRatings).then((vals) => {
+                uRes();
+              });
+            });
+          });
+
+          Promise.all(improvedRatings).then(() => {
+            let mergedResults = Utils.mergeOn(matchingRecords, gRes.results, 'place_id');
+
+            for (var i = mergedResults.length - 1; i >= 0; i--) {
+              mergedResults[i].tags = mergedResults[i].tags || [];
+              for (var q = mergedResults[i].types.length - 1; q >= 0; q--) {
+                if(_.contains(unwantedTypes, mergedResults[i].types[q])) break;
+                mergedResults[i].tags.push(
+                  {
+                    name: mergedResults[i].types[q]
+                  }
+                );
+              }
             }
-          }
 
-          return res.ok({ restaurantLocations: Utils.removePropertiesByBlacklist(mergedResults, unwantedProperties) });
+            return res.ok({ restaurantLocations: Utils.removePropertiesByBlacklist(mergedResults, unwantedProperties) });
+          });
         });
     });
   },
