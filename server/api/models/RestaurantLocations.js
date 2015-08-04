@@ -32,7 +32,8 @@ module.exports = {
     },
     place_id: {
       type: 'string',
-      required: true
+      required: true,
+      unique: true
     },
     isDeleted: {
       type: 'boolean',
