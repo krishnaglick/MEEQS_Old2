@@ -19,7 +19,7 @@ module.exports = {
         if(matchingRecords) {
           _.map(matchingRecords, (record) => {
             if(record && record.user && record.user.username) {
-              record.user = {username: record.user.username};
+              record.user = {username: record.user.displayName};
             }
             return record;
           });
@@ -43,10 +43,48 @@ module.exports = {
 
       if(!matchingRecord) return res.serverError({error: 'No rating!'});
 
-      matchingRecord.user = matchingRecord.user ? {username: (matchingRecord.user.username || '')} : {};
+      matchingRecord.user = matchingRecord.user ? {username: (matchingRecord.user.displayName || '')} : {};
 
       res.ok({ratings: matchingRecord});
     });
+  },
+
+  create : (req, res) => {
+  var Model = actionUtil.parseModel(req);
+  var data = actionUtil.parseValues(req, Model);
+
+  Model.create( data ).exec( function created(err, newInstance) {
+    if (err) return res.negotiate( err );
+
+    if (req._sails.hooks.pubsub) {
+      if (req.isSocket) {
+        Model.subscribe(req, newInstance);
+        Model.introduce(newInstance);
+      }
+      Model.publishCreate(newInstance, !req.options.mirror && req);
+    }
+
+    // Do a final query to populate the associations of the record.
+    var Q = this.findOne(newInstance[Model.primaryKey]);
+    Q = actionUtil.populateEach(Q, req);
+    Q.exec((err, populatedRecord) => {
+      if (err) return res.serverError(err);
+      if (!populatedRecord) return res.serverError('Could not find record after updating!');
+
+      res.status(201);
+
+      Users.findOne({where: { userID: populatedRecord.user }}).exec((err, user) => {
+        if(err) res.json(actionUtil.emberizeJSON( Model, populatedRecord, req.options.associations, false));
+
+        populatedRecord.user = user.displayName;
+        res.json(actionUtil.emberizeJSON( Model, populatedRecord, req.options.associations, false));
+      });
+
+      
+      
+    });
+  });
+
   }
 };
 
