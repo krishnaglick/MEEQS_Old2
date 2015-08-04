@@ -19,7 +19,7 @@ module.exports = {
         if(matchingRecords) {
           _.map(matchingRecords, (record) => {
             if(record && record.user && record.user.username) {
-              record.user = {username: record.user.username};
+              record.user = {username: record.user.displayName};
             }
             return record;
           });
@@ -43,7 +43,7 @@ module.exports = {
 
       if(!matchingRecord) return res.serverError({error: 'No rating!'});
 
-      matchingRecord.user = matchingRecord.user ? {username: (matchingRecord.user.username || '')} : {};
+      matchingRecord.user = matchingRecord.user ? {username: (matchingRecord.user.displayName || '')} : {};
 
       res.ok({ratings: matchingRecord});
     });
