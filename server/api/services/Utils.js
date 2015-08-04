@@ -33,6 +33,28 @@ module.exports = {
     return alpha;
   },
 
+  mergeOnAsProperty : (uno, dos, matchProp, asProp, mod = (i) => { return i; }, props = []) {
+    var alpha = uno.length > dos.length ? uno : dos;
+    var beta = uno.length > dos.length ? dos : uno;
+
+    for (var i = alpha.length - 1; i >= 0; i--) {
+      if(!alpha[i]) break;
+
+      for (var q = beta.length - 1; q >= 0; q--) {
+        if(!beta[q]) break;
+
+        alpha[i] = mod(alpha[i], props);
+        beta[q] = mod(beta[q], props);
+        
+        if(alpha[i][matchProp] == beta[q][matchProp]) {
+          alpha[i][asProp] = beta[q];
+          delete beta[q];
+          break;
+        }
+      }
+    }
+  },
+
   removePropertiesByBlacklist : (alpha, blacklist) => {
     if(!alpha) return alpha;
 
