@@ -1,12 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-    store: Ember.inject.service(),
     isEditing: false,
     messages: [],
     actions: {
         edit(){
-            this.set('model', Ember.store.createRecord('rating'));
+            this.set('model', this.store.createRecord('rating'));
             this.set('isEditing', true);
         },
         saveRating(){

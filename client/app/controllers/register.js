@@ -5,9 +5,10 @@ export default Ember.Controller.extend({
     actions: {
         register(){
             var credentials = {
-                username: this.model.get('username'),
-                password: this.model.get('password')
+                username: this.get('model.username'),
+                password: this.get('model.password')
             };
+            this.set('messages', []);
             this.model.save().then(() => {
                 this.get('session').authenticate('authenticator:passport', credentials)
                     .then(() => {
@@ -18,7 +19,7 @@ export default Ember.Controller.extend({
             });
         },
         cancel(){
-            this.transitionToRoute('index');
+            this.set('messages', []);
         }
     }
 });

@@ -1,16 +1,38 @@
 
-<i class="times icon" {{action 'cancel'}}></i>
-<div class="header">
-    {{modalLabel}}
-</div>
-<div class="content">
-    {{yield}}
-</div>
-<div class="actions">
-    {{#if cancelLabel}}
-        <div class="ui black button" {{action 'cancel'}}>{{cancelLabel}}</div>
-    {{/if}}
-    {{#if submitLabel}}
-        <div class="ui right labeled icon button" {{action 'submit'}}>{{submitLabel}}<i class="checkmark icon"></i></div>
-    {{/if}}
-</div>
+{{#if formify}}
+    <form class='ui modal form' {{action 'submit' on='submit'}}>
+        <i class='times icon' {{action 'cancel'}}></i>
+        <div class='header'>
+            {{modalLabel}}
+        </div>
+        <div class='content'>
+            {{yield}}
+        </div>
+        <div class='actions'>
+            {{#if cancelLabel}}
+                <div class='ui black button' {{action 'cancel'}}>{{cancelLabel}}</div>
+            {{/if}}
+            {{#if submitLabel}}
+                <button class='ui right labeled icon submit button'>{{submitLabel}}<i class='checkmark icon'></i></button>
+            {{/if}}
+        </div>
+    </form>
+{{else}}
+    <div class='ui modal'>
+        <i class='times icon' {{action 'cancel'}}></i>
+        <div class='header'>
+            {{modalLabel}}
+        </div>
+        <div class='content'>
+            {{yield}}
+        </div>
+        <div class='actions'>
+            {{#if cancelLabel}}
+                <div class='ui black button' {{action 'cancel'}}>{{cancelLabel}}</div>
+            {{/if}}
+            {{#if submitLabel}}
+                <button type='button' class='ui right labeled icon button' {{action 'submit'}}>{{submitLabel}}<i class='checkmark icon'></i></button>
+            {{/if}}
+        </div>
+    </div>
+{{/if}}

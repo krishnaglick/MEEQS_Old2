@@ -1,30 +1,12 @@
 import Ember from 'ember';
+import ModalRouteMixin from '../../mixins/ModalRouteMixin';
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(ModalRouteMixin, {
+    modal: {
+        route: 'login',
+        routeOnClose: 'index'
+    },
     model(){
-        return {
-            username: '',
-            password: ''
-        };
-    },
-    renderTemplate(){
-        new Promise((resolve, reject) => {
-            this.render('login', {
-                into: 'application',
-                outlet: 'modal'
-            });
-            resolve();
-        }).then(() => {
-            $('.modal').modal('show');
-        });
-    },
-    actions: {
-        willTransition() {
-            $('.modal').modal('hide');
-            return this.disconnectOutlet({
-                parentView: 'application',
-                outlet: 'modal'
-            });
-        }
+        return this.store.createRecord('user');
     }
 });

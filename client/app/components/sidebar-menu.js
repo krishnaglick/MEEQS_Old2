@@ -8,6 +8,12 @@ export default Ember.Component.extend({
         },
         closeSidebar(){
             Ember.$('.ui.sidebar#sidemenu').sidebar('close');
+        },
+        login(){
+            this.sendAction('openModal', 'login');
+        },
+        register(){
+            this.sendAction('openModal', 'register');
         }
     }
 });

@@ -4,8 +4,11 @@ export default Ember.Controller.extend({
     messages: [],
     actions: {
         login(){
-            var credentials = this.get('model');
-            this.set('message', '');
+            var credentials = {
+                username: this.get('model.username'),
+                password: this.get('model.password')
+            };
+            this.set('messages', []);
             this.get('session').authenticate('authenticator:passport', credentials)
                 .then(() => {
                     this.transitionToRoute('index');
@@ -14,7 +17,7 @@ export default Ember.Controller.extend({
                 });
         },
         cancel(){
-            this.transitionToRoute('index');
+            this.set('messages', []);
         }
     }
 });

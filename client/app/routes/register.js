@@ -1,28 +1,12 @@
 import Ember from 'ember';
+import ModalRouteMixin from '../../mixins/ModalRouteMixin';
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(ModalRouteMixin, {
+    modal: {
+        route: 'register',
+        routeOnClose: 'index'
+    },
     model(){
         return this.store.createRecord('user');
-    },
-    renderTemplate(){
-        new Promise((resolve, reject) => {
-            this.render('register', {
-                into: 'application',
-                outlet: 'modal'
-            });
-            resolve();
-        }).then(() => {
-            $('.modal').modal('show');
-        });
-    },
-    actions: {
-        willTransition() {
-            this.get('currentModel').unloadRecord();
-            $('.modal').modal('hide');
-            return this.disconnectOutlet({
-                parentView: 'application',
-                outlet: 'modal'
-            });
-        }
     }
 });
