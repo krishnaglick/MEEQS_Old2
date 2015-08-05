@@ -26,6 +26,10 @@ module.exports.routes = {
 
   '/logout': 'AuthController.logout',
 
+  //Need to figure out why this isn't getting auto-routed...
+  '/api/v1/restaurants' : 'RestaurantsController.find',
+  '/api/v1/restaurants/*' : 'RestaurantsController.findOne',
+
   '/*': { controller: 'App', action: 'serve', skipAssets: true, skipRegex: /^\/api\/.*$/ }
 
 };
