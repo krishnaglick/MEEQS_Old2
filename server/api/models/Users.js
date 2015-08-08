@@ -31,7 +31,8 @@ module.exports = {
       required: true
     },
     displayName: {
-      type: 'string'
+      type: 'string',
+      defaultsTo: ''
     },
     email: {
       type: 'string'
