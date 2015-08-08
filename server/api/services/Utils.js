@@ -97,5 +97,23 @@ module.exports = {
     }
 
     return alpha;
+  },
+
+  deepPopulate : (baseModel, associations) => {
+    populates = _.map(associations, (association) => {
+      return association.split('.');
+    });
+    /*[
+      ['ratings', 'user'],
+      ['tags']
+    ]*/
+    baseModel.find()
+    .exec((err, values) => {
+      _.map(values, (value) => {
+        _.forEach(populates, (pop) => {
+          value[pop[0]] = sails.models[pop[0]]
+        });
+      });
+    });
   }
 };

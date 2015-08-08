@@ -13,8 +13,10 @@ export default AppSerializer.extend({
             }
 
             item.placeID = item.place_id;
-            item.latitude = item.geometry.location.lat;
-            item.longitude = item.geometry.location.lng;
+            if(item.geometry && item.geometry.location) {
+                item.latitude = item.geometry.location.lat;
+                item.longitude = item.geometry.location.lng;
+            }
             delete item.id;
             delete item.geometry;
             delete item.place_id;
