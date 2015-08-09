@@ -99,20 +99,56 @@ module.exports = {
     return alpha;
   },
 
-  deepPopulate : (baseModel, associations) => {
-    populates = _.map(associations, (association) => {
+  deepPopulate : (baseModel, associations, conditions = {}) => {
+    var populates = _.map(associations, (association) => {
       return association.split('.');
     });
     /*[
       ['ratings', 'user'],
       ['tags']
     ]*/
-    baseModel.find()
-    .exec((err, values) => {
-      _.map(values, (value) => {
-        _.forEach(populates, (pop) => {
-          value[pop[0]] = sails.models[pop[0]]
-        });
+
+    /*
+    Load all items in base model.
+    Loop over all items in base model =>
+      Loop over all items in populates
+        If populateItem.length == 1
+          Get value of baseModelItem[populateItem[0]]
+          Get model[populateItem[0]] and load values for it
+            Set value of baseModelItem[populateItem[0]] to loaded value
+        If populate item.length > 1
+          Call deepPopulate with model[populateItem[0]] and _.rest(populate item)
+    */
+
+    return new Promise((res, rej) => {
+      baseModel.find(conditions)
+      .exec((err, values) => {
+        var promises = [];
+        for (var i = values.length - 1; i >= 0; i--) {
+          for (var q = populates.length - 1; q >= 0; q--) {
+            if(populates[q].length == 1) {
+              if(!values[i][populates[q]][0]) break;
+
+              var associationToReplace = values[i][populates[q]][0];
+              promises.push(new Promise((res, rej) => {
+                sails.models[populates[q][0]].findOne({associationToReplace})
+                .exec((err, val) => {
+                  if(err || i < 0 || q < 0) return res();
+                  //debugger;
+                  values[i][populates[q]][0] = val;
+                  return res();
+                });
+              }));
+            }
+            else {
+              promises.push(
+                Utils.deepPopulate(sails.models[populates[q][0]], _.rest(populates[q]))
+              );
+            }
+          }
+        }
+        Promise.all(promises)
+        .then(res(values));
       });
     });
   }

@@ -6,19 +6,26 @@
  */
 
 module.exports = {
-	find : (req, res) => {
-		var associations = [
-			'ratings.user',
-			'tags'
-		];
-		debugger;
-		Utils.deepPopulate(RestaurantLocations, associations);
-		RestaurantLocations.find()
-		.populate('ratings')
-		.exec((err, results) => {
-			if(err) return res.serverError(err);
+  find : (req, res) => {
+    var associations = [
+      'ratings.users',
+      'tags'
+    ];
 
-			return res.ok({restaurantLocations: results});
-		});
-	}
+    if(true) {
+      Utils.deepPopulate(RestaurantLocations, associations)
+      .then((data) => {
+        return res.ok({restaurantLocations: data});
+      });
+    }
+    
+    RestaurantLocations.find()
+    .populate('ratings')
+    .populate('tags')
+    .exec((err, results) => {
+      if(err) return res.serverError(err);
+
+      return res.ok({restaurantLocations: results});
+    });
+  }
 };
