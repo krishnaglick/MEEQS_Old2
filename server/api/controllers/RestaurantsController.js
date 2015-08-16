@@ -5,8 +5,6 @@
  * @help        :: https://www.npmjs.com/package/googleplaces
  */
 
-var actionUtil = require('../../node_modules/sails/lib/hooks/blueprints/actionUtil.js');
-
 var unwantedProperties = [
   'rating',
   'scope',
@@ -42,14 +40,6 @@ var googleRequestParams = [
 ];
 
 module.exports = {
-  _config: {
-    actions: false,
-    shortcuts: false,
-    rest: false,
-
-    index: false
-  },
-
   find : (req, res) => {
     let googleSearchOptions = _.pick(req.params.all(), googleRequestParams);
     googleSearchOptions.location = req.cookies.location || googleSearchOptions.location;
@@ -60,43 +50,39 @@ module.exports = {
 
       var place_ids = _.pluck(gRes.results, 'place_id');
 
-      var types = _.uniq(_.flatten(_.pluck(gRes.results, 'types')));
+      RestaurantLocations.find({ where: { place_id: place_ids }})
+      .populate('tags')
+      .populate('ratings')
+      .exec((err, matchingRecords) => {
+        if (err) return res.serverError(err);
+        if(!matchingRecords || _.isEmpty(matchingRecords)) return res.ok({restaurants: Utils.removePropertiesByBlacklist(gRes.results, unwantedProperties)});
 
-      let Model = actionUtil.parseModel(req);
-
-      Model.find({ where: { place_id: place_ids }})
-        .populate('tags')
-        .populate('ratings')
-        .exec((err, matchingRecords) => {
-          if (err) return res.serverError(err);
-          if(!matchingRecords) return res.ok(Utils.removePropertiesByBlacklist(gRes.results, unwantedProperties));
-
-          //TODO: Refactor
-          var improvedRatings = _.map(matchingRecords, (record) => {
-            return new Promise((res, rej) => {
-              if(!record.ratings || _.isEmpty(record.ratings)) res();
-              var changedRatings = _.map(record.ratings, (rating) => {
-                return new Promise((res, rej) => {
-                  Users.find({where: {userID: rating.user}})
-                  .exec((err, user) => {
-                    if(!err) rating.user = user[0].displayName;
-                    res();
-                  });
+        //TODO: Refactor
+        var improvedRatings = _.map(matchingRecords, (record) => {
+          return new Promise((res, rej) => {
+            if(!record.ratings || _.isEmpty(record.ratings)) res();
+            var changedRatings = _.map(record.ratings, (rating) => {
+              return new Promise((res, rej) => {
+                Users.find({where: {userID: rating.user}})
+                .exec((err, user) => {
+                  if(!err) rating.user = user[0].displayName;
+                  res();
                 });
               });
+            });
 
-              Promise.all(changedRatings).then((vals) => {
-                res();
-              });
+            Promise.all(changedRatings).then((vals) => {
+              res();
             });
           });
-
-          Promise.all(improvedRatings).then(() => {
-            let mergedResults = Utils.mergeOnAsProperty(matchingRecords, gRes.results, 'place_id', 'restaurantLocation');
-
-            return res.ok({ restaurantLocations: Utils.removePropertiesByBlacklist(mergedResults, unwantedProperties) });
-          });
         });
+
+        Promise.all(improvedRatings).then(() => {
+          let mergedResults = Utils.mergeOnAsProperty(matchingRecords, gRes.results, 'place_id', 'restaurantLocation');
+
+          return res.ok({ restaurants: Utils.removePropertiesByBlacklist(mergedResults, unwantedProperties) });
+        });
+      });
     });
   },
 
@@ -120,7 +106,7 @@ module.exports = {
       });
 
       Promise.all(improvedRatings).then(() => {
-        return res.ok({ restaurants: Utils.removePropertiesByBlacklist(restaurantLocation, unwantedProperties) });
+        return res.ok({ restaurantLocations: Utils.removePropertiesByBlacklist(restaurantLocation, unwantedProperties) });
       });
     });
   }

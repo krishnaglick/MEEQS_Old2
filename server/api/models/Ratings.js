@@ -22,7 +22,7 @@ module.exports = {
       model: 'restaurantLocations',
       required: true
     },
-    user: {
+    users: {
       model: 'users',
       required: true
     },

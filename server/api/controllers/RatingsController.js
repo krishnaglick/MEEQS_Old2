@@ -18,16 +18,19 @@ module.exports = {
 
         if(matchingRecords) {
           _.map(matchingRecords, (record) => {
-            if(record && record.user && record.user.username) {
-              record.user = {username: record.user.displayName};
+            if(record && record.user && record.user.displayName) {
+              record.user = { displayName: record.user.displayName };
+            }
+            else {
+              delete record.user;
             }
             return record;
           });
 
-          return res.ok({ratings: matchingRecords});
+          return res.ok({ ratings: matchingRecords });
         }
 
-        return res.serverError({error: 'No ratings!'});
+        return res.serverError({ error: 'No ratings!' });
       });
   },
 
@@ -43,9 +46,9 @@ module.exports = {
 
       if(!matchingRecord) return res.serverError({error: 'No rating!'});
 
-      matchingRecord.user = matchingRecord.user ? {username: (matchingRecord.user.displayName || '')} : {};
+      matchingRecord.user = matchingRecord.user ? { displayName: (matchingRecord.user.displayName || '') } : {};
 
-      res.ok({ratings: matchingRecord});
+      res.ok({ ratings: matchingRecord });
     });
   },
 
@@ -76,12 +79,9 @@ module.exports = {
       Users.findOne({where: { userID: populatedRecord.user }}).exec((err, user) => {
         if(err) res.json(actionUtil.emberizeJSON( Model, populatedRecord, req.options.associations, false));
 
-        populatedRecord.user = user.displayName;
+        populatedRecord.user = { displayName: user.displayName };
         res.json(actionUtil.emberizeJSON( Model, populatedRecord, req.options.associations, false));
       });
-
-      
-      
     });
   });
 
