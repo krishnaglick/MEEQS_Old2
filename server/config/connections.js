@@ -23,10 +23,10 @@ module.exports.connections = {
 
   meeqs: {
     adapter: 'sails-postgresql',
-    host: '99.125.202.24',
+    host: 'localhost',
     port: 5432,
     user: 'pi',
-    password: '',
+    password: ' ',
     database: 'meeqs'
   },
   test: {
@@ -41,9 +41,10 @@ module.exports.connections = {
     adapter: 'sails-postgresql',
     host: 'localhost',
     port: 5432,
-    user: 'postgres',
-    password: 'swordfish',
-    database: 'MEEQS'
+    user: 'pi',
+    password: ' ',
+    database: 'meeqs'
   }
+
 
 };

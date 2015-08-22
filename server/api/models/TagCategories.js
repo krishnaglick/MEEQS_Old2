@@ -18,6 +18,9 @@ module.exports = {
       unique: true,
       autoIncrement: true
     },
+    id: function() {
+      return this.tagCategoryID;
+    },
     name: {
       type: 'string',
       unique: true,

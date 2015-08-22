@@ -5,9 +5,9 @@
  * @help        :: http://github.com/KrishnaGlick/MEEQS_Sane
  */
 
-var _ = require('lodash');
+ var _ = require('lodash');
 
-module.exports = {
+ module.exports = {
 
   mergeOn : (uno, dos, property, mod = (i) => i, props = []) => {
     var alpha = uno.length > dos.length ? uno : dos;
@@ -100,13 +100,15 @@ module.exports = {
   },
 
   deepPopulate : (baseModel, associations, conditions = {}) => {
+    baseModel = typeof(baseModel) === 'string' ? sails.models[baseModel.toLowerCase()] : baseModel;
     var populates = _.map(associations, (association) => {
-      return association.split('.');
+      return _.isArray(association) ? association : association.split('.');
     });
     /*[
       ['ratings', 'user'],
       ['tags']
-    ]*/
+      ]
+    */
 
     /*
     Load all items in base model.
@@ -120,7 +122,62 @@ module.exports = {
           Call deepPopulate with model[populateItem[0]] and _.rest(populate item)
     */
 
-    return new Promise((res, rej) => {
+    return new Promise((alphaRes, alphaRej) => {
+
+      var baseModelAction = baseModel.find();
+      _.each(populates, (assoc) => { //Setup initial associations.
+        baseModelAction.populate(assoc[0]);
+      });
+
+      baseModelAction.exec((err, vals) => {
+
+        if(err) alphaRej(err);
+
+        var promises = [];
+
+        _.each(vals, (val, n) => {
+
+          _.each(populates, (assoc, i) => {
+
+            if(val[assoc[0]]) { //Has association.
+              promises.push(
+                new Promise((res, rej) => {
+                  if(assoc.length > 1) {
+                    console.log('We must go deeper! ', _.rest(assoc));
+                    Utils.deepPopulate(sails.models[assoc[0]], _.rest(assoc))
+                    .then((data) => {
+                      if(assoc[0] == 'users')
+                        console.log('We went deeper. ', data);
+                      val[assoc[0]] = data;
+                      res();
+                    });
+                  }
+                  else {
+                    console.log('We have arrived! ', assoc);
+                    sails.models[assoc[0]].find({where: {id: val[assoc[0]]}})
+                    .exec((err, data) => {
+                      val[assoc[0]] = data;
+                      res();
+                    });
+                  }
+                })
+              );
+            }
+
+          });
+
+          Promise.all(promises).then(() => {
+            console.log('All done!');
+            alphaRes(vals);
+          });
+
+        });
+      });
+    });
+
+
+
+    /*return new Promise((res, rej) => {
       baseModel.find(conditions)
       .exec((err, values) => {
         var promises = [];
@@ -143,13 +200,13 @@ module.exports = {
             else {
               promises.push(
                 Utils.deepPopulate(sails.models[populates[q][0]], _.rest(populates[q]))
-              );
+                );
             }
           }
         }
         Promise.all(promises)
         .then(res(values));
       });
-    });
-  }
+    });*/
+}
 };
