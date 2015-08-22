@@ -20,6 +20,9 @@ module.exports = {
       unique: true,
       autoIncrement: true
     },
+    id: function() {
+      return this.userID;
+    },
     username: {
       type: 'string',
       unique: true,
