@@ -41,7 +41,7 @@ var googleRequestParams = [
 
 module.exports = {
   find : (req, res) => {
-    let googleSearchOptions = _.pick(req.params.all(), googleRequestParams);
+    let googleSearchOptions = _.pick(req.allParams(), googleRequestParams);
     googleSearchOptions.location = req.cookies.location || googleSearchOptions.location;
 
     Google.getPlacesNearMe(googleSearchOptions, (err, gRes) => {
