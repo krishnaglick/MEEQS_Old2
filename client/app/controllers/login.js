@@ -1,9 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+    model: {},
     messages: [],
     actions: {
-        login(){
+        approve(view){
             var credentials = {
                 username: this.get('model.username'),
                 password: this.get('model.password')
@@ -11,13 +12,14 @@ export default Ember.Controller.extend({
             this.set('messages', []);
             this.get('session').authenticate('authenticator:passport', credentials)
                 .then(() => {
-                    this.transitionToRoute('index');
+                    view.execute('hide');
                 }, (error) => {
                     this.set('messages', [error]);
                 });
         },
-        cancel(){
+        deny(view){
             this.set('messages', []);
+            view.execute('hide');
         }
     }
 });

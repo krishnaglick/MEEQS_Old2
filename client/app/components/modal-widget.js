@@ -1,5 +1,13 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-    tagName: ''
+    tagName: '',
+    actions: {
+        submit(){
+            this.sendAction('submit');
+        },
+        cancel(){
+            this.sendAction('cancel');
+        }
+    }
 });

@@ -16,15 +16,12 @@ export default Ember.Component.extend({
     actions: {
         toggleExpand(){
             new Promise((resolve/*, reject*/) => {
-                var restaurantLocation = this.get('location');
+                var restaurant = this.get('location');
 
-                if(restaurantLocation.get('restaurantLocationData')){
+                if(restaurant.get('restaurantLocation')){
                     resolve();
                 } else {
-                    var restaurantLocationData = this.store.createRecord('restaurant-location-data');
-                    restaurantLocationData.set('restaurantLocation', restaurantLocation);
-                    restaurantLocationData.save().then((data) => {
-                        restaurantLocation.set('restaurantLocationData', data);
+                    restaurant = this.store.find('restaurant', restaurant.get('id')).then(() => {
                         resolve();
                     });
                 }

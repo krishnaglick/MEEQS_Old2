@@ -5,7 +5,7 @@ export default Ember.Controller.extend({
     searchParams: {},
     actions: {
         setFilter(){
-            this.set('model', this.store.find('restaurant-location', this.get('searchParams')));
+            this.set('model', this.store.find('restaurant', this.get('searchParams')));
         },
         clearFilter(){
             this.set('searchParams', {});
