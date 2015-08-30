@@ -5,14 +5,15 @@ var Router = Ember.Router.extend({
     location: config.locationType
 });
 Router.map(function() {
-    this.route('index', { path: '/' });
+  this.route('index', { path: '/' });
 
-    //this.route('restaurant-location', { path: '/restaurant-locations/:restaurantLocation_id' });
+  //this.route('restaurant-location', { path: '/restaurant-locations/:restaurantLocation_id' });
 
-    this.route('login');
-    this.route('register');
-    this.route('profile');
-    this.route('logout');
+  this.route('login');
+  this.route('register');
+  this.route('profile');
+  this.route('logout');
+  this.route('roles');
 });
 
 export default Router;
