@@ -1,8 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-    classNames: ['ui', 'modal'],
-    suppressClose: false,
+    tagName: '',
     actions: {
         submit(){
             this.sendAction('submit');

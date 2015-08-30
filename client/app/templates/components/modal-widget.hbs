@@ -1,16 +1,16 @@
 
-<i class="times icon" {{action 'cancel'}}></i>
-<div class="header">
+<i class='times icon' {{action 'cancel'}}></i>
+<div class='header'>
     {{modalLabel}}
 </div>
-<div class="content">
+<div class='ui form content'>
     {{yield}}
 </div>
-<div class="actions">
+<div class='actions'>
     {{#if cancelLabel}}
-        <div class="ui black button" {{action 'cancel'}}>{{cancelLabel}}</div>
+        <div class='ui black cancel button'>{{cancelLabel}}</div>
     {{/if}}
     {{#if submitLabel}}
-        <div class="ui right labeled icon button" {{action 'submit'}}>{{submitLabel}}<i class="checkmark icon"></i></div>
+        <button type='button' class='ui right labeled icon ok button'>{{submitLabel}}<i class='checkmark icon'></i></button>
     {{/if}}
 </div>

@@ -14,12 +14,20 @@ export default Ember.Component.extend({
         return this.get('google-service').getGoogleDirectionsURL(currentLocation, targetLocation);
     }),
     actions: {
-        loadDetail(){
-            this.sendAction('loadDetail', this.get('location'));
-        },
         toggleExpand(){
-            this.send('loadDetail');
-            this.set('isExpanded', !this.get('isExpanded'));
+            new Promise((resolve/*, reject*/) => {
+                var restaurant = this.get('location');
+
+                if(restaurant.get('restaurantLocation')){
+                    resolve();
+                } else {
+                    restaurant = this.store.find('restaurant', restaurant.get('id')).then(() => {
+                        resolve();
+                    });
+                }
+            }).then(() => {
+                this.set('isExpanded', !this.get('isExpanded'));
+            });
         }
     }
 });
