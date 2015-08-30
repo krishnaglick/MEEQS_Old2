@@ -25,6 +25,10 @@ module.exports = {
     	required: false,
     	defaultsTo: false
     },
+    users: {
+      collection: 'users',
+      via: 'roles'
+    },
     toJSON: function() {
     	var obj = this.toObject();
 

@@ -46,7 +46,8 @@ module.exports = {
       defaultsTo: false
     },
     roles: {
-      model: 'roles'
+      collection: 'roles',
+      via: 'users'
     },
     isDeleted: {
       type: 'boolean',
