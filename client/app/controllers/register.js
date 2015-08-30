@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-    model: {},
     messages: [],
     actions: {
         approve(view){
@@ -10,7 +9,7 @@ export default Ember.Controller.extend({
                 password: this.get('model.password')
             };
             this.set('messages', []);
-            this.model.save().then(() => {
+            this.store.createRecord('user', credentials).save().then(() => {
                 this.get('session').authenticate('authenticator:passport', credentials)
                     .then(() => {
                         view.execute('hide');
