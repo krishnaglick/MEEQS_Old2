@@ -64,7 +64,7 @@ module.exports = {
               return new Promise((res, rej) => {
                 Users.find({where: {userID: rating.user}})
                 .exec((err, user) => {
-                  if(!err) rating.user = user[0].displayName;
+                  if(!err) rating.user = (user[0] || user).displayName;
                   res();
                 });
               });
