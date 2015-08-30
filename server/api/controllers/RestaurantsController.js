@@ -57,7 +57,6 @@ module.exports = {
         if (err) return res.serverError(err);
         if(!matchingRecords || _.isEmpty(matchingRecords)) return res.ok({restaurants: Utils.removePropertiesByBlacklist(gRes.results, unwantedProperties)});
 
-        //TODO: Refactor
         var improvedRatings = _.map(matchingRecords, (record) => {
           return new Promise((res, rej) => {
             if(!record.ratings || _.isEmpty(record.ratings)) res();
@@ -79,7 +78,6 @@ module.exports = {
 
         Promise.all(improvedRatings).then(() => {
           let mergedResults = Utils.mergeOnAsProperty(matchingRecords, gRes.results, 'place_id', 'restaurantLocation');
-
           return res.ok({ restaurants: Utils.removePropertiesByBlacklist(mergedResults, unwantedProperties) });
         });
       });
@@ -87,7 +85,7 @@ module.exports = {
   },
 
   findOne : (req, res) => {
-    RestaurantLocations.find({where: { place_id: req.options.id}})
+    RestaurantLocations.find({where: { place_id: req.params}})
     .populate('tags')
     .populate('ratings')
     .exec((err, restaurantLocation) => {

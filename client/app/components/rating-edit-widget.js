@@ -13,13 +13,16 @@ export default Ember.Component.extend({
 
             //HACK model associations later
             model.set('user', this.get('session').content.secure.user.userID);
-            model.set('restaurantLocation', this.get('location').get('id'));
+            model.set('restaurantLocation', {
+                place_id: this.get('location.id'),
+                name: this.get('location.name')
+            });
 
             model.save().then((data) => {
                 this.set('isEditing', false);
                 
                 //HACK model associations later
-                this.get('location').get('ratings').push(data);
+                this.get('location.ratings').push(data);
             });
         },
         cancel(){

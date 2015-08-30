@@ -5,33 +5,33 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-var actionUtil = require('../../node_modules/sails/lib/hooks/blueprints/actionUtil.js');
+ var actionUtil = require('../../node_modules/sails/lib/hooks/blueprints/actionUtil.js');
 
-module.exports = {
+ module.exports = {
   find : (req, res) => {
     let Model = actionUtil.parseModel(req);
     
     Model.find()
-      .populate('user')
-      .exec((err, matchingRecords) => {
-        if(err) return res.serverError(err);
+    .populate('users')
+    .exec((err, matchingRecords) => {
+      if(err) return res.serverError(err);
 
-        if(matchingRecords) {
-          _.map(matchingRecords, (record) => {
-            if(record && record.user && record.user.displayName) {
-              record.user = { displayName: record.user.displayName };
-            }
-            else {
-              delete record.user;
-            }
-            return record;
-          });
+      if(matchingRecords) {
+        _.map(matchingRecords, (record) => {
+          if(record && record.user && record.user.displayName) {
+            record.user = { displayName: record.user.displayName };
+          }
+          else {
+            delete record.user;
+          }
+          return record;
+        });
 
-          return res.ok({ ratings: matchingRecords });
-        }
+        return res.ok({ ratings: matchingRecords });
+      }
 
-        return res.serverError({ error: 'No ratings!' });
-      });
+      return res.serverError({ error: 'No ratings!' });
+    });
   },
 
   findOne : (req, res) => {
@@ -53,38 +53,35 @@ module.exports = {
   },
 
   create : (req, res) => {
-  var Model = actionUtil.parseModel(req);
-  var data = actionUtil.parseValues(req, Model);
+    var Model = actionUtil.parseModel(req);
+    var data = actionUtil.parseValues(req, Model);
 
-  Model.create( data ).exec( function created(err, newInstance) {
-    if (err) return res.negotiate( err );
+    //Hack :(
+    Users.findOne({where: {userID: data.ratings.user}})
+    .exec((err, user) => {
+      data.ratings.users = data.ratings.user = user.userID;
+      RestaurantLocations.findOne({where: {place_id: data.ratings.restaurantLocation.place_id}})
+      .exec((err, loadedData) => {
+        if(loadedData.length === 0) {
+          RestaurantLocations.create(data.ratings.restaurantLocation)
+          .exec((err, newData) => {
+            data.ratings.restaurantLocations = data.ratings.restaurantLocation = newData.restaurantLocationID;
 
-    if (req._sails.hooks.pubsub) {
-      if (req.isSocket) {
-        Model.subscribe(req, newInstance);
-        Model.introduce(newInstance);
-      }
-      Model.publishCreate(newInstance, !req.options.mirror && req);
-    }
+            Ratings.create(data.ratings).exec((err, data) => {
+              if(err) return res.negotiate(err);
+              return res.ok({data: data});
+            });
+          });
+        }
+        else {
+          data.ratings.restaurantLocations = data.ratings.restaurantLocation = loadedData.restaurantLocationID;
 
-    // Do a final query to populate the associations of the record.
-    var Q = this.findOne(newInstance[Model.primaryKey]);
-    Q = actionUtil.populateEach(Q, req);
-    Q.exec((err, populatedRecord) => {
-      if (err) return res.serverError(err);
-      if (!populatedRecord) return res.serverError('Could not find record after updating!');
-
-      res.status(201);
-
-      Users.findOne({where: { userID: populatedRecord.user }}).exec((err, user) => {
-        if(err) res.json(actionUtil.emberizeJSON( Model, populatedRecord, req.options.associations, false));
-
-        populatedRecord.user = { displayName: user.displayName };
-        res.json(actionUtil.emberizeJSON( Model, populatedRecord, req.options.associations, false));
+          Ratings.create(data.ratings).exec((err, data) => {
+            if(err) return res.negotiate(err);
+            return res.ok({data: data});
+          });
+        }
       });
     });
-  });
-
   }
 };
-

@@ -33,7 +33,7 @@
     return alpha;
   },
 
-  mergeOnAsProperty : (uno, dos, matchProp, asProp, mod = (i) =>  i, props = []) => {
+  mergeOnAsProperty : (uno, dos, matchProp, asProp) => {
     var alpha = uno.length > dos.length ? uno : dos;
     var beta = uno.length > dos.length ? dos : uno;
 
@@ -42,9 +42,6 @@
 
       for (var q = beta.length - 1; q >= 0; q--) {
         if(!beta[q]) break;
-
-        alpha[i] = mod(alpha[i], props);
-        beta[q] = mod(beta[q], props);
         
         if(alpha[i][matchProp] == beta[q][matchProp]) {
           alpha[i][asProp] = beta[q];
@@ -53,6 +50,8 @@
         }
       }
     }
+
+    return alpha;
   },
 
   removePropertiesByBlacklist : (alpha, blacklist) => {
@@ -73,7 +72,7 @@
         }
       });
     }
-
+    
     return alpha;
   },
 

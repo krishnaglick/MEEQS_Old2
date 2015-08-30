@@ -6,5 +6,11 @@
  */
 
 module.exports = {
-  
+  	find : (req, res) => {
+  		RestaurantLocations.find()
+  		.populate('ratings')
+  		.exec((err, restaurantLocations) => {
+  			return res.ok({restaurantLocations: restaurantLocations});
+  		});
+  	}
 };
