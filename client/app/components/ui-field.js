@@ -17,7 +17,7 @@ export default Ember.Component.extend({
     }),
     actions: {
         approve() {
-            this.sendAction();
+            this.sendAction('action', (this.get('element.parentElement.parentElement.id')));
         }
     }
 });
