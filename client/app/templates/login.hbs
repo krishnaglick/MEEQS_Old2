@@ -1,7 +1,7 @@
 
 {{#modal-widget submitLabel='Login' modalLabel='Login' cancelLabel='Cancel'}}
-    {{ui-field type='text' value=model.username label='Username'}}
-    {{ui-field type='password' value=model.password label='Password'}}
+    {{ui-field type='text' value=model.username label='Username' action="approve" onEvent="keypress"}}
+    {{ui-field type='password' value=model.password label='Password' action="approve" onEvent="keypress"}}
     
     {{message-widget messages=messages color='red'}}
 {{/modal-widget}}
