@@ -62,7 +62,7 @@
       data.ratings.users = data.ratings.user = user.userID;
       RestaurantLocations.findOne({where: {place_id: data.ratings.restaurantLocation.place_id}})
       .exec((err, loadedData) => {
-        if(loadedData.length === 0) {
+        if((loadedData || '').length === 0) {
           RestaurantLocations.create(data.ratings.restaurantLocation)
           .exec((err, newData) => {
             data.ratings.restaurantLocations = data.ratings.restaurantLocation = newData.restaurantLocationID;
