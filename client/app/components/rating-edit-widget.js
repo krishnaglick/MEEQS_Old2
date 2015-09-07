@@ -4,7 +4,7 @@ export default Ember.Component.extend({
     isEditing: false,
     messages: [],
     actions: {
-        edit(){
+        edit() {
             this.set('model', this.store.createRecord('rating'));
             this.set('isEditing', true);
         },
@@ -20,9 +20,11 @@ export default Ember.Component.extend({
 
             model.save().then((data) => {
                 this.set('isEditing', false);
-                
+                if(!this.get('location.ratings')) {
+                    this.set('location.ratings', this.store.createRecord('rating'));
+                }
                 //HACK model associations later
-                this.get('location.ratings').push(data);
+                this.get('location.restaurantLocation.ratings').push(data);
             });
         },
         cancel(){
