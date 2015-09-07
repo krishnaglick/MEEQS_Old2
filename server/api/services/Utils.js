@@ -5,11 +5,11 @@
  * @help        :: http://github.com/KrishnaGlick/MEEQS_Sane
  */
 
-var _ = require('lodash');
+ var _ = require('lodash');
 
-module.exports = {
+ module.exports = {
 
-  mergeOn : (uno, dos, property, mod = (i) => { return i; }, props = []) => {
+  mergeOn : (uno, dos, property, mod = (i) => i, props = []) => {
     var alpha = uno.length > dos.length ? uno : dos;
     var beta = uno.length > dos.length ? dos : uno;
 
@@ -24,6 +24,27 @@ module.exports = {
         
         if(alpha[i][property] == beta[q][property]) {
           _.merge(alpha[i], beta[q]);
+          delete beta[q];
+          break;
+        }
+      }
+    }
+
+    return alpha;
+  },
+
+  mergeOnAsProperty : (uno, dos, matchProp, asProp) => {
+    var alpha = uno.length > dos.length ? uno : dos;
+    var beta = uno.length > dos.length ? dos : uno;
+
+    for (var i = alpha.length - 1; i >= 0; i--) {
+      if(!alpha[i]) break;
+
+      for (var q = beta.length - 1; q >= 0; q--) {
+        if(!beta[q]) break;
+        
+        if(alpha[i][matchProp] == beta[q][matchProp]) {
+          alpha[i][asProp] = beta[q];
           delete beta[q];
           break;
         }
@@ -51,7 +72,7 @@ module.exports = {
         }
       });
     }
-
+    
     return alpha;
   },
 

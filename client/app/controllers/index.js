@@ -4,23 +4,8 @@ export default Ember.Controller.extend({
     //convert me to a mixin later
     searchParams: {},
     actions: {
-        loadDetail(restaurantLocation){
-            //service later hardLoadModel()
-            if(restaurantLocation.get('isNew')){
-                restaurantLocation.set('tags', undefined);
-
-                restaurantLocation.save().then(function(data){
-                    restaurantLocation.set('hardLoad', true);
-                });
-            } else if(!restaurantLocation.get('hardLoad')){
-                this.store.find('restaurant-location', restaurantLocation.get('id')).then(function(data){
-                    restaurantLocation = data;
-                    restaurantLocation.set('hardLoad', true);
-                });
-            }
-        },
         setFilter(){
-            this.set('model', this.store.find('restaurant-location', this.get('searchParams')));
+            this.set('model', this.store.find('restaurant', this.get('searchParams')));
         },
         clearFilter(){
             this.set('searchParams', {});

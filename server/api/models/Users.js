@@ -30,6 +30,10 @@ module.exports = {
       minLength: 6,
       required: true
     },
+    displayName: {
+      type: 'string',
+      defaultsTo: ''
+    },
     email: {
       type: 'string'
     },
@@ -40,6 +44,10 @@ module.exports = {
     isAdmin: {
       type: 'boolean',
       defaultsTo: false
+    },
+    roles: {
+      collection: 'roles',
+      via: 'users'
     },
     isDeleted: {
       type: 'boolean',

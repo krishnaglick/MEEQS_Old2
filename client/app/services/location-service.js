@@ -11,6 +11,9 @@ export default Ember.Service.extend({
         this.get('cookie').setCookie('location', this.latLngToString(location));
     },
     latLngToString(latitude, longitude){
+        if(!latitude){
+            return latitude;
+        }
         if(latitude.constructor === String){
             return latitude;
         } else if(latitude.constructor === Array){

@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
 
         //TODO: put this in a service
         this.get('geolocation').getGeoposition().then((latLng) => {
-            this.get('location-service').setLocation(latLng.coords)
+            this.get('location-service').setLocation(latLng.coords);
         });
     }
 });

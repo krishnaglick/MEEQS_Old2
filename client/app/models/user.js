@@ -5,6 +5,6 @@ export default DS.Model.extend({
     username: DS.attr(),
     password: DS.attr(),
     email: DS.attr(),
-    isVerified: DS.attr(),
+    isVerified: DS.attr('boolean'),
     isAdmin: DS.attr('boolean')
 });

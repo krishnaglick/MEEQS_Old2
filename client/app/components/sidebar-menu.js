@@ -7,7 +7,15 @@ export default Ember.Component.extend({
             this.get('session').invalidate('authenticator:passport');
         },
         closeSidebar(){
-            Ember.$('.ui.sidebar#sidemenu').sidebar('close');
+            Ember.$('.ui.sidebar#sidemenu').sidebar('hide');
+        },
+        login(){
+            this.send('closeSidebar');
+            this.sendAction('openModal', 'login', {});
+        },
+        register(){
+            this.send('closeSidebar');
+            this.sendAction('openModal', 'register', {});
         }
     }
 });
