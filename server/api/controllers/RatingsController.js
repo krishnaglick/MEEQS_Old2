@@ -10,7 +10,7 @@
  module.exports = {
   find : (req, res) => {
     let Model = actionUtil.parseModel(req);
-    
+
     Model.find()
     .populate('users')
     .exec((err, matchingRecords) => {

@@ -23,19 +23,25 @@
       if(err) return res.serverError(err);
       if(!restaurantLocation) return res.notFound({ error: 'No records' });
 
-      let improvedRatings = _.map(restaurantLocation.rating, (rating) => {
-        return new Promise((res, rej) => {
-          if(!record.ratings || _.isEmpty(record.ratings)) res();
-          Users.find({where: {userID: rating.user}}).exec((err, user) => {
-            if(err) res();
+      var promises = [];
+      for (let i = restaurantLocation.ratings.length - 1; i >= 0; i--) {
+        promises.push(
+          new Promise((res, rej) => {
+            if(!restaurantLocation.ratings[i] || _.isEmpty(restaurantLocation.ratings[i])) {
+              res();
+            }
 
-            rating.user = user.displayName;
-            res();
-          });
-        });
-      });
+            Users.find(restaurantLocation.ratings[i].users).exec((err, user) => {
+              if(err) res();
 
-      Promise.all(improvedRatings).then(() => {
+              restaurantLocation.ratings[i].users = user.displayName || 'Anonymous';
+              res();
+            });
+          })
+        );
+      }
+
+      Promise.all(promises).then(() => {
         return res.ok({ restaurantLocations: restaurantLocation });
       });
     });

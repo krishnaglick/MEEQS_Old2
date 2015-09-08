@@ -57,14 +57,14 @@ module.exports = {
         if (err) return res.serverError(err);
         if(!matchingRecords || _.isEmpty(matchingRecords)) return res.ok({restaurants: Utils.removePropertiesByBlacklist(gRes.results, unwantedProperties)});
 
-        var mrs = _.map(matchingRecords, (record) => {
+        var mappedRecords = _.map(matchingRecords, (record) => {
           return {
             place_id: record.place_id,
             restaurantLocationID: record.restaurantLocationID
           };
         });
 
-        let mergedResults = Utils.mergeOnAsProperty(mrs, gRes.results, 'place_id', 'restaurantLocation');
+        let mergedResults = Utils.mergeOnAsProperty(mappedRecords, gRes.results, 'place_id', 'restaurantLocation');
         mergedResults = _.map(mergedResults, (result) => {
           if(result.restaurantLocation)
             result.restaurantLocation = result.restaurantLocation.restaurantLocationID;
