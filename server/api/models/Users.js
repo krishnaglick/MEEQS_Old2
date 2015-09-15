@@ -20,9 +20,6 @@ module.exports = {
       unique: true,
       autoIncrement: true
     },
-    id: function() {
-      return this.userID;
-    },
     username: {
       type: 'string',
       unique: true,
@@ -47,6 +44,10 @@ module.exports = {
     isAdmin: {
       type: 'boolean',
       defaultsTo: false
+    },
+    roles: {
+      collection: 'roles',
+      via: 'users'
     },
     isDeleted: {
       type: 'boolean',

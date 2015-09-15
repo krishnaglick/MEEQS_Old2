@@ -1,10 +1,13 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-    model: {},
     messages: [],
     actions: {
-        approve(view){
+        approve(view) {
+            if(!view.get) {
+                view = Ember.View.views[view];
+            }
+
             var credentials = {
                 username: this.get('model.username'),
                 password: this.get('model.password')

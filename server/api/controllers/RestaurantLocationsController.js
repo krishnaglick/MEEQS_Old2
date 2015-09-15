@@ -5,34 +5,45 @@
  * @help        :: Ask!
  */
 
-module.exports = {
+ module.exports = {
   find : (req, res) => {
-    var associations = [
-      ['ratings', 'users'],
-      ['tags']
-    ];
-
-    /*RestaurantLocations.find()
-    .populate('tags')
-    .exec((err, vals) => {
-      return res.ok({restaurantLocations: vals});
-    });*/
-
-    if(true) {
-      Utils.deepPopulate('restaurantLocations', associations)
-      .then((data) => {
-        console.log('--------------------------------');
-        return res.ok({restaurantLocations: data});
-      });
-    }
-    
-    /*RestaurantLocations.find()
+    RestaurantLocations.find()
     .populate('ratings')
-    .populate('tags')
-    .exec((err, results) => {
-      if(err) return res.serverError(err);
+    .exec((err, restaurantLocations) => {
+      return res.ok({restaurantLocations: restaurantLocations});
+    });
+  },
 
-      return res.ok({restaurantLocations: results});
-    });*/
+  findOne : (req, res) => {
+    let targetRestaurantLocation = req.param('id');
+    RestaurantLocations.findOne(targetRestaurantLocation)
+    .populate('tags')
+    .populate('ratings')
+    .exec((err, restaurantLocation) => {
+      if(err) return res.serverError(err);
+      if(!restaurantLocation) return res.notFound({ error: 'No records' });
+
+      var promises = [];
+      for (let i = restaurantLocation.ratings.length - 1; i >= 0; i--) {
+        promises.push(
+          new Promise((res, rej) => {
+            if(!restaurantLocation.ratings[i] || _.isEmpty(restaurantLocation.ratings[i])) {
+              res();
+            }
+
+            Users.find(restaurantLocation.ratings[i].users).exec((err, user) => {
+              if(err) res();
+
+              restaurantLocation.ratings[i].users = user.displayName || 'Anonymous';
+              res();
+            });
+          })
+        );
+      }
+
+      Promise.all(promises).then(() => {
+        return res.ok({ restaurantLocations: restaurantLocation });
+      });
+    });
   }
 };

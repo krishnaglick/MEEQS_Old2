@@ -11,11 +11,11 @@ export default Ember.Component.extend({
         },
         login(){
             this.send('closeSidebar');
-            this.sendAction('openModal', 'login');
+            this.sendAction('openModal', 'login', {});
         },
         register(){
             this.send('closeSidebar');
-            this.sendAction('openModal', 'register');
+            this.sendAction('openModal', 'register', {});
         }
     }
 });

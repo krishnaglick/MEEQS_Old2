@@ -18,9 +18,6 @@ module.exports = {
       unique: true,
       autoIncrement: true
     },
-    id: function() {
-      return this.restaurantLocationID;
-    },
     name: {
       type: 'string',
       required: false

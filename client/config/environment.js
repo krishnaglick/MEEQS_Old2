@@ -55,7 +55,8 @@ module.exports = function(environment) {
     }
 
     ENV['simple-auth'] = {
-        authorizer: 'authorizer:passport'
+        authorizer: 'authorizer:passport',
+        store: 'simple-auth-session-store:cookie'
     };
 
     ENV.GOOGLE = {

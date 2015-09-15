@@ -18,9 +18,6 @@ module.exports = {
       unique: true,
       autoIncrement: true
     },
-    id: function() {
-      return this.tagID;
-    },
     name: {
       type: 'string',
       unique: true,

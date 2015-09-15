@@ -4,7 +4,7 @@ export default Ember.Component.extend({
     isEditing: false,
     messages: [],
     actions: {
-        edit(){
+        edit() {
             this.set('model', this.store.createRecord('rating'));
             this.set('isEditing', true);
         },
@@ -13,13 +13,18 @@ export default Ember.Component.extend({
 
             //HACK model associations later
             model.set('user', this.get('session').content.secure.user.userID);
-            model.set('restaurantLocation', this.get('location').get('id'));
+            model.set('restaurantLocation', {
+                place_id: this.get('location.id'),
+                name: this.get('location.name')
+            });
 
             model.save().then((data) => {
                 this.set('isEditing', false);
-                
+                if(!this.get('location.ratings')) {
+                    this.set('location.ratings', this.store.createRecord('rating'));
+                }
                 //HACK model associations later
-                this.get('location').get('ratings').push(data);
+                this.get('location.restaurantLocation.ratings').push(data);
             });
         },
         cancel(){

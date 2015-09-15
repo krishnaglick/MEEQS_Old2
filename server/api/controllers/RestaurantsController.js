@@ -41,7 +41,7 @@ var googleRequestParams = [
 
 module.exports = {
   find : (req, res) => {
-    let googleSearchOptions = _.pick(req.params.all(), googleRequestParams);
+    let googleSearchOptions = _.pick(req.allParams(), googleRequestParams);
     googleSearchOptions.location = req.cookies.location || googleSearchOptions.location;
 
     Google.getPlacesNearMe(googleSearchOptions, (err, gRes) => {
@@ -51,21 +51,36 @@ module.exports = {
       var place_ids = _.pluck(gRes.results, 'place_id');
 
       RestaurantLocations.find({ where: { place_id: place_ids }})
-      .populate('tags')
-      .populate('ratings')
+      //.populate('tags')
+      //.populate('ratings')
       .exec((err, matchingRecords) => {
         if (err) return res.serverError(err);
         if(!matchingRecords || _.isEmpty(matchingRecords)) return res.ok({restaurants: Utils.removePropertiesByBlacklist(gRes.results, unwantedProperties)});
 
-        //TODO: Refactor
-        var improvedRatings = _.map(matchingRecords, (record) => {
+        var mappedRecords = _.map(matchingRecords, (record) => {
+          return {
+            place_id: record.place_id,
+            restaurantLocationID: record.restaurantLocationID
+          };
+        });
+
+        let mergedResults = Utils.mergeOnAsProperty(mappedRecords, gRes.results, 'place_id', 'restaurantLocation');
+        mergedResults = _.map(mergedResults, (result) => {
+          if(result.restaurantLocation)
+            result.restaurantLocation = result.restaurantLocation.restaurantLocationID;
+          return result;
+        });
+        return res.ok({ restaurants: Utils.removePropertiesByBlacklist(mergedResults, unwantedProperties) });        
+
+        //Ember does not like all of these things.
+        /*var improvedRatings = _.map(matchingRecords, (record) => {
           return new Promise((res, rej) => {
             if(!record.ratings || _.isEmpty(record.ratings)) res();
             var changedRatings = _.map(record.ratings, (rating) => {
               return new Promise((res, rej) => {
                 Users.find({where: {userID: rating.user}})
                 .exec((err, user) => {
-                  if(!err) rating.user = user[0].displayName;
+                  if(!err) rating.user = (user[0] || user).displayName;
                   res();
                 });
               });
@@ -79,23 +94,22 @@ module.exports = {
 
         Promise.all(improvedRatings).then(() => {
           let mergedResults = Utils.mergeOnAsProperty(matchingRecords, gRes.results, 'place_id', 'restaurantLocation');
-
           return res.ok({ restaurants: Utils.removePropertiesByBlacklist(mergedResults, unwantedProperties) });
-        });
+        });*/
       });
     });
   },
 
   findOne : (req, res) => {
-    RestaurantLocations.find({where: { place_id: req.options.id}})
+    RestaurantLocations.findOne({where: { place_id: req.params}})
     .populate('tags')
     .populate('ratings')
     .exec((err, restaurantLocation) => {
       if(err) return res.serverError(err);
 
-      let improvedRatings = _.map(restaurantLocation.ratings, (rating) => {
+      let improvedRatings = _.map(restaurantLocation.rating, (rating) => {
         return new Promise((res, rej) => {
-          if(!record.ratings || _.isEmpty(record.ratings)) res();
+          if(!record.ratings || _.isEmpty(record.rating)) res();
           Users.find({where: {userID: rating.user}}).exec((err, user) => {
             if(err) res();
 
