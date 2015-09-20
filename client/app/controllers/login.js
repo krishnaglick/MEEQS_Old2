@@ -4,10 +4,6 @@ export default Ember.Controller.extend({
     messages: [],
     actions: {
         approve(view) {
-            if(!view.get) {
-                view = Ember.View.views[view];
-            }
-
             var credentials = {
                 username: this.get('model.username'),
                 password: this.get('model.password')

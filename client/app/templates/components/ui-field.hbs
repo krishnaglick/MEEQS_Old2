@@ -4,8 +4,8 @@
     {{yield}}
 {{else}}
     {{#if isTextarea}}
-        {{textarea id=label value=value enabled=enabled action="approve" onEvent="keypress"}}
+        {{textarea id=label value=value enabled=enabled}}
     {{else}}
-        {{input id=label type=type value=value enabled=enabled action="approve" onEvent="keypress"}}
+        {{input id=label type=type value=value enabled=enabled}}
     {{/if}}
 {{/if}}

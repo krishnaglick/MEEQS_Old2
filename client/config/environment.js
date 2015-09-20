@@ -48,11 +48,10 @@ module.exports = function(environment) {
         'script-src': "'self' 'unsafe-eval' http://maps.googleapis.com http://maps.gstatic.com https://cdn.mxpnl.com", // Allow scripts from https://cdn.mxpnl.com
         'font-src': "'self' https://fonts.gstatic.com http://fonts.gstatic.com data:", // Allow fonts to be loaded from http://fonts.gstatic.com
         'connect-src': "'self' http://localhost:1337 https://api.mixpanel.com", // Allow data (ajax/websocket) from api.mixpanel.com and custom-api.local
-        //do this better or uninstall
         'img-src': "'self' http://placehold.it/ https://placeholdit.imgix.net/ https://maps.googleapis.com https://lh1.googleusercontent.com https://lh2.googleusercontent.com https://lh3.googleusercontent.com https://lh4.googleusercontent.com https://lh5.googleusercontent.com https://lh6.googleusercontent.com",
         'style-src': "'self' 'unsafe-inline' http://fonts.googleapis.com https://fonts.googleapis.com", // Allow inline styles and loaded CSS from http://fonts.googleapis.com 
         'media-src': "'self'"
-    }
+    };
 
     ENV['simple-auth'] = {
         authorizer: 'authorizer:passport',
@@ -64,7 +63,7 @@ module.exports = function(environment) {
         PHOTO_WIDTH: 480,
         PHOTO_HEIGHT: 640,
         DEFAULT_PHOTO: "http://placehold.it/300x200"
-    }
+    };
 
 
     return ENV;

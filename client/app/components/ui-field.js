@@ -14,10 +14,5 @@ export default Ember.Component.extend({
     }),
     isDropdown: Ember.computed('type', function() {
         return this.get('type') === 'dropdown';
-    }),
-    actions: {
-        approve() {
-            this.sendAction('action', (this.get('element.parentElement.parentElement.id')));
-        }
-    }
+    })
 });
