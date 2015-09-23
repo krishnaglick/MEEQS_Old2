@@ -39,7 +39,6 @@
     "ember-cli-uglify": "^1.2.0",
     "ember-data": "1.13.8",
     "ember-disable-proxy-controllers": "^1.0.0",
-    "ember-export-application-global": "^1.0.3",
-    "semantic-ui-ember": "git://github.com/semantic-org/semantic-ui-ember.git#85c214c5ea1f3d706fca1905c9701be7841fe93e"
+    "ember-export-application-global": "^1.0.3"
   }
 }

@@ -1,0 +1,18 @@
+
+{{#if open}}
+    <i class="close icon"></i>
+    <div class="header">
+        {{modalLabel}}
+    </div>
+    <div class="content">
+        {{yield}}
+    </div>
+    <div class="actions">
+        {{#if denyLabel}}
+            <div class="ui black deny button">{{denyLabel}}</div>
+        {{/if}}
+        {{#if approveLabel}}
+            <button class="ui positive right labeled icon button">{{approveLabel}}<i class='checkmark icon'></i></button>
+        {{/if}}
+    </div>
+{{/if}}

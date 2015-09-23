@@ -2,7 +2,9 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
     classNames: ['ui', 'rating'],
-    initializeElement: function(){
+    didInsertElement(){
+        this._super();
+
         var element = Ember.$(this.get('element'));
         element.rating({
             initialRating: this.get('value') || 0,
@@ -16,5 +18,5 @@ export default Ember.Component.extend({
         element.rating('setting', 'onRate', (value) => {
             this.set('value', value);
         });
-    }.on('didInsertElement')
+    }
 });

@@ -10,12 +10,10 @@ export default Ember.Component.extend({
             Ember.$('.ui.sidebar#sidemenu').sidebar('hide');
         },
         login(){
-            this.send('closeSidebar');
-            this.sendAction('openModal', 'login', {});
+            this.set('loginOpen', !this.get('loginOpen'));
         },
         register(){
-            this.send('closeSidebar');
-            this.sendAction('openModal', 'register', {});
+            this.set('registerOpen', !this.get('registerOpen'));
         }
     }
 });

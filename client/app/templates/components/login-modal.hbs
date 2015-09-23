@@ -1,7 +1,7 @@
 
-{{#modal-widget submitLabel='Login' modalLabel='Login' cancelLabel='Cancel'}}
+{{#ui-modal formify=true open=open modalLabel='Login' approveLabel='Login' denyLabel='Cancel' approve=(action 'login') deny=(action 'cancel')}}
     {{ui-field type='text' value=model.username label='Username'}}
     {{ui-field type='password' value=model.password label='Password'}}
     
     {{message-widget messages=messages color='red'}}
-{{/modal-widget}}
+{{/ui-modal}}

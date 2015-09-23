@@ -1,9 +1,14 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
+export default Ember.Component.extend({
+    tagName: '',
     messages: [],
+    init(){
+        this._super();
+        this.set('model', {});
+    },
     actions: {
-        approve(view){
+        register: function() {
             var credentials = {
                 username: this.get('model.username'),
                 password: this.get('model.password')
@@ -12,15 +17,15 @@ export default Ember.Controller.extend({
             this.store.createRecord('user', credentials).save().then(() => {
                 this.get('session').authenticate('authenticator:passport', credentials)
                     .then(() => {
-                        view.execute('hide');
+                        this.send('cancel');
                     }, (error) => {
                         this.set('messages', error);
                     });
             });
+            return false;
         },
-        deny(view){
+        cancel: function() {
             this.set('messages', []);
-            view.execute('hide');
         }
     }
 });
