@@ -3,27 +3,27 @@ import Ember from 'ember';
 export default Ember.Component.extend({
     tagName: '',
     messages: [],
-    init(){
-        this._super();
-        this.set('model', {});
-    },
+    model: {},
+    loading: false,
     actions: {
         login: function() {
-            var credentials = {
-                username: this.get('model.username'),
-                password: this.get('model.password')
-            };
+            this.set('loading', true);
+            var credentials = this.get('model');
             this.set('messages', []);
             this.get('session').authenticate('authenticator:passport', credentials)
                 .then(() => {
                     this.send('cancel');
                 }, (error) => {
                     this.set('messages', [error]);
+                    this.set('loading', false);
                 });
             return false;
         },
         cancel: function() {
-            this.set('messages', []);
+            this.set('open', false);
+            Ember.run.later(() => {
+                this.set('messages', []);
+            }, 500);
         }
     }
 });

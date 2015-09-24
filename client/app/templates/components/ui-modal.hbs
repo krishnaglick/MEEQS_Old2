@@ -12,7 +12,7 @@
             <div class="ui black deny button">{{denyLabel}}</div>
         {{/if}}
         {{#if approveLabel}}
-            <button class="ui positive right labeled icon button">{{approveLabel}}<i class='checkmark icon'></i></button>
+            <button class="ui positive right labeled {{if loading 'loading'}} icon button">{{approveLabel}}<i class='checkmark icon'></i></button>
         {{/if}}
     </div>
 {{/if}}

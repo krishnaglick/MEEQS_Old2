@@ -18,6 +18,9 @@ export default Ember.Component.extend({
                 }
             },
             onApprove(){
+                if(context.get('formify')){
+                    event.preventDefault();
+                }
                 return context.triggerPassedInEvent('approve');
             },
             onDeny(){
@@ -31,7 +34,7 @@ export default Ember.Component.extend({
     toggleModal: function(){
         var element = Ember.$(this.get('element'));
         if(element){
-            element.modal(this.get('open') ? 'show' : 'hide');
+            element.modal(this.get('open') ? 'show' : 'hide').modal('refresh');
         }
     }.observes('open'),
 });

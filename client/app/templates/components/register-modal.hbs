@@ -1,8 +1,8 @@
 
-{{#ui-modal formify=true open=open modalLabel='Register' approveLabel='Register' denyLabel='Cancel' approve=(action 'register') deny=(action 'cancel')}}
+{{#ui-modal formify=true loading=loading open=open modalLabel='Register' approveLabel='Register' denyLabel='Cancel' approve=(action 'register') deny=(action 'cancel')}}
     {{ui-field type='text' value=model.username label='Username'}}
     {{ui-field type='password' value=model.password label='Password'}}
     {{ui-field type='text' value=model.email label='Email'}}
 
-    {{message-widget messages=messages color='red'}}
+    {{ui-message messages=messages color='red'}}
 {{/ui-modal}}
