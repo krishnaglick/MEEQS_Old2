@@ -1,11 +1,11 @@
 
 {{#if editing}}
-    {{#model-form action='createTag' submitLabel='Add' cancelLabel='Cancel'}}
-        {{ui-field type='dropdown' options=categoryOptions value=newTag.category label='Type'}}
-        {{ui-field type='text' value=newTag.name label='Password'}}
-    {{/model-form}}
+    {{#ui/ui-form action='createTag' submitLabel='Add' cancelLabel='Cancel'}}
+        {{ui/ui-field type='dropdown' options=categoryOptions value=newTag.category label='Type'}}
+        {{ui/ui-field type='text' value=newTag.name label='Password'}}
+    {{/ui/ui-form}}
 {{else}}
-    {{#ui-label action='addTag'}}
+    {{#ui/ui-label action='addTag'}}
         <i class="add icon"></i>
-    {{/ui-label}}
+    {{/ui/ui-label}}
 {{/if}}

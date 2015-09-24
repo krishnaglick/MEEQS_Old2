@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: ['ui', 'item'],
+  classNames: ['ui', 'segment'],
   isExpanded: false,
   photoUrl: Ember.computed(function(){
     return this.get('google-service').getGooglePhotoURL(this.get('location').get('photo_reference'));

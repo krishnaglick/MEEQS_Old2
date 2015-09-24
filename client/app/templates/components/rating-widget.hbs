@@ -1,32 +1,32 @@
 
 <div class='ui form'>
-    {{#ui-label}}
+    {{#ui/ui-label}}
         <strong>User:</strong> {{rating.users}}
-    {{/ui-label}}
-    {{#ui-label}}
+    {{/ui/ui-label}}
+    {{#ui/ui-label}}
         <strong>Average Rating:</strong> {{rating.averageRating}}
-    {{/ui-label}}
-    {{#ui-label}}
+    {{/ui/ui-label}}
+    {{#ui/ui-label}}
         <strong>Create Date:</strong> {{rating.createdAt}}
-    {{/ui-label}}
+    {{/ui/ui-label}}
 
-    {{#ui-field label='Comment' enabled=false}}
+    {{#ui/ui-field label='Comment' enabled=false}}
         <p>{{rating.comment}}</p>
-    {{/ui-field}}
+    {{/ui/ui-field}}
 
-    {{#ui-field label='Menu Selection'}}
-        {{ui-rating value=rating.menuSelection enabled=false}}
-    {{/ui-field}}
-    {{#ui-field label='Environment'}}
-        {{ui-rating value=rating.environment enabled=false}}
-    {{/ui-field}}
-    {{#ui-field label='Cost Efficiency'}}
-        {{ui-rating value=rating.costEfficiency enabled=false}}
-    {{/ui-field}}
-    {{#ui-field label='Product Quality'}}
-        {{ui-rating value=rating.productQuality enabled=false}}
-    {{/ui-field}}
-    {{#ui-field label='Service'}}
-        {{ui-rating value=rating.service enabled=false}}
-    {{/ui-field}}
+    {{#ui/ui-field label='Menu Selection'}}
+        {{ui/ui-rating value=rating.menuSelection enabled=false}}
+    {{/ui/ui-field}}
+    {{#ui/ui-field label='Environment'}}
+        {{ui/ui-rating value=rating.environment enabled=false}}
+    {{/ui/ui-field}}
+    {{#ui/ui-field label='Cost Efficiency'}}
+        {{ui/ui-rating value=rating.costEfficiency enabled=false}}
+    {{/ui/ui-field}}
+    {{#ui/ui-field label='Product Quality'}}
+        {{ui/ui-rating value=rating.productQuality enabled=false}}
+    {{/ui/ui-field}}
+    {{#ui/ui-field label='Service'}}
+        {{ui/ui-rating value=rating.service enabled=false}}
+    {{/ui/ui-field}}
 </div>

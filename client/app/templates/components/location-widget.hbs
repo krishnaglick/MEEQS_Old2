@@ -1,20 +1,15 @@
 
-<a class='image' href {{action 'toggleExpand'}}>
-    <img src='{{photoUrl}}'>
-</a>
-<div class='content'>
-    <a class='header' href {{action 'toggleExpand'}}>{{location.name}}</a>
-    <div class='meta'>
-        <a class='ui button' href='{{directionsUrl}}'><i class='map icon'></i></a>
+<a class='ui image' href {{action 'toggleExpand'}}><img src='{{photoUrl}}'></a>
+<a class='ui header' href {{action 'toggleExpand'}}>{{location.name}}</a>
+<a class='ui button' href='{{directionsUrl}}'><i class='map icon'></i></a>
+
+{{tag-list-widget tags=location.restaurantLocationID.tags}}
+
+{{#if isExpanded}}
+    <div class="ui section divider"></div>
+    <div class='description'>
+        {{#ui/ui-label}}ID: {{location.id}}{{/ui/ui-label}}
+        {{rating-edit-widget location=location}}
+        {{rating-list-widget ratings=location.restaurantLocation.ratings}}
     </div>
-    {{#if isExpanded}}
-        <div class='description'>
-            {{#ui-label}}ID: {{location.id}}{{/ui-label}}
-            {{rating-edit-widget location=location}}
-            {{rating-list-widget ratings=location.restaurantLocation.ratings}}
-        </div>
-    {{/if}}
-    <div class='extra'>
-        {{tag-list-widget tags=location.restaurantLocationID.tags}}
-    </div>
-</div>
+{{/if}}
