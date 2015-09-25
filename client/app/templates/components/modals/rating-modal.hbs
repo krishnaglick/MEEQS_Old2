@@ -1,28 +1,34 @@
 
-{{#if isEditing}}
-    {{#ui/ui-segment}}
-        {{#ui/ui-form submit='saveRating' cancel='cancel' submitLabel='Rate!' cancelLabel='Cancel' formLabel='Submit a Rating'}}
+{{#ui/ui-modal formify=true loading=loading open=open modalLabel='Create a Rating' approveLabel='Rate!' denyLabel='Cancel' approve=(action 'rate') deny=(action 'cancel')}}
+    <div class='ui five column doubling grid'>
+        <div class='column'>
             {{#ui/ui-field label='Menu Selection'}}
                 {{ui/ui-rating value=model.menuSelection}}
             {{/ui/ui-field}}
+        </div>
+        <div class='column'>
             {{#ui/ui-field label='Environment'}}
                 {{ui/ui-rating value=model.environment}}
             {{/ui/ui-field}}
+        </div>
+        <div class='column'>
             {{#ui/ui-field label='Cost Efficiency'}}
                 {{ui/ui-rating value=model.costEfficiency}}
             {{/ui/ui-field}}
+        </div>
+        <div class='column'>
             {{#ui/ui-field label='Product Quality'}}
                 {{ui/ui-rating value=model.productQuality}}
             {{/ui/ui-field}}
+        </div>
+        <div class='column'>
             {{#ui/ui-field label='Service'}}
                 {{ui/ui-rating value=model.service}}
             {{/ui/ui-field}}
+        </div>
+    </div>
 
-            {{ui/ui-field type='textarea' value=model.comment label='Comment'}}
+    {{ui/ui-field type='textarea' value=model.comment label='Comment'}}
 
-            {{ui/ui-message messages=messages color='red'}}
-        {{/ui/ui-form}}
-    {{/ui/ui-segment}}
-{{else}}
-    <div class='ui button' {{action 'edit'}}>Have an opinion to share? Rate this restaurant now!</div>
-{{/if}}
+    {{ui/ui-message messages=messages color='red'}}
+{{/ui/ui-modal}}

@@ -6,9 +6,6 @@ var Router = Ember.Router.extend({
 });
 Router.map(function() {
   this.route('index', { path: '/' });
-
-  //this.route('restaurant-location', { path: '/restaurant-locations/:restaurantLocation_id' });
-
   this.route('login');
   this.route('register');
   this.route('profile');
