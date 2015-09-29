@@ -1,7 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-    classNames: ['ui', 'segment'],
+    classNameBindings: ['isExpanded:sixteen:four', 'apply:wide', 'apply:column'],
+    closeDiv: '</div>',
+    openDiv: '<div class=\'ui four column doubling stackable grid\'>',
+    apply: true,
     isExpanded: false,
     photoUrl: Ember.computed(function(){
         return this.get('google-service').getGooglePhotoURL(this.get('restaurant').get('photo_reference'));
@@ -26,7 +29,13 @@ export default Ember.Component.extend({
                     });
                 }
             }).then(() => {
-                this.set('isExpanded', !this.get('isExpanded'));
+                var expanded = !this.get('isExpanded');
+                this.set('isExpanded', expanded);
+                if(expanded){
+                    Ember.run.later(() => {
+                        Ember.$('html, body').animate({ scrollTop: Ember.$(this.get('element')).offset().top }, 'fast');
+                    }, 100);
+                }
             });
         },
         rate(restaurant){

@@ -1,6 +1,10 @@
 
 {{sidebar-filter id='filtermenu' searchParams=searchParams setFilter='setFilter' clearFilter='clearFilter'}}
 
-{{location-list-widget restaurants=model rate='rate'}}
+<div class='ui four column doubling stackable grid'>
+    {{#each model as |restaurant|}}
+        {{location-widget restaurant=restaurant rate='rate'}}
+    {{/each}}
+</div>
 
 {{modals/rating-modal open=ratingOpen restaurant=restaurant}}

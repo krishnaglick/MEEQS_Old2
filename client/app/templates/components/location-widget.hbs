@@ -1,16 +1,42 @@
 
-<a class='ui image' href {{action 'toggleExpand'}}><img src='{{photoUrl}}'></a>
-<a class='ui header' href {{action 'toggleExpand'}}>{{restaurant.name}}</a>
-<a class='ui icon button' href='{{directionsUrl}}'><i class='map icon'></i></a>
-<button class='ui icon button' {{action 'rate' restaurant}}><i class='map icon'></i></button>
-
-{{tag-list-widget tags=restaurant.restaurantLocationID.tags}}
-
-{{#if isExpanded}}
-    <div class="ui section divider"></div>
-    <div class='description'>
-        {{#ui/ui-label}}ID: {{restaurant.id}}{{/ui/ui-label}}
-        {{rating-edit-widget restaurant=restaurant}}
-        {{rating-list-widget ratings=restaurant.restaurantLocation.ratings}}
+{{#unless isExpanded}}
+    <div class='ui fluid link card'>
+        <div class='content'>
+            <a class='ui header' href {{action 'toggleExpand'}}>{{restaurant.name}}</a>
+        </div>
+        <a class='image' href {{action 'toggleExpand'}}><img src='{{photoUrl}}'></a>
+        <div class='content'>
+            <a class='ui icon button' href='{{directionsUrl}}'><i class='map icon'></i></a>
+            <button class='ui icon button' {{action 'rate' restaurant}}><i class='star icon'></i></button>
+        </div>
+        {{#if restaurant.restaurantLocationID.tags}}
+            <div class='extra content'>
+                {{tag-list-widget tags=restaurant.restaurantLocationID.tags}}
+            </div>
+        {{/if}}
     </div>
-{{/if}}
+{{else}}
+    {{{closeDiv}}}
+
+    <div class='ui segment items'>
+        <div class='item'>
+            <a class='image' href {{action 'toggleExpand'}}><img src='{{photoUrl}}'></a>
+            <div class='content'>
+                <a class='header' href {{action 'toggleExpand'}}>{{restaurant.name}}</a>
+                <div class='meta'>
+                    <a class='ui icon button' href='{{directionsUrl}}'><i class='map icon'></i></a>
+                    <button class='ui icon button' {{action 'rate' restaurant}}><i class='star icon'></i></button>
+                </div>
+                <div class='meta'>
+                    {{#ui/ui-label}}ID: {{restaurant.id}}{{/ui/ui-label}}
+                    {{tag-list-widget tags=restaurant.restaurantLocationID.tags}}
+                </div>
+                <div class='description'>
+                    {{rating-list-widget ratings=restaurant.restaurantLocation.ratings}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{{openDiv}}}
+{{/unless}}
