@@ -23,6 +23,7 @@ export default Base.extend({
         });
     },
     authenticate(credentials){
+        var context = this;
         return new Ember.RSVP.Promise((resolve, reject) => {
             Ember.$.ajax({
                 url: '/login',
@@ -35,6 +36,7 @@ export default Base.extend({
             }).then((response) => {
                 Ember.run(() => {
                     if(response.user){
+                        context.set('content', response.user);
                         resolve({ user: response.user });
                     } else {
                         reject(response.message);

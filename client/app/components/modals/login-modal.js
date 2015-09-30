@@ -11,8 +11,7 @@ export default Ember.Component.extend({
             var credentials = this.get('model');
             this.set('messages', []);
             this.get('session').authenticate('authenticator:passport', credentials)
-                .then((user) => {
-                    this.get('session').set('user', user);
+                .then(() => {
                     this.send('cancel');
                 }, (error) => {
                     this.set('messages', [error]);

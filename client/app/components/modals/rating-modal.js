@@ -9,7 +9,7 @@ export default Ember.Component.extend({
     loading: false,
     onOpen: function(){
         if(this.get('open')){
-            this.set('model', this.store.createRecord('rating', { user: this.get('session.user') }));
+            this.set('model', this.store.createRecord('rating'));
         }
     }.observes('open'),
     actions: {
