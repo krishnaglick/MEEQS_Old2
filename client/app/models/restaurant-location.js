@@ -6,5 +6,5 @@ export default DS.Model.extend({
     tags: DS.attr(),
     ratings: DS.attr(),
 
-    restaurant: DS.belongsTo('restaurant'),
+    restaurant: DS.belongsTo('restaurant', { async: true }),
 });

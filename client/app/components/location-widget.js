@@ -2,8 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
     classNameBindings: ['isExpanded:sixteen:four', 'apply:wide', 'apply:column'],
-    closeDiv: '</div>',
-    openDiv: '<div class=\'ui four column doubling stackable grid\'>',
     apply: true,
     isExpanded: false,
     photoUrl: Ember.computed(function(){

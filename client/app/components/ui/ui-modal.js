@@ -34,7 +34,10 @@ export default Ember.Component.extend({
     toggleModal: function(){
         var element = Ember.$(this.get('element'));
         if(element){
-            element.modal(this.get('open') ? 'show' : 'hide').modal('refresh');
+            element.modal(this.get('open') ? 'show' : 'hide');
+            Ember.run.later(() => {
+                element.modal('refresh');
+            }, 100);
         }
     }.observes('open'),
 });
