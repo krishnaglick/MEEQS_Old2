@@ -1,7 +1,7 @@
 {
-  "name": "server",
+  "name": "MEEQS_Backend",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.2",
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
