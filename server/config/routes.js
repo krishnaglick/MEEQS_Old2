@@ -21,12 +21,12 @@
  */
 
 module.exports.routes = {
-
   'post /login': 'AuthController.login',
 
   '/logout': 'AuthController.logout',
 
-  '/api/v1/restaurants' : 'RestaurantController.find',
-  '/api/v1/restaurants/*' : 'RestaurantController.findOne'
-
+  'get /api/v1/restaurants' : 'RestaurantController.find',
+  'get /api/v1/restaurants/*' : 'RestaurantController.findOne',
+  'get /api/v1/options/restaurantFind' : 'RestaurantController.optionsFind',
+  'get /api/v1/options/restaurantFindOne' : 'RestaurantController.optionsFindOne'
 };

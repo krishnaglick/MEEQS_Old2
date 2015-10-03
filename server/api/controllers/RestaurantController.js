@@ -85,8 +85,71 @@ module.exports = {
     });
   },
 
+  optionsFind : (req, res) => {
+    var optionsObject = {
+      'Request Details': {
+        'Type': 'get',
+        'Allowed Query String Parameters': googleRequestParams,
+        'Required Cookies': { 'Sample Location': Google.getDefaultLocation() },
+        'Example Routes': [
+          '/api/v1/Restaurants',
+          '/api/v1/Restaurants?keyword=Mexican',
+          '/api/v1/Restaurants?maxprice=10'
+        ]
+      },
+      'Response Details': {
+        restaurants: [
+          {
+            geometry: {
+              location: {
+                lat: 'A Number',
+                lng: 'A Number'
+              }
+            },
+            icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-##.png',
+            name: 'A Restaurant',
+            opening_hours: {
+              open_now: true,
+              weekday_text: []
+            },
+            place_id: 'some google place id',
+            vicinity: 'Street Address, City',
+            restaurantLocation:
+              {
+                restaurantLocationID: 1,
+                name: 'A Restaurant',
+                rating: {
+                  menuSelection: 2.5,
+                  environment: 1.2,
+                  costEfficiency: 2.9,
+                  productQuality: 3,
+                  service: 0.9,
+                  averageRating: 2.1
+                },
+                place_id: 'some google place id'
+              }
+          },
+          {
+            geometry: {
+              location: {
+                lat: 'A Number',
+                lng: 'A Number'
+              }
+            },
+            icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-##.png',
+            name: 'Another Restaurant',
+            place_id: 'some other google place id',
+            vicinity: 'Street Address, City',
+          }
+        ]
+      }
+    };
+
+    return res.ok(optionsObject);
+  },
+
   findOne : (req, res) => {
-    RestaurantLocation.find({where: { place_id: req.params}})
+    RestaurantLocation.find({ where: { or: [ {place_id: req.params}, {restaurantLocationID: req.params} ], limit: 1 } })
     .populate('tags')
     .populate('ratings')
     .exec((err, restaurantLocation) => {
@@ -108,6 +171,53 @@ module.exports = {
         return res.ok({ restaurantLocations: Utils.removePropertiesByBlacklist(restaurantLocation, unwantedProperties) });
       });
     });
-  }
+  },
+
+  optionsFindOne : (req, res) => {
+    var optionsObject = {
+      'Request Details': {
+        'Type': 'get',
+        'Route Value': 'A Google Place ID or Restaurant Location ID',
+        'Example Routes': [
+          '/api/v1/Restaurants/1',
+          '/api/v1/Restaurants/ChIJV-L5JFq15YgRLmUkD-SkpuA',
+        ]
+      },
+      'Response Details': {
+        RestaurantLocation: {
+          restaurantLocationID: 1,
+          name: 'A Restaurant',
+          ratings: [
+            {
+              menuSelection: 2.5,
+              environment: 1.2,
+              costEfficiency: 2.9,
+              productQuality: 3,
+              service: 0.9,
+              averageRating: 2.1,
+              comment: 'A Comment',
+              user: 'A user\'s display name',
+              language: 'en-US'
+            },
+            {
+              menuSelection: 4,
+              environment: 3,
+              costEfficiency: 2,
+              productQuality: 1,
+              service: 0,
+              averageRating: 2,
+              comment: 'Another Comment',
+              user: 'Another user\'s display name',
+              language: 'en-US'
+            }
+          ],
+          place_id: 'some google place id',
+          tags: ['A tag', 'Another Tag', 'A Third Tag']
+        }
+      }
+    };
+
+    return res.ok(optionsObject);
+  },
 };
 
