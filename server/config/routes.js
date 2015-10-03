@@ -28,5 +28,7 @@ module.exports.routes = {
   'get /api/v1/restaurants' : 'RestaurantController.find',
   'get /api/v1/restaurants/*' : 'RestaurantController.findOne',
   'get /api/v1/options/restaurantFind' : 'RestaurantController.optionsFind',
-  'get /api/v1/options/restaurantFindOne' : 'RestaurantController.optionsFindOne'
+  'get /api/v1/options/restaurantFindOne' : 'RestaurantController.optionsFindOne',
+
+  'get /fixtures' : { view : 'test' }
 };

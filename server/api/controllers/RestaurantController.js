@@ -169,6 +169,25 @@ module.exports = {
       });
 
       Promise.all(improvedRatings).then(() => {
+        var avgRating = {
+          menuSelection: 0,
+          environment: 0,
+          costEfficiency: 0,
+          productQuality: 0,
+          service: 0,
+          averageRating: 0
+        };
+        _.each(restaurantLocation.ratings, (rating) => {
+          avgRating.menuSelection += rating.menuSelection;
+          avgRating.environment += rating.environment;
+          avgRating.costEfficiency += rating.costEfficiency;
+          avgRating.productQuality += rating.productQuality;
+          avgRating.service += rating.service;
+          avgRating.averageRating += rating.averageRating;
+        });
+        avgRating = _.map(avgRating, (ratingType) => {
+          return ratingType / restaurantLocation.ratings.length;
+        });
         return res.ok({ restaurantLocations: Utils.removePropertiesByBlacklist(restaurantLocation, unwantedProperties) });
       });
     });
