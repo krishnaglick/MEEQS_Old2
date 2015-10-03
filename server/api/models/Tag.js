@@ -37,6 +37,9 @@ module.exports = {
     toJSON : function() {
       var obj = this.toObject();
       if(!obj.isDeleted) {
+        delete obj.createdAt;
+        delete obj.updatedAt;
+        delete obj.tagID;
         return obj;
       }
       return null;

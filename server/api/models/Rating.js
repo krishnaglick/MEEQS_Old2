@@ -76,12 +76,14 @@ module.exports = {
     toJSON : function() {
       var obj = this.toObject();
       if(!obj.isDeleted) {
-        //delete obj.isDeleted;
+        delete obj.isDeleted;
+        delete obj.createdAt;
+        delete obj.updatedAt;
         obj.averageRating = this.getAverageRating();
         return obj;
       }
       return null;
     }
-  }
+  },
 };
 

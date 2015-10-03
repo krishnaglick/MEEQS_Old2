@@ -57,15 +57,15 @@ module.exports = {
         if (err) return res.serverError(err);
         if(!matchingRecords || _.isEmpty(matchingRecords)) return res.ok({restaurants: Utils.removePropertiesByBlacklist(gRes.results, unwantedProperties)});
 
-        //TODO: Refactor w/ Waterline Deep Populate when it is released.
+        //TODO: Refactor w/ Waterline Deep Populate when it is released... If ever...
         var improvedRatings = _.map(matchingRecords, (record) => {
           return new Promise((res, rej) => {
             if(!record.ratings || _.isEmpty(record.ratings)) res();
             var changedRatings = _.map(record.ratings, (rating) => {
               return new Promise((res, rej) => {
-                Users.find({where: {userID: rating.user}})
+                Users.findOne({ where: {userID: rating.user} })
                 .exec((err, user) => {
-                  if(!err) rating.user = (user[0] || user).displayName;
+                  if(!err) rating.user = user.displayName;
                   res();
                 });
               });
@@ -149,46 +149,59 @@ module.exports = {
   },
 
   findOne : (req, res) => {
-    RestaurantLocation.find({ where: { or: [ {place_id: req.params}, {restaurantLocationID: req.params} ], limit: 1 } })
+    let queryOptions = {
+      where: {}
+    };
+    if(isNaN(req.params)) {
+      queryOptions.where.place_id = req.params;
+    }
+    else {
+      queryOptions.where.restaurantLocationID = req.params;
+    }
+    RestaurantLocation.findOne(queryOptions)
     .populate('tags')
     .populate('ratings')
     .exec((err, restaurantLocation) => {
       if(err) return res.serverError(err);
-      debugger;
+
+      //I shouldn't have to do this.
+      restaurantLocation = restaurantLocation.toJSON();
+
       let improvedRatings = _.map(restaurantLocation.ratings, (rating) => {
         return new Promise((res, rej) => {
-          if(!record.ratings || _.isEmpty(record.ratings)) res();
-          Users.find({where: {userID: rating.user}}).exec((err, user) => {
-            if(err) res();
-
-            rating.user = user.displayName;
-
+          if(!rating || _.isEmpty(rating)) res();
+          User.findOne({where: {userID: rating.user}}).exec((err, user) => {
+            if(!err) rating.user = user.displayName;
             res();
           });
         });
       });
 
       Promise.all(improvedRatings).then(() => {
-        var avgRating = {
-          menuSelection: 0,
-          environment: 0,
-          costEfficiency: 0,
-          productQuality: 0,
-          service: 0,
-          averageRating: 0
-        };
-        _.each(restaurantLocation.ratings, (rating) => {
-          avgRating.menuSelection += rating.menuSelection;
-          avgRating.environment += rating.environment;
-          avgRating.costEfficiency += rating.costEfficiency;
-          avgRating.productQuality += rating.productQuality;
-          avgRating.service += rating.service;
-          avgRating.averageRating += rating.averageRating;
-        });
-        avgRating = _.map(avgRating, (ratingType) => {
-          return ratingType / restaurantLocation.ratings.length;
-        });
-        return res.ok({ restaurantLocations: Utils.removePropertiesByBlacklist(restaurantLocation, unwantedProperties) });
+        if(restaurantLocation.ratings) {
+          //TODO: This should be part of the query, but...
+          var avgRating = {
+            menuSelection: 0,
+            environment: 0,
+            costEfficiency: 0,
+            productQuality: 0,
+            service: 0,
+            averageRating: 0
+          };
+          _.each(restaurantLocation.ratings, (rating) => {
+            avgRating.menuSelection += rating.menuSelection;
+            avgRating.environment += rating.environment;
+            avgRating.costEfficiency += rating.costEfficiency;
+            avgRating.productQuality += rating.productQuality;
+            avgRating.service += rating.service;
+            avgRating.averageRating += rating.averageRating;
+          });
+          avgRating = _.each(avgRating, (ratingValue, ratingType, obj) => {
+            obj[ratingType] = ratingValue / (restaurantLocation.ratings || []).length;
+          });
+          restaurantLocation.avgRating = avgRating;
+        }
+        return res.ok({ restaurantLocation: Utils.removePropertiesByBlacklist(restaurantLocation, unwantedProperties) });
       });
     });
   },
@@ -204,7 +217,7 @@ module.exports = {
         ]
       },
       'Response Details': {
-        RestaurantLocation: {
+        restaurantLocation: {
           restaurantLocationID: 1,
           name: 'A Restaurant',
           ratings: [
@@ -231,7 +244,7 @@ module.exports = {
               language: 'en-US'
             }
           ],
-          rating: {
+          avgRating: {
             menuSelection: 4,
             environment: 3,
             costEfficiency: 2,
@@ -240,7 +253,11 @@ module.exports = {
             averageRating: 2
           },
           place_id: 'some google place id',
-          tags: ['A tag', 'Another Tag', 'A Third Tag']
+          tags: [
+            {name: 'A tag'},
+            {name: 'Another Tag'},
+            {name: 'A Third Tag'}
+          ]
         }
       }
     };

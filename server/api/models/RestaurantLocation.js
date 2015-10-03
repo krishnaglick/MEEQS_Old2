@@ -38,10 +38,12 @@ module.exports = {
       defaultsTo: false,
       protected: true
     },
-    //Override
     toJSON : function() {
       var obj = this.toObject();
       if(!obj.isDeleted) {
+        delete obj.isDeleted;
+        delete obj.createdAt;
+        delete obj.updatedAt;
         return obj;
       }
       return null;
