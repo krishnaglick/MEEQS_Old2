@@ -42,7 +42,7 @@ var googleRequestParams = [
 module.exports = {
   find : (req, res) => {
     let googleSearchOptions = _.pick(req.allParams(), googleRequestParams);
-    googleSearchOptions.location = req.cookies.location || googleSearchOptions.location;
+    googleSearchOptions.location = req.cookies.location || req.allParams().location || googleSearchOptions.location;
 
     Google.getPlacesNearMe(googleSearchOptions, (err, gRes) => {
       if (err) return res.serverError(err);
@@ -154,7 +154,7 @@ module.exports = {
     .populate('ratings')
     .exec((err, restaurantLocation) => {
       if(err) return res.serverError(err);
-
+      debugger;
       let improvedRatings = _.map(restaurantLocation.ratings, (rating) => {
         return new Promise((res, rej) => {
           if(!record.ratings || _.isEmpty(record.ratings)) res();
@@ -162,6 +162,7 @@ module.exports = {
             if(err) res();
 
             rating.user = user.displayName;
+
             res();
           });
         });
@@ -211,6 +212,14 @@ module.exports = {
               language: 'en-US'
             }
           ],
+          rating: {
+            menuSelection: 4,
+            environment: 3,
+            costEfficiency: 2,
+            productQuality: 1,
+            service: 0,
+            averageRating: 2
+          },
           place_id: 'some google place id',
           tags: ['A tag', 'Another Tag', 'A Third Tag']
         }

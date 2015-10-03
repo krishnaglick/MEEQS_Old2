@@ -1,6 +1,4 @@
 module.exports = {
-  create : (req, res) => {
-    RestaurantLocation.create();
-  }
+  /* Need non-find and non-findOne blueprints for create. */
 };
 
