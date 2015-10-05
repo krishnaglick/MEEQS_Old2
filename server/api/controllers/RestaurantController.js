@@ -58,6 +58,7 @@ module.exports = {
         if(!matchingRecords || _.isEmpty(matchingRecords)) return res.ok({restaurants: Utils.removePropertiesByBlacklist(gRes.results, unwantedProperties)});
 
         //TODO: Refactor w/ Waterline Deep Populate when it is released... If ever...
+        //TODO: Need to aggregate ratings here, instead of listing all ratings.
         var improvedRatings = _.map(matchingRecords, (record) => {
           return new Promise((res, rej) => {
             if(!record.ratings || _.isEmpty(record.ratings)) res();
