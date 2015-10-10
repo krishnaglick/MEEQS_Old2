@@ -52,33 +52,22 @@ module.exports = {
 
       RestaurantLocation.find({ where: { place_id: place_ids }})
       .populate('tags')
-      .populate('ratings')
+      //.populate('ratings')
       .exec((err, matchingRecords) => {
-        if (err) return res.serverError(err);
-        if(!matchingRecords || _.isEmpty(matchingRecords)) return res.ok({restaurants: Utils.removePropertiesByBlacklist(gRes.results, unwantedProperties)});
 
-        //TODO: Refactor w/ Waterline Deep Populate when it is released... If ever...
-        //TODO: Need to aggregate ratings here, instead of listing all ratings.
-        var improvedRatings = _.map(matchingRecords, (record) => {
+        if (err)
+          return res.serverError(err);
+
+        if(!matchingRecords || _.isEmpty(matchingRecords))
+          return res.ok({restaurants: Utils.removePropertiesByBlacklist(gRes.results, unwantedProperties)});
+
+        let recordsWithRatings = _.map(matchingRecords, (matchingRecord) => {
           return new Promise((res, rej) => {
-            if(!record.ratings || _.isEmpty(record.ratings)) res();
-            var changedRatings = _.map(record.ratings, (rating) => {
-              return new Promise((res, rej) => {
-                Users.findOne({ where: {userID: rating.user} })
-                .exec((err, user) => {
-                  if(!err) rating.user = user.displayName;
-                  res();
-                });
-              });
-            });
-
-            Promise.all(changedRatings).then((vals) => {
-              res();
-            });
+            matchingRecord.getAverageRatings(res);
           });
         });
 
-        Promise.all(improvedRatings).then(() => {
+        Promise.all(recordsWithRatings).then(() => {
           let mergedResults = Utils.mergeOnAsProperty(matchingRecords, gRes.results, 'place_id', 'restaurantLocation');
           return res.ok({ restaurants: Utils.removePropertiesByBlacklist(mergedResults, unwantedProperties) });
         });
