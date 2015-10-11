@@ -175,7 +175,7 @@ module.exports = {
     .populate('tags')
     .populate('ratings')
     .exec((err, restaurantLocation) => {
-      if(err) return res.serverError(err);
+      if(err || !restaurantLocation) return res.serverError(err || 'restaurantLocation is undefined');
 
       //I shouldn't have to do this.
       restaurantLocation = restaurantLocation.toJSON();
