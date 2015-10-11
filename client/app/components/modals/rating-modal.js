@@ -17,7 +17,9 @@ export default Ember.Component.extend({
             this.set('loading', true);
             this.set('messages', []);
 
-            this.get('model').save().then(() => {
+            var model = this.get('model');
+            model.set('user', this.store.find('user', this.session.content.secure.user.userID));
+            model.save().then(() => {
                 this.send('cancel');
             }, (error) => {
                 this.set('messages', [error]);
