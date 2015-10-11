@@ -17,19 +17,18 @@
  * CoffeeScript for the front-end.
  *
  * For more information on configuring custom routes, check out:
- * http://sailsjs.org/#/documentation/concepts/Routes/RouteTargetSyntax.html
+ * http://sailsjs.org/#!/documentation/concepts/Routes/RouteTargetSyntax.html
  */
 
 module.exports.routes = {
-
   'post /login': 'AuthController.login',
 
   '/logout': 'AuthController.logout',
 
-  //Need to figure out why this isn't getting auto-routed...
-  '/api/v1/restaurants' : 'RestaurantsController.find',
-  '/api/v1/restaurants/*' : 'RestaurantsController.findOne',
-
-  '/*': { controller: 'App', action: 'serve', skipAssets: true, skipRegex: /^\/api\/.*$/ }
-
+  'get /api/v1/restaurants' : 'RestaurantController.find',
+  'get /api/v1/restaurants/*' : 'RestaurantController.findOne',
+  'get /api/v1/options/restaurantFind' : 'RestaurantController.optionsFind',
+  'get /api/v1/options/restaurantFindOne' : 'RestaurantController.optionsFindOne',
+  'options /api/v1/restaurants/restaurantFind' : 'RestaurantController.optionsFind',
+  'options /api/v1/restaurants/restaurantFindOne' : 'RestaurantController.optionsFindOne'
 };

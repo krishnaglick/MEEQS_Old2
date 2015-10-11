@@ -10,9 +10,10 @@ module.exports = {
     },
 
     login: function(req, res) {
-        passport.authenticate('local', function(err, user, info) {
+        //Lets see what this does...
+        passport.authenticate('local', { session: false }, function(err, user, info) {
             if ((err) || (!user)) {
-            	res.status(401);
+              res.status(401);
                 return res.send({
                     message: info.message,
                     user: user
@@ -20,8 +21,8 @@ module.exports = {
             }
             req.logIn(user, function(err) {
                 if (err) {
-                	res.status(400);
-                	res.send(err);
+                  res.status(400);
+                  res.send(err);
                 }
                 return res.send({
                     message: info.message,

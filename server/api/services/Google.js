@@ -26,5 +26,9 @@ module.exports = {
 
   getPlaceDetails : (place_id, callback) => {
     googlePlaces.placeDetailsRequest({placeid: place_id}, callback);
+  },
+
+  getDefaultLocation : () => {
+    return config.defaultLocation;
   }
 };
