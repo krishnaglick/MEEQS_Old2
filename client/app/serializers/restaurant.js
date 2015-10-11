@@ -1,6 +1,6 @@
 import AppSerializer from './application';
 
-export default AppSerializer.extend({
+export default AppSerializer.extend(DS.EmbeddedRecordsMixin, {
     primaryKey: 'place_id',
     extractArray(store, primaryTypeClass, rawPayload){
         rawPayload['restaurants'].forEach((item) => {
@@ -12,4 +12,7 @@ export default AppSerializer.extend({
 
         return this._super(store, primaryTypeClass, rawPayload);
     },
+    attrs: {
+        restaurantLocation: { embedded: 'always' }
+    }
 });

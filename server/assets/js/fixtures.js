@@ -26,13 +26,13 @@ $(function() {
 					$.ajax({
 						url: 'http://localhost:1337/api/v1/restaurantLocations',
 						type: 'POST',
-						data: {restaurantLocation: {name: 'Mellow Mushroom', place_id: 'ChIJq6qq6jauEmsRJAf7FjrKnXI', tags: 1}}
+						data: {restaurantLocation: {name: 'Mellow Mushroom', place_id: 'ChIJdyLHgTRL5IgRWpkr9K5gg7A', tags: 1}}
 					})
 					.complete(function() {
 						$.ajax({
 							url: 'http://localhost:1337/api/v1/restaurantLocations',
 							type: 'POST',
-							data: {restaurantLocation: {name: 'Tijuana Flats', place_id: 'ChIJ4V5dQhm35YgRv4kgtMzyjLo', tags: 1}}
+							data: {restaurantLocation: {name: 'Tijuana Flats', place_id: 'ChIJQWMNSTRL5IgRzByh874rBcs', tags: 1}}
 						})
 						.complete(function() {
 							$.ajax({
