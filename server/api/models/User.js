@@ -55,6 +55,11 @@ module.exports = {
     toJSON : function() {
       var obj = this.toObject();
       if(!obj.isDeleted) {
+        delete obj.isDeleted;
+        delete obj.roles;
+        delete obj.password;
+        delete obj.userID;
+        delete obj.username;
         return obj;
       }
       return null;
