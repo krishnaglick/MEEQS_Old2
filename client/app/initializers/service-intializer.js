@@ -8,6 +8,9 @@ export function initialize(container, application) {
     application.inject('controller', 'google-service', 'service:google-service');
     application.inject('component', 'google-service', 'service:google-service');
 
+    application.inject('controller', 'modal-service', 'service:modal-service');
+    application.inject('component', 'modal-service', 'service:modal-service');
+
     application.inject('component', 'store', 'service:store');
 }
 

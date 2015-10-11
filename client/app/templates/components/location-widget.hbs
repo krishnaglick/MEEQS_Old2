@@ -7,7 +7,7 @@
         <div class='image'><img src='{{photoUrl}}'></div>
         <div class='content'>
             <a class='ui icon button' href='{{directionsUrl}}'><i class='map icon'></i></a>
-            <button class='ui icon button' {{action 'rate' restaurant}}><i class='star icon'></i></button>
+            <button class='ui icon button' {{action 'rate' restaurant bubbles=false}}><i class='star icon'></i></button>
         </div>
         {{#if restaurant.restaurantLocationID.tags}}
             <div class='extra content'>
@@ -23,7 +23,7 @@
                 <a class='header' href {{action 'toggleExpand'}}>{{restaurant.name}}</a>
                 <div class='meta'>
                     <a class='ui icon button' href='{{directionsUrl}}'><i class='map icon'></i></a>
-                    <button class='ui icon button' {{action 'rate' restaurant}}><i class='star icon'></i></button>
+                    <button class='ui icon button' {{action 'rate' restaurant bubbles=false}}><i class='star icon'></i></button>
                 </div>
                 <div class='meta'>
                     {{#ui/ui-label}}ID: {{restaurant.id}}{{/ui/ui-label}}

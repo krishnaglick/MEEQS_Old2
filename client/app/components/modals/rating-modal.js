@@ -16,6 +16,7 @@ export default Ember.Component.extend({
         rate() {
             this.set('loading', true);
             this.set('messages', []);
+
             this.get('model').save().then(() => {
                 this.send('cancel');
             }, (error) => {
@@ -28,7 +29,7 @@ export default Ember.Component.extend({
             this.set('loading', false);
             this.set('open', false);
             Ember.run.later(() => {
-                this.set('model',{});
+                this.set('model', {});
                 this.set('messages', []);
             }, 500);
         }
