@@ -26,7 +26,7 @@ module.exports = function notFound (data, options) {
 
   // Set status code
   res.status(404);
-  return res.notFound({no:'no'});
+  //return res.notFound({no:'no'});
 
   // Log error to console
   if (data !== undefined) {

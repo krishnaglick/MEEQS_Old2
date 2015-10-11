@@ -20,8 +20,8 @@ module.exports = function forbidden (data, options) {
   var sails = req._sails;
 
   // Set status code
-  //res.status(403);
-  return res.forbidden({no:'no'});
+  res.status(403);
+  //return res.forbidden({no:'no'});
 
   // Log error to console
   if (data !== undefined) {
