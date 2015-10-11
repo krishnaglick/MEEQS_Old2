@@ -23,6 +23,7 @@ export default Ember.Component.extend({
         cancel: function() {
             this.set('open', false);
             Ember.run.later(() => {
+                this.set('model', {});
                 this.set('messages', []);
             }, 500);
         }

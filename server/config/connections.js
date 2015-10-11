@@ -26,7 +26,7 @@ module.exports.connections = {
     host: '99.125.202.24',
     port: 5432,
     user: 'pi',
-    password: '',
+    password: 'swordfish',
     database: 'meeqs'
   },
   test: {
@@ -34,7 +34,7 @@ module.exports.connections = {
     host: '99.125.202.24',
     port: 5432,
     user: 'pi',
-    password: '',
+    password: 'swordfish',
     database: 'meeqs_test'
   },
   local: {

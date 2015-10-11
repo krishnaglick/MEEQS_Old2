@@ -5,8 +5,12 @@ export default Ember.Controller.extend({
     searchParams: {},
     actions: {
         rate(restaurant){
-            this.set('restaurant', restaurant);
-            this.set('ratingOpen', !this.get('ratingOpen'));
+            if(!this.get('session.isAuthenticated')){
+                this.get('modal-service').openLogin();
+            } else {
+                this.set('restaurant', restaurant);
+                this.set('ratingOpen', !this.get('ratingOpen'));
+            }
         },
         setFilter(){
             this.set('model', this.store.find('restaurant', this.get('searchParams')));

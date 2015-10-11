@@ -1,5 +1,5 @@
 
-{{sidebar-menu id='sidemenu'}}
+{{sidebar-menu id='sidemenu' openLogin='openLogin' openRegister='openRegister'}}
 
 <div class='pusher'>
     <header class='ui vertical segment'>
@@ -24,3 +24,6 @@
         </div>
     </footer>
 </div>
+
+{{modals/login-modal open=modal-service.loginOpen}}
+{{modals/register-modal open=modal-service.registerOpen}}
