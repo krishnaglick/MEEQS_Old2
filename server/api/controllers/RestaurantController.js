@@ -91,9 +91,10 @@ module.exports = {
           }
           return restaurant;
         });
-        unwantedProperties.push('ratings');
+        let neuUnwantedProperties = unwantedProperties;
+        neuUnwantedProperties.push('ratings');
         let mergedResults = Utils.mergeOnAsProperty(matchingRecords, gRes.results, 'place_id', 'restaurantLocation');
-        return res.ok({ restaurants: Utils.removePropertiesByBlacklist(mergedResults, unwantedProperties) });
+        return res.ok({ restaurants: Utils.removePropertiesByBlacklist(mergedResults, neuUnwantedProperties) });
       });
     });
   },
