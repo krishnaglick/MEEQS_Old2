@@ -39,6 +39,30 @@ var googleRequestParams = [
   'zagatselected'
 ];
 
+var getAverageRatingForRestaurant = (ratings) => {
+  var avgRating = {
+    menuSelection: 0,
+    environment: 0,
+    costEfficiency: 0,
+    productQuality: 0,
+    service: 0,
+    averageRating: 0
+  };
+  _.each(ratings, (rating) => {
+    avgRating.menuSelection += rating.menuSelection;
+    avgRating.environment += rating.environment;
+    avgRating.costEfficiency += rating.costEfficiency;
+    avgRating.productQuality += rating.productQuality;
+    avgRating.service += rating.service;
+    avgRating.averageRating += rating.getAverageRating();
+  });
+  avgRating = _.each(avgRating, (ratingValue, ratingType, obj) => {
+    obj[ratingType] = ratingValue / (ratings || []).length;
+  });
+
+  return avgRating;
+};
+
 module.exports = {
   find : (req, res) => {
     let googleSearchOptions = _.pick(req.allParams(), googleRequestParams);
@@ -52,25 +76,24 @@ module.exports = {
 
       RestaurantLocation.find({ where: { place_id: place_ids }})
       .populate('tags')
-      //.populate('ratings')
+      .populate('ratings')
       .exec((err, matchingRecords) => {
-
         if (err)
           return res.serverError(err);
 
         if(!matchingRecords || _.isEmpty(matchingRecords))
           return res.ok({restaurants: Utils.removePropertiesByBlacklist(gRes.results, unwantedProperties)});
 
-        let recordsWithRatings = _.map(matchingRecords, (matchingRecord) => {
-          return new Promise((res, rej) => {
-            matchingRecord.getAverageRatings(res);
-          });
+        matchingRecords = _.map(matchingRecords, (restaurant) => {
+          if(restaurant.ratings) {
+            restaurant = restaurant.toJSON();
+            restaurant.avgRating = getAverageRatingForRestaurant(restaurant.ratings);
+          }
+          return restaurant;
         });
-
-        Promise.all(recordsWithRatings).then(() => {
-          let mergedResults = Utils.mergeOnAsProperty(matchingRecords, gRes.results, 'place_id', 'restaurantLocation');
-          return res.ok({ restaurants: Utils.removePropertiesByBlacklist(mergedResults, unwantedProperties) });
-        });
+        unwantedProperties.push('ratings');
+        let mergedResults = Utils.mergeOnAsProperty(matchingRecords, gRes.results, 'place_id', 'restaurantLocation');
+        return res.ok({ restaurants: Utils.removePropertiesByBlacklist(mergedResults, unwantedProperties) });
       });
     });
   },
@@ -108,7 +131,7 @@ module.exports = {
               {
                 restaurantLocationID: 1,
                 name: 'A Restaurant',
-                rating: {
+                avgRating: {
                   menuSelection: 2.5,
                   environment: 1.2,
                   costEfficiency: 2.9,
@@ -169,27 +192,7 @@ module.exports = {
 
       Promise.all(improvedRatings).then(() => {
         if(restaurantLocation.ratings) {
-          //TODO: This should be part of the query, but...
-          var avgRating = {
-            menuSelection: 0,
-            environment: 0,
-            costEfficiency: 0,
-            productQuality: 0,
-            service: 0,
-            averageRating: 0
-          };
-          _.each(restaurantLocation.ratings, (rating) => {
-            avgRating.menuSelection += rating.menuSelection;
-            avgRating.environment += rating.environment;
-            avgRating.costEfficiency += rating.costEfficiency;
-            avgRating.productQuality += rating.productQuality;
-            avgRating.service += rating.service;
-            avgRating.averageRating += rating.averageRating;
-          });
-          avgRating = _.each(avgRating, (ratingValue, ratingType, obj) => {
-            obj[ratingType] = ratingValue / (restaurantLocation.ratings || []).length;
-          });
-          restaurantLocation.avgRating = avgRating;
+          restaurantLocation.avgRating = getAverageRatingForRestaurant(restaurantLocation.ratings);
         }
         return res.ok({ restaurantLocation: Utils.removePropertiesByBlacklist(restaurantLocation, unwantedProperties) });
       });

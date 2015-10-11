@@ -48,15 +48,6 @@ module.exports = {
       }
       return null;
     }
-  },
-
-  getAverageRatings: function(res) {
-    Rating.find({restaurantLocationID: this.restaurantLocationID})
-    .average('getAverageRating')
-    .done((a,b,c,d) => {
-      debugger;
-      res();
-    });
   }
 };
 
