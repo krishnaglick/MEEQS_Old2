@@ -72,7 +72,12 @@ module.exports = {
       if (err) return res.serverError(err);
       if(!gRes || !gRes.results) return res.notFound();
 
-      var place_ids = _.pluck(gRes.results, 'place_id');
+      var place_ids = [];
+      for (var i = gRes.results.length - 1; i >= 0; i--) {
+        if(gRes.results[i].place_id) {
+          place_ids.push(gRes.results[i].place_id);
+        }
+      }
 
       RestaurantLocation.find({ where: { place_id: place_ids }})
       .populate('tags')
@@ -91,10 +96,9 @@ module.exports = {
           }
           return restaurant;
         });
-        let neuUnwantedProperties = unwantedProperties;
-        neuUnwantedProperties.push('ratings');
+
         let mergedResults = Utils.mergeOnAsProperty(matchingRecords, gRes.results, 'place_id', 'restaurantLocation');
-        return res.ok({ restaurants: Utils.removePropertiesByBlacklist(mergedResults, neuUnwantedProperties) });
+        return res.ok({ restaurants: Utils.removePropertiesByBlacklist(mergedResults, unwantedProperties) });
       });
     });
   },
@@ -166,36 +170,65 @@ module.exports = {
     let queryOptions = {
       where: {}
     };
+    var googlePlace;
+    var promise = new Promise((res) => {res();});
     if(isNaN(req.params)) {
       queryOptions.where.place_id = req.params;
+
+      promise = new Promise((res) => {
+        Google.getPlaceDetails(req.params[0], (output) => {
+          googlePlace = output;
+          res();
+        });
+      });
     }
     else {
       queryOptions.where.restaurantLocationID = req.params;
     }
-    RestaurantLocation.findOne(queryOptions)
-    .populate('tags')
-    .populate('ratings')
-    .exec((err, restaurantLocation) => {
-      if(err || !restaurantLocation) return res.serverError(err || 'restaurantLocation is undefined');
+    promise.then(() => {
+      RestaurantLocation.findOne(queryOptions)
+      .populate('tags')
+      .populate('ratings')
+      .exec((err, restaurantLocation) => {
+        if(err) return res.serverError(err);
+        let improvedRatings = [];
+        if(restaurantLocation) {
+          restaurantLocation = restaurantLocation.toJSON();
 
-      //I shouldn't have to do this.
-      restaurantLocation = restaurantLocation.toJSON();
-
-      let improvedRatings = _.map(restaurantLocation.ratings, (rating) => {
-        return new Promise((res, rej) => {
-          if(!rating || _.isEmpty(rating)) res();
-          User.findOne({where: {userID: rating.user}}).exec((err, user) => {
-            if(!err) rating.user = user.displayName;
-            res();
+          improvedRatings = _.map(restaurantLocation.ratings, (rating) => {
+            return new Promise((res, rej) => {
+              if(!rating || _.isEmpty(rating)) res();
+              User.findOne({where: {userID: rating.user}}).exec((err, user) => {
+                if(!err) rating.user = user.displayName;
+                res();
+              });
+            });
           });
-        });
-      });
 
-      Promise.all(improvedRatings).then(() => {
-        if(restaurantLocation.ratings) {
-          restaurantLocation.avgRating = getAverageRatingForRestaurant(restaurantLocation.ratings);
+          if(!googlePlace && restaurantLocation.place_id) {
+            improvedRatings.push(
+              new Promise((res) => {
+                Google.getPlaceDetails(restaurantLocation.place_id, (output) => {
+                  googlePlace = output;
+                  res();
+                });
+              })
+            );
+          }
         }
-        return res.ok({ restaurantLocation: Utils.removePropertiesByBlacklist(restaurantLocation, unwantedProperties) });
+
+        Promise.all(improvedRatings).then(() => {
+          if(((restaurantLocation && restaurantLocation.ratings) || []).length > 0) {
+            restaurantLocation.avgRating = getAverageRatingForRestaurant(restaurantLocation.ratings);
+          }
+
+          if(restaurantLocation) {
+            restaurantLocation.toJSON = undefined;
+            googlePlace.restaurantLocation = restaurantLocation;
+          }
+
+          return res.ok({ restaurant: Utils.removePropertiesByBlacklist(googlePlace, unwantedProperties) });
+        });
       });
     });
   },
@@ -211,7 +244,7 @@ module.exports = {
         ]
       },
       'Response Details': {
-        restaurantLocation: {
+        restaurant: {
           restaurantLocationID: 1,
           name: 'A Restaurant',
           ratings: [

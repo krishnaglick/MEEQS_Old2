@@ -25,7 +25,9 @@ module.exports = {
   },
 
   getPlaceDetails : (place_id, callback) => {
-    googlePlaces.placeDetailsRequest({placeid: place_id}, callback);
+    googlePlaces.placeDetailsRequest({placeid: place_id}, (bad, data) => {
+      callback(data.result);
+    });
   },
 
   getDefaultLocation : () => {
