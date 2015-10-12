@@ -16,17 +16,28 @@ export default Ember.Component.extend({
     }),
     actions: {
         toggleExpand(){
-            new Promise((res) => {
+            new Promise((resolve) => {
+                this.set('loading', true);
+
                 var restaurant = this.get('restaurant');
-                if(restaurant.get('restaurantLocation')){
-                    res();
-                } else {
-                    this.store.find('restaurant', restaurant.get('id')).then((loadedRestaurant) => {
-                        restaurant = loadedRestaurant;
-                        res();
+                var location = restaurant.get('restaurantLocation');
+                if(!location){
+                    restaurant.reload().then(() => {
+                        if(!restaurant.get('restaurantLocation')){
+                            this.store.createRecord('restaurant-location', {
+                                restaurant: restaurant
+                            }).save().then(resolve);
+                        } else {
+                            resolve();
+                        }
                     });
+                } else if(!location.get('ratings.isLoaded')){
+                    location.reload().then(resolve);
+                } else {
+                    resolve();
                 }
             }).then(() => {
+                this.set('loading', false);
                 var expanded = !this.get('isExpanded');
                 this.set('isExpanded', expanded);
                 if(expanded){
@@ -34,6 +45,10 @@ export default Ember.Component.extend({
                         Ember.$('html, body').animate({ scrollTop: Ember.$(this.get('element')).offset().top }, 'fast');
                     }, 100);
                 }
+            }, (error) => {
+                console.log(error);
+                alert(error);
+                this.set('loading', false);
             });
         },
         rate(restaurant){

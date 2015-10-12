@@ -1,12 +1,12 @@
 
 {{#unless isExpanded}}
-    <a class='ui fluid link card' href {{action 'toggleExpand'}}>
-        <div class='content'>
+    <button class='ui fluid link {{if loading 'loading'}} segment card'>
+        <div class='content' {{action 'toggleExpand'}}>
             <a class='ui header' href>{{restaurant.name}}</a>
         </div>
-        <div class='image'><img src='{{photoUrl}}'></div>
+        <div class='image'><img src='{{photoUrl}}' {{action 'toggleExpand'}}></div>
         <div class='content'>
-            <a class='ui icon button' href='{{directionsUrl}}'><i class='map icon'></i></a>
+            <a class='ui icon button' href='{{directionsUrl}}' target='_blank' onclick="$(this).preventDefault();"><i class='map icon'></i></a>
             <button class='ui icon button' {{action 'rate' restaurant bubbles=false}}><i class='star icon'></i></button>
         </div>
         {{#if restaurant.restaurantLocationID.tags}}
@@ -14,7 +14,7 @@
                 {{tag-list-widget tags=restaurant.restaurantLocationID.tags}}
             </div>
         {{/if}}
-    </a>
+    </button>
 {{else}}
     <div class='ui segment items'>
         <div class='item'>
