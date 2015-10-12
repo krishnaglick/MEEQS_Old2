@@ -41,6 +41,9 @@ module.exports = {
       type: 'string',
       email: true
     },
+    avatar: {
+      type: 'string'
+    },
     roles: {
       collection: 'role',
       via: 'users'
@@ -58,7 +61,6 @@ module.exports = {
         delete obj.isDeleted;
         delete obj.roles;
         delete obj.password;
-        delete obj.userID;
         delete obj.username;
         return obj;
       }

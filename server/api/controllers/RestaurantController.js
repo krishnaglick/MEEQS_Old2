@@ -199,7 +199,7 @@ module.exports = {
             return new Promise((res, rej) => {
               if(!rating || _.isEmpty(rating)) res();
               User.findOne({where: {userID: rating.user}}).exec((err, user) => {
-                if(!err) rating.user = user.displayName;
+                if(!err) rating.user = user.toJSON();
                 res();
               });
             });
