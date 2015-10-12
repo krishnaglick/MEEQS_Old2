@@ -16,6 +16,14 @@ module.exports = function(environment) {
         APP: {
             // Here you can pass flags/options to your application instance
             // when it is created
+            DEFAULT_AVATAR: 'http://placehold.it/64',
+            GOOGLE: {
+                API_KEY: "AIzaSyALJ2HzrbmrjgIMRKu7VzcY3508_6FcVWU",
+                PHOTO_WIDTH: 480,
+                PHOTO_HEIGHT: 640,
+                DEFAULT_PHOTO: "http://placehold.it/300x200",
+                REQUEST_GOOGLE_IMAGES: true
+            }
         }
     };
 
@@ -58,14 +66,6 @@ module.exports = function(environment) {
         authenticate: 'authenticator:passport',
         store: 'simple-auth-session-store:cookie'
     };
-
-    ENV.GOOGLE = {
-        API_KEY: "AIzaSyALJ2HzrbmrjgIMRKu7VzcY3508_6FcVWU",
-        PHOTO_WIDTH: 480,
-        PHOTO_HEIGHT: 640,
-        DEFAULT_PHOTO: "http://placehold.it/300x200"
-    };
-
 
     return ENV;
 };

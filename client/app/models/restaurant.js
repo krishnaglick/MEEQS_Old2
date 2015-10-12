@@ -9,7 +9,7 @@ export default DS.Model.extend(DS.EmbeddedRecordsMixin, {
     photos: DS.attr(),
     types: DS.attr(),
 
-    restaurantLocation: DS.belongsTo('restaurant-location', { async: true }),
+    restaurantLocation: DS.belongsTo('restaurant-location'),
 
     latitude: DS.attr('string'),
     longitude: DS.attr('string'),
