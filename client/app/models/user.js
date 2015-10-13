@@ -9,6 +9,8 @@ export default DS.Model.extend({
     email: DS.attr('string'),
     isVerified: DS.attr('boolean'),
     isAdmin: DS.attr('boolean'),
+    username: DS.attr('string'),
+    password: DS.attr('string'),
 
     displayImage: Ember.computed('avatar', function(){
         return this.get('avatar') || config.APP.DEFAULT_AVATAR;
