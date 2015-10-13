@@ -14,9 +14,7 @@ export default DS.Model.extend({
     productQuality: DS.attr('number'),
     service: DS.attr('number'),
 
-    restaurantLocation: DS.belongsTo('restaurant-location', {
-        async: true
-    }),
+    restaurantLocation: DS.belongsTo('restaurant-location'),
 
-    user: DS.belongsTo('user', { async: true })
+    user: DS.belongsTo('user')
 });

@@ -2,6 +2,7 @@ import Ember from 'ember';
 import Base from 'simple-auth/authenticators/base';
 
 export default Base.extend({
+    store: Ember.inject.service(),
     restore(data){
         return new Ember.RSVP.Promise((resolve, reject) => {
             if (!Ember.isEmpty(data.token)) {
@@ -36,8 +37,11 @@ export default Base.extend({
             }).then((response) => {
                 Ember.run(() => {
                     if(response.user){
-                        context.set('content', response.user);
-                        resolve({ user: response.user });
+                        response.user.id = response.user.userID;
+                        var user = this.get('store').push('user', response.user);
+
+                        context.set('content', user);
+                        resolve({ user: user });
                     } else {
                         reject(response.message);
                     }

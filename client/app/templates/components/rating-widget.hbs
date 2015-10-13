@@ -1,32 +1,41 @@
 
-<div class='ui form'>
-    {{#ui/ui-label}}
-        <strong>User:</strong> {{rating.users}}
-    {{/ui/ui-label}}
-    {{#ui/ui-label}}
-        <strong>Average Rating:</strong> {{rating.averageRating}}
-    {{/ui/ui-label}}
-    {{#ui/ui-label}}
-        <strong>Create Date:</strong> {{rating.createdAt}}
-    {{/ui/ui-label}}
-
-    {{#ui/ui-field label='Comment' enabled=false}}
-        <p>{{rating.comment}}</p>
-    {{/ui/ui-field}}
-
-    {{#ui/ui-field label='Menu Selection'}}
-        {{ui/ui-rating value=rating.menuSelection enabled=false}}
-    {{/ui/ui-field}}
-    {{#ui/ui-field label='Environment'}}
-        {{ui/ui-rating value=rating.environment enabled=false}}
-    {{/ui/ui-field}}
-    {{#ui/ui-field label='Cost Efficiency'}}
-        {{ui/ui-rating value=rating.costEfficiency enabled=false}}
-    {{/ui/ui-field}}
-    {{#ui/ui-field label='Product Quality'}}
-        {{ui/ui-rating value=rating.productQuality enabled=false}}
-    {{/ui/ui-field}}
-    {{#ui/ui-field label='Service'}}
-        {{ui/ui-rating value=rating.service enabled=false}}
-    {{/ui/ui-field}}
+<div class='label'>
+    <img src='{{rating.user.displayImage}}'>
+</div>
+<div class='content'>
+    <div class='date'>
+        {{rating.createdAt}}
+    </div>
+    <div class='extra ratings'>
+        <div class='ui list'>
+            <div class='item'>
+                {{ui/ui-rating value=rating.menuSelection enabled=false}} Menu
+            </div>
+            <div class='item'>
+                {{ui/ui-rating value=rating.environment enabled=false}} Environment
+            </div>
+            <div class='item'>
+                {{ui/ui-rating value=rating.costEfficiency enabled=false}} Efficiency
+            </div>
+            <div class='item'>
+                {{ui/ui-rating value=rating.productQuality enabled=false}} Quality
+            </div>
+            <div class='item'>
+                {{ui/ui-rating value=rating.service enabled=false}} Service
+            </div>
+        </div>
+    </div>
+    <div class='summary'>
+        {{#ui/ui-label}}
+            {{rating.user.displayName}}
+        {{/ui/ui-label}}
+    </div>
+    {{#if rating.comment}}
+        <div class='extra text'>
+            {{rating.comment}}
+        </div>
+    {{/if}}
+    <div class="meta">
+        <i class="rating icon"></i> Average: {{rating.averageRating}}
+    </div>
 </div>

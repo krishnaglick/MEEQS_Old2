@@ -1,4 +1,5 @@
 import AppSerializer from './application';
+import DS from 'ember-data';
 
 export default AppSerializer.extend(DS.EmbeddedRecordsMixin, {
     primaryKey: 'place_id',
