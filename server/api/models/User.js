@@ -18,20 +18,17 @@ module.exports = {
       index: true,
       primaryKey: true,
       unique: true,
-      autoIncrement: true,
-      protected: true
+      autoIncrement: true
     },
     username: {
       type: 'string',
       unique: true,
-      required: true,
-      protected: true
+      required: true
     },
     password: {
       type: 'string',
       minLength: 6,
-      required: true,
-      protected: true
+      required: true
     },
     displayName: {
       type: 'string',
@@ -69,6 +66,7 @@ module.exports = {
   },
   //Override
   beforeCreate: function(user, cb) {
+      delete user.userID;
       bcrypt.genSalt(10, function(err, salt) {
           bcrypt.hash(user.password, salt, function(err, hash) {
               if (err) {
