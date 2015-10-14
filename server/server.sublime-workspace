@@ -1,0 +1,1135 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"the",
+				"theThings"
+			],
+			[
+				"getAv",
+				"getAverageRatingForRestaurant"
+			],
+			[
+				"matchingRe",
+				"matchingRecord"
+			],
+			[
+				"dis",
+				"displayName"
+			],
+			[
+				"menu",
+				"menuItem"
+			],
+			[
+				"res",
+				"responseJSON"
+			],
+			[
+				"app",
+				"applyBinding"
+			],
+			[
+				"client",
+				"clientName"
+			],
+			[
+				"authToken",
+				"authTokenPrefix"
+			],
+			[
+				"loginv",
+				"login_view_model"
+			],
+			[
+				"restaurantLo",
+				"restaurantLocation"
+			],
+			[
+				"pass",
+				"password"
+			],
+			[
+				"valu",
+				"valuesToReplace"
+			],
+			[
+				"error",
+				"errorID"
+			],
+			[
+				"proto",
+				"prototype"
+			],
+			[
+				"valid",
+				"validatePassword"
+			],
+			[
+				"max",
+				"maximumRepeatedCharacters"
+			],
+			[
+				"valida",
+				"validation"
+			],
+			[
+				"va",
+				"validation"
+			],
+			[
+				"vali",
+				"validationResult"
+			],
+			[
+				"err",
+				"error"
+			],
+			[
+				"acti",
+				"actionEnd"
+			],
+			[
+				"min-",
+				"min-height"
+			],
+			[
+				"auth",
+				"authToken"
+			],
+			[
+				"text-",
+				"text-align"
+			],
+			[
+				"message",
+				"messageList"
+			],
+			[
+				"is",
+				"isFocused"
+			],
+			[
+				"mee",
+				"messageHeader"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"to",
+				"toJSON"
+			],
+			[
+				"pro",
+				"prototype"
+			],
+			[
+				"Login",
+				"LoginViewModel"
+			],
+			[
+				"new",
+				"newPasswordConfirm"
+			],
+			[
+				"anime",
+				"animateMessage"
+			],
+			[
+				"isErr",
+				"isErrorMessage"
+			],
+			[
+				"mess",
+				"messageBody"
+			],
+			[
+				"loading",
+				"loadingAnimEnd"
+			],
+			[
+				"login",
+				"login_view_model"
+			],
+			[
+				"action",
+				"actionStart"
+			],
+			[
+				"validate",
+				"validatePasswordChange"
+			],
+			[
+				"l",
+				"login_view_model"
+			],
+			[
+				"ca",
+				"cacheID"
+			],
+			[
+				"ass",
+				"associationToReplace"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "api/controllers/RestaurantController.js",
+			"settings":
+			{
+				"buffer_size": 8475,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "api/models/User.js",
+			"settings":
+			{
+				"buffer_size": 1658,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "api/models/RestaurantLocation.js",
+			"settings":
+			{
+				"buffer_size": 1017,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "api/services/Utils.js",
+			"settings":
+			{
+				"buffer_size": 2513,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 173.0,
+		"last_filter": "install",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"color",
+				"Colorsublime: Install Theme"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"git",
+				"Git (SideBarGit): Status"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 416.0
+	},
+	"console":
+	{
+		"height": 186.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Node/MEEQS_Sane/server",
+		"/C/Node/MEEQS_Sane/server/api",
+		"/C/Node/MEEQS_Sane/server/api/blueprints",
+		"/C/Node/MEEQS_Sane/server/api/controllers",
+		"/C/Node/MEEQS_Sane/server/api/responses",
+		"/C/Node/MEEQS_Sane/server/api/services",
+		"/C/Node/MEEQS_Sane/server/assets/js",
+		"/C/Node/MEEQS_Sane/server/config"
+	],
+	"file_history":
+	[
+		"/C/Node/MEEQS_Sane/server/node_modules/googleplaces/lib/PlaceDetailsRequest.js",
+		"/C/Node/MEEQS_Sane/server/node_modules/googleplaces/index.js",
+		"/C/Node/MEEQS_Sane/server/api/services/Google.js",
+		"/C/Node/MEEQS_Sane/server/api/services/Utils.js",
+		"/C/Node/MEEQS_Sane/server/node_modules/googleplaces/test/GooglePlacesTest.js",
+		"/C/Node/MEEQS_Sane/server/assets/js/fixtures.js",
+		"/C/Node/MEEQS_Sane/server/config/passport.js",
+		"/C/Node/MEEQS_Sane/server/api/controllers/AuthController.js",
+		"/C/Node/MEEQS_Sane/server/api/models/User.js",
+		"/C/Node/MEEQS_Sane/server/api/models/RestaurantLocation.js",
+		"/C/Node/MEEQS_Sane/server/config/routes.js",
+		"/C/Node/MEEQS_Sane/server/config/models.js",
+		"/C/Node/MEEQS_Sane/server/api/models/Rating.js",
+		"/C/Node/MEEQS_Sane/server/config/blueprints.js",
+		"/C/Node/MEEQS_Sane/server/api/responses/badRequest.js",
+		"/C/Node/MEEQS_Sane/server/api/responses/forbidden.js",
+		"/C/Node/MEEQS_Sane/server/api/responses/notFound.js",
+		"/C/Node/MEEQS_Sane/server/api/responses/serverError.js",
+		"/C/Node/MEEQS_Sane/server/views/index.html",
+		"/C/C#/desktop4/Application/RunSQL.py",
+		"/C/Node/MEEQS_Sane/client/app/models/rating.js",
+		"/C/Node/MEEQS_Sane/server/config/cors.js",
+		"/C/Node/MEEQS_Sane/server/config/csrf.js",
+		"/C/Node/MEEQS_Sane/fixtures.js",
+		"/C/Node/MEEQS_Sane/server/api/controllers/TagCategoryController.js",
+		"/C/Node/MEEQS_Sane/server/api/controllers/UserController.js",
+		"/C/Node/MEEQS_Sane/server/api/controllers/TagController.js",
+		"/C/Node/MEEQS_Sane/server/api/controllers/RestaurantLocationController.js",
+		"/C/Node/MEEQS_Sane/server/api/controllers/RoleController.js",
+		"/C/Node/MEEQS_Sane/server/api/controllers/RatingController.js",
+		"/C/Node/MEEQS_Sane/test.html",
+		"/C/Users/kglick/Desktop/test.html",
+		"/C/C#/SrProj/SrProj/Static/app.html",
+		"/C/C#/SrProj/SrProj/Static/assets/js/router.js",
+		"/C/C#/SrProj/SrProj/Static/assets/js/app.js",
+		"/C/C#/SrProj/SrProj/Static/controllers/appController.js",
+		"/C/C#/SrProj/SrProj/Static/viewModels/loginViewModel.js",
+		"/C/C#/SrProj/SrProj/Static/viewModels/viewModelBase.js",
+		"/C/Users/kglick/AppData/Roaming/Sublime Text 3/Packages/User/html.sublime-build",
+		"/C/C#/desktop2/Application/Beeline/TMS/Scripts/Compensation/MyDirectReports.js",
+		"/C/C#/desktop2/Application/Beeline/TMS/Scripts/MauiLogin/css/style.css",
+		"/C/C#/desktop2/Application/Beeline/Theme/Framework.Master",
+		"/C/C#/desktop2/Application/Beeline/Theme/OldPageTemplate.aspx",
+		"/C/C#/desktop2/Application/Beeline/TMS/Performance/Evaluation/Layouts/Form.Master",
+		"/C/C#/desktop2/Application/Beeline/TMS/Theme/TMSMain.Master",
+		"/C/C#/desktop2/Application/Beeline/TMS/Theme/TMSSecondaryNav.Master",
+		"/C/C#/desktop2/Application/Stinger.Framework/Web/Beeline/Theme/OldPageTemplate.aspx",
+		"/C/C#/desktop2/Application/Stinger.Framework/Web/Beeline/Theme/Framework.Master",
+		"/C/C#/desktop2/Application/Stinger.Framework/Web/Beeline/home/DelegatorImpersonationMenuLoader.cs",
+		"/C/C#/desktop2/Application/Beeline/home/DelegatorImpersonationMenuLoader.cs",
+		"/C/C#/desktop2/Application/Stinger.Framework/DBSchema/ChangeScripts/3.0/3.0-037-SecondayMenuConfiguration.sql",
+		"/C/C#/desktop2/Application/DBSchema/Client/ChangeScripts/8.0.5/011-TMS-1946-PDFLogOffPipelineIssue.sql",
+		"/C/C#/desktop2/Application/Beeline/TMS/Scripts/sessionVerification.js",
+		"/C/C#/desktop2/Application/Beeline/TMS/Scripts/MauiLogin/js/loginViewModel.js",
+		"/C/C#/desktop2/Application/Beeline/TMS/Scripts/MauiLogin/css/loader.css",
+		"/C/C#/desktop2/Application/Beeline/TMS/Scripts/MauiLogin/js/loginController.js",
+		"/C/C#/desktop2/Application/Beeline/TMS/Security/MauiLogin.aspx",
+		"/C/C#/desktop2/Application/Stinger.Framework/Web/Beeline/Web.config",
+		"/C/C#/desktop2/Application/Beeline/TMS/Security/MauiLogin/js/loginViewModel.js",
+		"/C/C#/desktop2/Application/Beeline/TMS/Security/MauiLogin/js/loginController.js",
+		"/C/Node/MEEQS_Sane/server/api/models/Ratings.js",
+		"/C/Node/MEEQS_Sane/client/app/components/rating-widget.js",
+		"/C/Node/MEEQS_Sane/server/api/models/Users.js",
+		"/C/Node/MEEQS_Sane/server/api/models/RestaurantLocations.js",
+		"/C/Users/kglick/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Node/MEEQS_Sane/client/app/templates/ratings.hbs",
+		"/C/Node/MEEQS_Sane/client/app/models/restaurant-location.js",
+		"/C/Node/MEEQS_Sane/client/app/components/location-list-widget.js",
+		"/C/Node/MEEQS_Sane/client/app/components/ui-field.js",
+		"/C/Node/MEEQS_Sane/client/app/controllers/login.js",
+		"/C/C#/desktop2/Application/Stinger.Framework/Beeline.Services/Services/Utility/UtilityAssemblyService.cs",
+		"/C/C#/desktop2/Application/Beeline/TMS/Security/MauiLogin/js/validator.js",
+		"/C/C#/desktop2/Application/Beeline/TMS/WebServices/LoginController.cs",
+		"/C/C#/desktop2/Application/Stinger.Framework/Beeline.Services/Services/Security/SecurityAuthenticationService.cs",
+		"/C/C#/desktop2/Application/Beeline/TMS/Security/mauiLogin.aspx",
+		"/C/C#/desktop2/Application/Beeline/Web.config",
+		"/C/C#/desktop2/Application/Beeline/TMS/Web.config",
+		"/C/C#/desktop2/Application/Beeline/TMS/bin/Beeline.TMS.dll.config",
+		"/C/C#/desktop2/Application/Beeline/bin/Beeline.TMS.dll.config",
+		"/C/C#/desktop2/Application/Beeline.Services.TMS.Assessment/app.config",
+		"/C/C#/desktop2/Application/Starfield.TMS.Web/Starfield.TMS.Web/Web.config",
+		"/C/C#/desktop2/Application/Stinger.Framework/Beeline.Persistence.SettingsEditor/app.config",
+		"/C/C#/desktop2/Application/Stinger.Framework/Beeline.Persistence.SettingsEditor/app.manifest",
+		"/C/C#/desktop2/Application/Stinger.Framework/Beeline.Persistence.SettingsEditor/bin/Release/bpsedit.exe.config",
+		"/C/C#/desktop2/Application/Stinger.Framework/Beeline.Reports.Editor/app.manifest",
+		"/C/C#/desktop2/Application/Stinger.Framework/ReportingServices/ReportingServices.Configuration/app.manifest",
+		"/C/C#/desktop2/Application/Stinger.Framework/Web/Beeline/bin/Beeline.dll.config",
+		"/C/C#/desktop2/Application/Beeline/TMS/Security/mauiLogin/js/bootstrap.3.3.2.min.js",
+		"/C/C#/desktop2/Application/Beeline/TMS/Security/mauiLogin/css/jQuery.1.9.1.min.js",
+		"/C/C#/desktop2/Application/Beeline/TMS/Security/mauiLogin/css/OpenSans.css",
+		"/C/C#/desktop2/Application/Beeline/TMS/Security/mauiLogin/css/bootstrap.min.css",
+		"/C/Node/MEEQS_Sane/server/api/controllers/RatingsController.js",
+		"/C/C#/desktop/Application/Beeline/Controls/SelectionListCustomizeScreen.ascx",
+		"/C/Node/MEEQS_Sane/server/config/connections.js",
+		"/C/C#/desktop/Application/Stinger.Framework/Web/Beeline/Controls/SelectionListCustomizeScreen.ascx",
+		"/C/C#/desktop/Application/DBSchema/Client/Objects/StoredProcedures/prc_Competency_GetTalentProfileCompetenciesByDateAndType.sql",
+		"/C/C#/desktop/Application/DBSchema/Client/Objects/StoredProcedures/prc_Competency_GetRatedCompetencies.sql",
+		"/C/C#/desktop/Application/Beeline/Theme/Controls/Menu.ascx.cs",
+		"/C/C#/desktop2/Application/Beeline/TMS/Security/css/style.css",
+		"/C/C#/desktop2/Application/Beeline/TMS/Security/Login.aspx",
+		"/C/Node/MEEQS_Sane/server/api/models/Roles.js",
+		"/C/Node/MEEQS_Sane/server/api/models/Tags.js",
+		"/C/C#/desktop2/Application/Beeline/Security/Login.aspx.cs",
+		"/C/C#/desktop2/Application/Beeline/TMS/Security/mauiLogin/js/message.js",
+		"/C/C#/desktop2/Application/Beeline/TMS/Security/mauiLogin/js/router.js",
+		"/C/C#/desktop2/Application/Beeline/TMS/Security/mauiLogin/css/style.css",
+		"/C/C#/desktop2/Application/Beeline/TMS/Security/mauiLogin.aspx.cs",
+		"/C/C#/desktop2/Application/Beeline/TMS/Security/mauiLogin/js/loginController.js",
+		"/C/C#/desktop2/Application/Beeline/TMS/Security/mauiLogin/js/loginViewModel.js",
+		"/C/C#/desktop2/Application/Beeline/TMS/Security/mauiLogin/Login.html",
+		"/C/C#/desktop2/Application/Beeline/TMS/Security/mauiLogin/htmlPartials/_passwordRecovery.html",
+		"/C/C#/desktop2/Application/Beeline/TMS/Security/mauiLogin/htmlPartials/_passwordChange.html",
+		"/C/C#/desktop2/Application/Beeline/TMS/Security/mauiLogin/htmlPartials/_login.html",
+		"/C/C#/desktop/Application/DBSchema/Client/ChangeScripts/7.7/014-375985-9-Box-4-Configurations.sql",
+		"/C/C#/desktop/Application/Beeline/TMS/Security/mauiLogin/js/router.js",
+		"/C/C#/desktop/Application/Beeline/TMS/Security/mauiLogin/css/loader.css",
+		"/C/C#/desktop/Application/Beeline/TMS/Security/mauiLogin/css/style.css",
+		"/C/C#/desktop/Application/Beeline/TMS/Security/mauiLogin/css/ball-loader.css",
+		"/C/C#/desktop/Application/Beeline/TMS/Scripts/Cookies.js",
+		"/C/C#/desktop/Application/Beeline/TMS/Security/mauiLogin/js/enterKey.ko.js",
+		"/C/C#/desktop/Application/DBSchema/Client/Objects/Functions/udf_EmployeeActivityTranscript_tbl.sql",
+		"/C/C#/desktop/Application/Beeline/TMS/Security/htmlPartials/_passwordRecovery.html",
+		"/C/C#/desktop/Application/Beeline/TMS/Security/htmlPartials/_login.html",
+		"/C/C#/desktop/Application/Beeline/TMS/Security/htmlPartials/_changePassword.html",
+		"/C/C#/desktop/Application/Beeline/TMS/Security/js/loginController.js",
+		"/C/C#/desktop/Application/Beeline/TMS/Security/js/loginViewModel.js",
+		"/C/C#/desktop/Application/Beeline/TMS/Security/Login.html",
+		"/C/C#/desktop/Application/Beeline/TMS/Security/LoginService.svc.cs"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			"C:\\Node\\MEEQS_Sane\\server",
+			"C:\\C#\\desktop3\\Application\\Beeline",
+			"C:\\C#\\desktop2\\Application\\Beeline",
+			"",
+			"C:\\C#\\desktop2",
+			"C:\\C#\\desktop2,*.config",
+			"C:\\C#\\desktop2",
+			"C:\\C#\\desktop",
+			"C:\\C#\\desktop2",
+			"C:\\C#\\desktop",
+			"C:\\C#\\desktop,*.cs,",
+			"C:\\C#\\desktop,+*.cs",
+			"C:\\C#\\desktop,-*.sql",
+			"C:\\C#\\desktop",
+			"C:\\Node\\MEEQS_Sane\\client\\app,C:\\Node\\MEEQS_Sane\\server\\api",
+			"C:\\Node\\MEEQS_Sane\\",
+			"C:\\C#\\desktop",
+			"C:\\Node\\MEEQS_Sane",
+			"C:\\C#\\desktop\\Application\\Beeline"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"new PlaceDetailsRequest",
+			"PlaceDetailsRequest",
+			"placeDetailsRequest",
+			"views",
+			"/api/v1",
+			"false",
+			"average",
+			"debugger",
+			"viewModel",
+			"propsedIncrease",
+			"; \\}\\n",
+			"Cookies",
+			"string.Format(\"{0}{1}\", Request.ApplicationPath, TMSConfiguration.LoginUrl",
+			"clearAuthToken",
+			"Login.aspx",
+			"Action=Logoff",
+			"Login.aspx",
+			"client",
+			"Newtonsoft.Json",
+			"(Evaluation Wizard - Performance Goals Future.*), N",
+			"(Evaluation Wizard - Performance Goals Future - Corporate Initiative Column \\(Admin\\)), N",
+			"(Evaluation Wizard - Performance Goals Future.*), N",
+			"Talent Profile - Performance",
+			"/TMS/Performance/Evaluation/Steps/PerformanceGoalsFuture.aspx",
+			"(/TMS/Performance/Evaluation/Steps/PerformanceGoalsFuture.aspx, ",
+			"(^\\(.*x), ",
+			"(0)\\n",
+			"0\\n",
+			"(^/)",
+			"\\\\",
+			"(, 1, ).\\n",
+			"(.*, 1, ).\\n",
+			"(.*, 1, ).",
+			"49031be4-fe9e-4241-90c8-f869e231b4eb.*, 1, (.)",
+			"Talent Profile - Performance Goals",
+			"Evaluation Wizard - Performance Goals Future",
+			"PerformanceGoals",
+			"^([^,]+), ",
+			"^([^,]+),",
+			".*,",
+			"loader",
+			"this.client",
+			"this.origin",
+			"mauiLogin",
+			"logo.png",
+			"validatePassword",
+			"runtime",
+			"Api",
+			"Json",
+			"<dependentAssembly>",
+			"30ad4fe6b2a6aeed",
+			"6.0.0.0",
+			"30ad4fe6b2a6aeed",
+			"Version=4.5.0.0",
+			"name=\"Newtonsoft.Json\"",
+			"Newtonsoft.Json",
+			"element",
+			"Customize()",
+			"Customize",
+			"9000",
+			"otherscore",
+			"OtherRating",
+			"-- other",
+			"selection-arrow",
+			"validatePassword",
+			"validatePasswordChange",
+			"minlength.*MinPasswordLength %> ",
+			"btn",
+			"}\n",
+			"margin",
+			"BeelineTextBoxMedium",
+			"link",
+			"loginAction",
+			"window.location.href",
+			"authTokenPrefix",
+			"BeelineTextBoxMedium",
+			"selection-arrow",
+			"<hr",
+			"arrow",
+			"hr",
+			"messages",
+			"login-modal",
+			"this.message",
+			"this.createMessage",
+			"CF2DC076-3E71-4E2D-8D0E-7F76A297170E",
+			"setPageName",
+			"spinner-",
+			"culture",
+			"Services.TMS.",
+			"^Services.TMS.",
+			"Services.TMS.",
+			"^Services.TMS.",
+			"apply",
+			"Router",
+			"authToken",
+			"Cookies.js",
+			"85A88DA7-AA7A-46B3-82FD-EA9FAF4FF956",
+			"<",
+			"TMS.Dialogs.MultiSelect",
+			"showMultiSelectDialog",
+			"console",
+			"addRaters",
+			"manageRaters_Click",
+			"addRaters",
+			"bl",
+			"multiStepForm",
+			"localS",
+			"_getItemsFromCache",
+			"serial",
+			"get_serializedItems",
+			"serial",
+			"._cache.val",
+			"stateBag.remove('profileCompetencies')",
+			"id",
+			"add",
+			"_multiSelect",
+			"CompetencyRaterSelect",
+			"_cache",
+			"_keyCache",
+			"get_keyCache",
+			"_cache",
+			"debugger",
+			"_updateCaches",
+			"save",
+			"addRaters",
+			"var stateBag = bl.controller.get_state();",
+			"addRaters_Click",
+			"addRaters"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"api/v1",
+			"true",
+			"",
+			"rating",
+			";\\n}\\n",
+			";\\n}",
+			"string.Format(\"{0}/{1}\", Request.ApplicationPath, TMSConfiguration.LoginUrl",
+			"'\\1', N",
+			"'\\1'",
+			"Evaluation Wizard - Performance Goals Future",
+			"'/TMS/Performance/Evaluation/Steps/PerformanceGoalsFuture.aspx'",
+			"'/TMS/Performance/Evaluation/Steps/PerformanceGoalsFuture.aspx' ",
+			"'\\1', ",
+			"\\1),\\n",
+			"(\\1",
+			"\\10\\n",
+			"\\1",
+			"Evaluation Wizard - Performance Goals Future",
+			"PerformanceGoalsFuture",
+			"",
+			"../Scripts/MauiLogin",
+			"../Scripts/M",
+			"",
+			"form-control",
+			"window.location",
+			"form-control",
+			"this.message()",
+			"this.message.createMessage",
+			"",
+			"Beeline.Services.TMS.",
+			"this",
+			"",
+			"this",
+			"profileCompetencies",
+			"\""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "api/controllers/RestaurantController.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8475,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5884,
+								5884
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2600.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "api/models/User.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1658,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1185,
+								1185
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 427.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "api/models/RestaurantLocation.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1017,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								975,
+								975
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "api/services/Utils.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2513,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "server.sublime-project",
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"user.js",
+				"api\\models\\User.js"
+			],
+			[
+				"restaurantlocation",
+				"api\\models\\RestaurantLocation.js"
+			],
+			[
+				"models.js",
+				"config\\models.js"
+			],
+			[
+				"",
+				"api\\models\\User.js"
+			],
+			[
+				"authcontroller",
+				"api\\controllers\\AuthController.js"
+			],
+			[
+				"user",
+				"api\\models\\User.js"
+			],
+			[
+				"blueprints",
+				"config\\blueprints.js"
+			],
+			[
+				"routes.j",
+				"config\\routes.js"
+			],
+			[
+				"routes",
+				"config\\routes.js"
+			],
+			[
+				"rating.js",
+				"server\\api\\models\\Rating.js"
+			],
+			[
+				"restaurantlocations",
+				"server\\api\\models\\RestaurantLocation.js"
+			],
+			[
+				"authcontroller.js",
+				"server\\api\\controllers\\AuthController.js"
+			],
+			[
+				"pass",
+				"server\\config\\passport.js"
+			],
+			[
+				"passport",
+				"server\\config\\passport.js"
+			],
+			[
+				"csrf",
+				"server\\config\\csrf.js"
+			],
+			[
+				"fixture",
+				"fixtures.js"
+			],
+			[
+				"test.html",
+				"test.html"
+			],
+			[
+				"restaurantlocationcontroller",
+				"server\\api\\controllers\\RestaurantLocationController.js"
+			],
+			[
+				"viewmodel",
+				"Static\\viewModels\\volunteerViewModel.js"
+			],
+			[
+				"rou",
+				"Static\\assets\\js\\router.js"
+			],
+			[
+				"router",
+				"Static\\assets\\js\\router.js"
+			],
+			[
+				"volunteer",
+				"Static\\viewModels\\volunteerViewModel.js"
+			],
+			[
+				"app.js",
+				"Static\\assets\\js\\app.js"
+			],
+			[
+				"appcontro",
+				"Static\\controllers\\appController.js"
+			],
+			[
+				"router.js",
+				"Static\\assets\\js\\router.js"
+			],
+			[
+				"login",
+				"Static\\partials\\login.html"
+			],
+			[
+				"mydirectreports.js",
+				"Beeline\\TMS\\Scripts\\Compensation\\MyDirectReports.js"
+			],
+			[
+				"style.css",
+				"Beeline\\TMS\\Scripts\\MauiLogin\\css\\style.css"
+			],
+			[
+				"mauilogin.",
+				"Beeline\\TMS\\Security\\MauiLogin.aspx"
+			],
+			[
+				"logincontroller",
+				"TMS\\Scripts\\MauiLogin\\js\\loginController.js"
+			],
+			[
+				"loginview",
+				"TMS\\Scripts\\MauiLogin\\js\\loginViewModel.js"
+			],
+			[
+				"loginviewmode",
+				"TMS\\Scripts\\MauiLogin\\js\\loginViewModel.js"
+			],
+			[
+				"/mauilogin/",
+				"TMS\\Scripts\\MauiLogin\\css\\style.css"
+			],
+			[
+				"mauilogin/",
+				"TMS\\Scripts\\MauiLogin\\css\\loader.css"
+			],
+			[
+				"logincontroller.js",
+				"TMS\\Scripts\\MauiLogin\\js\\loginController.js"
+			],
+			[
+				"loginviewmo",
+				"TMS\\Security\\MauiLogin\\js\\loginViewModel.js"
+			],
+			[
+				"mauilogin.aspx",
+				"TMS\\Security\\MauiLogin.aspx"
+			],
+			[
+				"ratingscontroll",
+				"server\\api\\controllers\\RatingsController.js"
+			],
+			[
+				"ratings.js",
+				"server\\api\\models\\Ratings.js"
+			],
+			[
+				"rating-widget.js",
+				"client\\app\\components\\rating-widget.js"
+			],
+			[
+				"serverusers.js",
+				"server\\api\\models\\Users.js"
+			],
+			[
+				"rating-wid",
+				"client\\app\\templates\\components\\rating-widget.hbs"
+			],
+			[
+				"restaurantlocation.js",
+				"server\\api\\models\\RestaurantLocations.js"
+			],
+			[
+				"utils.js",
+				"server\\api\\services\\Utils.js"
+			],
+			[
+				"restaurantscontroller",
+				"server\\api\\controllers\\RestaurantsController.js"
+			],
+			[
+				"location-widget.js",
+				"client\\app\\components\\location-widget.js"
+			],
+			[
+				"location-widget.hbs",
+				"client\\app\\templates\\components\\location-widget.hbs"
+			],
+			[
+				"location-list-w",
+				"client\\app\\components\\location-list-widget.js"
+			],
+			[
+				"restaurantl",
+				"server\\api\\controllers\\RestaurantLocationsController.js"
+			],
+			[
+				"rating-edit-",
+				"client\\app\\components\\rating-edit-widget.js"
+			],
+			[
+				"ratings",
+				"client\\app\\templates\\ratings.hbs"
+			],
+			[
+				"login.js",
+				"client\\app\\controllers\\login.js"
+			],
+			[
+				"ui-",
+				"client\\app\\components\\ui-field.js"
+			],
+			[
+				"directorypa",
+				"Stinger.Framework\\Beeline.Services\\Services\\Security\\DirectoryPasswordService.cs"
+			],
+			[
+				"utilityassemblyservice",
+				"Stinger.Framework\\Beeline.Services\\Services\\Utility\\UtilityAssemblyService.cs"
+			],
+			[
+				"securityauthe",
+				"Stinger.Framework\\Beeline.Services\\Services\\Security\\SecurityAuthenticationService.cs"
+			],
+			[
+				"logincon",
+				"Beeline\\TMS\\WebServices\\LoginController.cs"
+			],
+			[
+				"mauilog",
+				"Beeline\\TMS\\Security\\MauiLogin.aspx"
+			],
+			[
+				"loader.",
+				"Beeline\\TMS\\Security\\mauiLogin\\css\\loader.css"
+			],
+			[
+				"message.",
+				"Beeline\\TMS\\Security\\mauiLogin\\js\\message.js"
+			],
+			[
+				"mauilo",
+				"Beeline\\TMS\\Security\\mauiLogin.aspx"
+			],
+			[
+				"loginvie",
+				"Beeline\\TMS\\Security\\mauiLogin\\js\\loginViewModel.js"
+			],
+			[
+				"logincontrolle",
+				"Beeline\\TMS\\Security\\mauiLogin\\js\\loginController.js"
+			],
+			[
+				"login.aspx",
+				"Beeline\\TMS\\Security\\Login.aspx"
+			],
+			[
+				"loader.css",
+				"Beeline\\TMS\\Security\\mauiLogin\\css\\loader.css"
+			],
+			[
+				"loginviewmodel",
+				"Beeline\\TMS\\Security\\mauiLogin\\js\\loginViewModel.js"
+			],
+			[
+				"maui",
+				"Beeline\\TMS\\Security\\mauiLogin.aspx.cs"
+			],
+			[
+				"mauilogin",
+				"Beeline\\TMS\\Security\\mauiLogin.aspx"
+			],
+			[
+				"login.aspx.cs",
+				"Beeline\\Security\\Login.aspx.cs"
+			],
+			[
+				"competencies.",
+				"TMS\\Performance\\Evaluation\\Steps\\Competencies.aspx"
+			],
+			[
+				"competencies.aspx",
+				"TMS\\Performance\\Evaluation\\Steps\\Competencies.aspx"
+			],
+			[
+				"vendor.js",
+				"client\\dist\\assets\\vendor.js"
+			],
+			[
+				"ember.js",
+				"client\\bower_components\\ember\\ember.js"
+			],
+			[
+				"connections",
+				"server\\config\\connections.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 167.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

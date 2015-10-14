@@ -20,22 +20,16 @@ export default Ember.Component.extend({
                 this.set('loading', true);
 
                 var restaurant = this.get('restaurant');
-                var location = restaurant.get('restaurantLocation');
-                if(!location){
-                    restaurant.reload().then(() => {
-                        if(!restaurant.get('restaurantLocation')){
-                            this.store.createRecord('restaurant-location', {
-                                restaurant: restaurant
-                            }).save().then(resolve);
-                        } else {
-                            resolve();
-                        }
-                    });
-                } else if(!location.get('ratings.isLoaded')){
-                    location.reload().then(resolve);
-                } else {
-                    resolve();
-                }
+                //var location = restaurant.get('restaurantLocation');
+                restaurant.reload().then(() => {
+                    if(!restaurant.get('restaurantLocation')){
+                        this.store.createRecord('restaurant-location', {
+                            restaurant: restaurant
+                        }).save().then(resolve);
+                    } else {
+                        resolve();
+                    }
+                });
             }).then(() => {
                 this.set('loading', false);
                 var expanded = !this.get('isExpanded');

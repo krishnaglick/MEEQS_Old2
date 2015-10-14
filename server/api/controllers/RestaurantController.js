@@ -57,7 +57,7 @@ var getAverageRatingForRestaurant = (ratings) => {
     avgRating.averageRating += rating.getAverageRating();
   });
   avgRating = _.each(avgRating, (ratingValue, ratingType, obj) => {
-    obj[ratingType] = ratingValue / (ratings || ['']).length;
+    obj[ratingType] = parseFloat((ratingValue / (ratings || ['']).length).toFixed(2));
   });
 
   return avgRating;
