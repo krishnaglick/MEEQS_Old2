@@ -28,6 +28,10 @@ module.exports = {
       collection: 'restaurantLocation',
       via: 'tags'
     },
+    icon: {
+      type: 'string',
+      required: false
+    },
     isDeleted: {
       type: 'boolean',
       required: false,
@@ -39,7 +43,7 @@ module.exports = {
       if(!obj.isDeleted) {
         delete obj.createdAt;
         delete obj.updatedAt;
-        delete obj.tagID;
+        delete obj.isDeleted;
         return obj;
       }
       return null;

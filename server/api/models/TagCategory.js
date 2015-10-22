@@ -24,6 +24,18 @@ module.exports = {
       type: 'string',
       required: false
     },
+    sort: {
+      type: 'integer',
+      required: false
+    },
+    style: {
+      type: 'string',
+      required: false
+    },
+    icon: {
+      type: 'string',
+      required: false
+    },
     tags: {
       collection: 'tag',
       via: 'tagCategories'
@@ -38,6 +50,9 @@ module.exports = {
     toJSON : function() {
       var obj = this.toObject();
       if(!obj.isDeleted) {
+        delete obj.createdAt;
+        delete obj.updatedAt;
+        delete obj.isDeleted;
         return obj;
       }
       return null;

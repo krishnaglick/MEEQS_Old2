@@ -18,7 +18,8 @@ module.exports = {
       index: true,
       primaryKey: true,
       unique: true,
-      autoIncrement: true
+      autoIncrement: true,
+      protected: true
     },
     username: {
       type: 'string',
