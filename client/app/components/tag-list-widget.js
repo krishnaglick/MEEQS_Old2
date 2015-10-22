@@ -2,13 +2,12 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
     classNames: ['ui', 'labels'],
+
+    editable: true,
+
     actions: {
-        addTag: function(){
-            this.sendAction('addTag');
-        },
-        //potentially should be handled at a lower level by a {{tag-widget}}
-        removeTag: function(tagID){
-            this.sendAction('removeTag', tagID);
+        addTag(){
+            this.get('modal-service').openTag(this.get('model'));
         }
     }
 });

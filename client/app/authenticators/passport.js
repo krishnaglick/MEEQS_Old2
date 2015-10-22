@@ -1,20 +1,27 @@
 import Ember from 'ember';
-import Base from 'simple-auth/authenticators/base';
+import Base from 'ember-simple-auth/authenticators/base';
 
 export default Base.extend({
     store: Ember.inject.service(),
     restore(data){
+        var context = this;
         return new Ember.RSVP.Promise((resolve, reject) => {
-            if (!Ember.isEmpty(data.token)) {
+            if (!Ember.isEmpty(data.user)) {
                 Ember.$.ajax({
-                    url: '/validate',
-                    type: 'POST',
-                    data: JSON.stringify({
-                        token: data.token
-                    }),
-                    contentType: 'application/json'
-                }).then(() => {
-                    resolve(data);
+                    url: '/api/v1/authenticate',
+                    type: 'GET'
+                }).then((response) => {
+                    Ember.run(() => {
+                        if(response.user){
+                            response.user.id = response.user.userID;
+                            var user = this.get('store').push('user', response.user);
+
+                            context.set('content', user);
+                            resolve({ user: user });
+                        } else {
+                            reject(response.message);
+                        }
+                    });
                 }, (err) => {
                     reject(err);
                 });

@@ -1,0 +1,20 @@
+
+{{#if tag.icon}}
+    <i class='{{tag.icon}} icon'></i>
+{{/if}}
+<div class='detail'>
+    {{#if tag}}
+        {{tag.name}}
+    {{else}}
+        {{tag.target_content_object.name}}
+    {{/if}}
+</div>
+
+{{tag.value}}
+{{#if deletable}}
+    {{#if removing}}
+        <a {{action 'confirmRemove'}}>Remove?</a> - <a {{action 'cancelRemove'}}>Cancel</a>
+    {{else}}
+        <i class='delete icon' {{action 'removeTag'}}></i>
+    {{/if}}
+{{/if}}

@@ -7,6 +7,8 @@ export default Ember.Controller.extend({
         //shhhhh it'll be okay
         Ember.store = this.store;
 
+        //this.get('session').authenticate('authenticator:passport', {username:'hur', password: 'hurhur'});
+
         //TODO: put this in a service
         this.get('geolocation').getGeoposition().then((latLng) => {
             this.get('location-service').setLocation(latLng.coords);

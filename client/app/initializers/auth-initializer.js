@@ -4,12 +4,12 @@ import PassportAuthorizer from '../authorizers/passport';
 
 
 export function initialize(container, application) {
-    application.register('authenticator:passport', PassportAuthenticator);
-    application.register('authorizer:passport', PassportAuthorizer);
+    container.register('authenticator:passport', PassportAuthenticator);
+    container.register('authorizer:passport', PassportAuthorizer);
 }
 
 export default Ember.Application.initializer({
     name: 'authorization',
-    before: 'simple-auth',
+    before: 'ember-simple-auth',
     initialize: initialize
 });

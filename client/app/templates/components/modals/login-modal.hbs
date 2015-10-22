@@ -1,5 +1,5 @@
 
-{{#ui/ui-modal formify=true loading=loading open=open modalLabel='Login' approveLabel='Login' denyLabel='Cancel' approve=(action 'login') deny=(action 'cancel')}}
+{{#ui/ui-modal class='form' loading=loading open=open modalLabel='Login' approveLabel='Login' denyLabel='Cancel' approve=(action 'login') deny=(action 'cancel')}}
     {{ui/ui-field type='text' value=model.username label='Username'}}
     {{ui/ui-field type='password' value=model.password label='Password'}}
     
