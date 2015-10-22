@@ -39,6 +39,18 @@ module.exports = {
             message: "Logged out.",
             user: false
         });
+    },
+
+    auth: (req, res) => {
+        if(req.user) {
+            return res.ok({user: req.user.toJSON()});
+        }
+        else if(req.session.passport.user) {
+            User.findOne(req.session.passport.user).exec((err, data) => {
+                return res.ok({user: data.toJSON()});
+            });
+        }
+        return res.badRequest({error:'Missing or Invalid Session'});
     }
 };
 
