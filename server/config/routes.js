@@ -27,6 +27,8 @@ module.exports.routes = {
 
   'get /api/v1/searchByComments': 'RatingController.searchByComments',
   'post /api/v1/searchByComments': 'RatingController.searchByComments',
+  'get /api/v1/options/searchByComments' : 'RatingController.optionsSearchByComments',
+  'options /api/v1/searchByComments': 'RatingController.optionsSearchByComments',
 
   'get /api/v1/restaurants' : 'RestaurantController.find',
   'get /api/v1/restaurants/*' : 'RestaurantController.findOne',
