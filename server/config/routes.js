@@ -25,6 +25,9 @@ module.exports.routes = {
   '/logout': 'AuthController.logout',
   'get /api/v1/authenticate': 'AuthController.auth',
 
+  'get /api/v1/searchByComments': 'RatingController.searchByComments',
+  'post /api/v1/searchByComments': 'RatingController.searchByComments',
+
   'get /api/v1/restaurants' : 'RestaurantController.find',
   'get /api/v1/restaurants/*' : 'RestaurantController.findOne',
   'get /api/v1/options/restaurantFind' : 'RestaurantController.optionsFind',

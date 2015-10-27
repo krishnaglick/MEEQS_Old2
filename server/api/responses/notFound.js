@@ -30,7 +30,8 @@ module.exports = function notFound (data, options) {
 
   // Log error to console
   if (data !== undefined) {
-    sails.log.verbose('Sending 404 ("Not Found") response: \n',data);
+    sails.log.verbose('Sending 404 ("Not Found") response: \n', data);
+    return res.send(data);
   }
   else sails.log.verbose('Sending 404 ("Not Found") response');
 
