@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import DS from 'ember-data';
+import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
 
-export default DS.RESTAdapter.extend({
+export default DS.RESTAdapter.extend(DataAdapterMixin, {
+    authorizer: 'authorizer:passport',
     coalesceFindRequests: true,
     namespace: 'api/v1',
     pathForType(modelName){
@@ -10,9 +12,4 @@ export default DS.RESTAdapter.extend({
         });
         return Ember.String.pluralize(camelCase);
     }
-    //this is dependent on production/development environment
-    //It is configured in config/environment.js
-    //host: ClientENV.hostUrl
-    //add IP from $DOCKER_HOST if --docker flag is set
-    //host: 'http://192.168.59.103:1337'
 });

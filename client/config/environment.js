@@ -61,7 +61,7 @@ module.exports = function(environment) {
         'media-src': "'self'"
     };
 
-    ENV['simple-auth'] = {
+    ENV['ember-simple-auth'] = {
         authorizer: 'authorizer:passport',
         authenticate: 'authenticator:passport',
         store: 'simple-auth-session-store:cookie'

@@ -1,7 +1,7 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-    tagID: DS.attr(),
+    tagID: DS.attr('number'),
     name: DS.attr('string'),
-    tagCategoryID: DS.attr('number')
+    tagCategory: DS.belongsTo('tag-category')
 });

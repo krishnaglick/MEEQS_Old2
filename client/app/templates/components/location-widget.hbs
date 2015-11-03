@@ -11,7 +11,7 @@
         </div>
         {{#if restaurant.restaurantLocationID.tags}}
             <div class='extra content'>
-                {{tag-list-widget tags=restaurant.restaurantLocationID.tags}}
+                {{tag-list-widget model=restaurant.restaurantLocation}}
             </div>
         {{/if}}
     </button>
@@ -27,7 +27,7 @@
                 </div>
                 <div class='meta'>
                     {{#ui/ui-label}}ID: {{restaurant.id}}{{/ui/ui-label}}
-                    {{tag-list-widget tags=restaurant.restaurantLocationID.tags}}
+                    {{tag-list-widget model=restaurant.restaurantLocation}}
                 </div>
                 <div class='description'>
                     {{rating-list-widget ratings=restaurant.restaurantLocation.ratings}}
