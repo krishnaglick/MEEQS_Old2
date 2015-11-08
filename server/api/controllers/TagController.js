@@ -39,7 +39,6 @@ module.exports = {
         Model.subscribe(req, matchingRecord);
         actionUtil.subscribeDeep(req, matchingRecord);
       }
-
       return res.ok(matchingRecord);
     });
   },

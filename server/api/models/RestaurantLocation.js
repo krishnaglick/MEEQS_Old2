@@ -20,8 +20,8 @@ module.exports = {
       required: false
     },
     tags: {
-      collection: 'tag',
-      via: 'restaurantLocations'
+      collection: 'restaurantLocationTag',
+      via: 'restaurantLocation'
     },
     ratings: {
       collection: 'rating',

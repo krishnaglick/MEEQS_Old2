@@ -25,8 +25,8 @@ module.exports = {
       via: 'tags'
     },
     restaurantLocations: {
-      collection: 'restaurantLocation',
-      via: 'tags'
+      collection: 'restaurantLocationTag',
+      via: 'tag'
     },
     icon: {
       type: 'string',
