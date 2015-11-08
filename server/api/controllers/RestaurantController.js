@@ -49,6 +49,7 @@ var getAverageRatingForRestaurant = (ratings) => {
     averageRating: 0
   };
   _.each(ratings, (rating) => {
+    rating = new Rating._model(rating);
     avgRating.menuSelection += rating.menuSelection;
     avgRating.environment += rating.environment;
     avgRating.costEfficiency += rating.costEfficiency;

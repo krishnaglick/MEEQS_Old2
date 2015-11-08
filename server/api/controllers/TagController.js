@@ -52,7 +52,6 @@ module.exports = {
       .skip(actionUtil.parseSkip(req))
       .sort(actionUtil.parseSort(req));
 
-    query = actionUtil.populateEach(query, req);
     query.exec(function found(err, matchingRecords) {
       if (err) return res.serverError(err);
       if (req._sails.hooks.pubsub && req.isSocket) {
