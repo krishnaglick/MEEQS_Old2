@@ -8,15 +8,11 @@ export default Ember.Component.extend({
     model: {},
     loading: false,
     onOpen: function(){
-        //update modal code later to use better code
         if(this.get('open')){
-            var model = this.set('model', this.store.createRecord('rating')).get('model');
-            model.set('restaurantLocation', this.get('restaurant.restaurantLocation'));
-            if(this.get('session.isAuthenticated')){
-                model.set('user', this.session.content.secure.user);
-            }
+            this.set('model', this.store.createRecord('rating'));
         } else {
             this.set('loading', false);
+            this.send('cancel');
             Ember.run.later(() => {
                 this.set('errors', []);
             }, 500);
@@ -27,7 +23,11 @@ export default Ember.Component.extend({
             this.set('loading', true);
             this.set('messages', []);
 
-            this.get('model').save().then(() => {
+            var model = this.get('model');
+            model.set('restaurantLocation', this.get('restaurant.restaurantLocation'));
+            model.set('user', this.get('session.data.authenticated.user'));
+            model.save().then(() => {
+                this.set('model', undefined);
                 this.send('cancel');
             }, (error) => {
                 this.set('messages', error);
@@ -36,7 +36,12 @@ export default Ember.Component.extend({
             return false;
         },
         cancel() {
-            this.set('open', false);
+            if(this.get('model')){
+                this.get('model').destroyRecord();
+            }
+            if(this.get('open')){
+                this.set('open', false);
+            }
         }
     }
 });

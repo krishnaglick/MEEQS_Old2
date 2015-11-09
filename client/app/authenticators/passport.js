@@ -4,7 +4,6 @@ import Base from 'ember-simple-auth/authenticators/base';
 export default Base.extend({
     store: Ember.inject.service(),
     restore(data){
-        var context = this;
         return new Ember.RSVP.Promise((resolve, reject) => {
             if (!Ember.isEmpty(data.user)) {
                 Ember.$.ajax({
@@ -15,8 +14,6 @@ export default Base.extend({
                         if(response.user){
                             response.user.id = response.user.userID;
                             var user = this.get('store').push('user', response.user);
-
-                            context.set('content', user);
                             resolve({ user: user });
                         } else {
                             reject(response.message);
@@ -31,7 +28,6 @@ export default Base.extend({
         });
     },
     authenticate(credentials){
-        var context = this;
         return new Ember.RSVP.Promise((resolve, reject) => {
             Ember.$.ajax({
                 url: '/login',
@@ -46,8 +42,6 @@ export default Base.extend({
                     if(response.user){
                         response.user.id = response.user.userID;
                         var user = this.get('store').push('user', response.user);
-
-                        context.set('content', user);
                         resolve({ user: user });
                     } else {
                         reject(response.message);

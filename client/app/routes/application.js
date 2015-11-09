@@ -3,7 +3,6 @@ import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mi
 
 export default Ember.Route.extend(ApplicationRouteMixin, {
     model(){
-        this.get('session').restore();
-        this.store.find('tag-category');
+        this.store.findAll('tag-category');
     }
 });
