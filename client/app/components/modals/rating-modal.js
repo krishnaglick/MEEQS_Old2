@@ -30,7 +30,7 @@ export default Ember.Component.extend({
                 this.set('model', undefined);
                 this.send('cancel');
             }, (error) => {
-                this.set('messages', error);
+                this.set('messages', [error]);
                 this.set('loading', false);
             });
             return false;

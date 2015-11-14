@@ -1,21 +1,5 @@
 
-{{#unless isExpanded}}
-    <button class='ui fluid link {{if loading 'loading'}} segment card'>
-        <div class='content' {{action 'toggleExpand'}}>
-            <a class='ui header' href>{{restaurant.name}}</a>
-        </div>
-        <div class='image'><img src='{{photoUrl}}' {{action 'toggleExpand'}}></div>
-        <div class='content'>
-            <a class='ui icon button' href='{{directionsUrl}}' target='_blank' onclick="$(this).preventDefault();"><i class='map icon'></i></a>
-            <button class='ui icon button' {{action 'rate' restaurant bubbles=false}}><i class='star icon'></i></button>
-        </div>
-        {{#if restaurant.restaurantLocationID.tags}}
-            <div class='extra content'>
-                {{tag-list-widget model=restaurant.restaurantLocation}}
-            </div>
-        {{/if}}
-    </button>
-{{else}}
+{{#if isExpanded}}
     <div class='ui segment items'>
         <div class='item'>
             <a class='image' href {{action 'toggleExpand'}}><img src='{{photoUrl}}'></a>
@@ -26,7 +10,7 @@
                     <button class='ui icon button' {{action 'rate' restaurant bubbles=false}}><i class='star icon'></i></button>
                 </div>
                 <div class='meta'>
-                    {{tag-list-widget model=restaurant.restaurantLocation}}
+                    {{tag-list-widget model=restaurant.restaurantLocation enabled=true}}
                 </div>
                 <div class='description'>
                     {{rating-list-widget ratings=restaurant.restaurantLocation.ratings}}
@@ -34,4 +18,20 @@
             </div>
         </div>
     </div>
-{{/unless}}
+{{else}}
+    <div class='ui fluid link {{if loading 'loading'}} segment card'>
+        <div class='content' {{action 'toggleExpand'}}>
+            <a class='ui header' href>{{restaurant.name}}</a>
+        </div>
+        <div class='image'><img src='{{photoUrl}}' {{action 'toggleExpand'}}></div>
+        <div class='content'>
+            <a class='ui icon button' href='{{directionsUrl}}' target='_blank' onclick="$(this).preventDefault();"><i class='map icon'></i></a>
+            <!--<button class='ui icon button' {{action 'rate' restaurant bubbles=false}}><i class='star icon'></i></button>-->
+        </div>
+        {{#if restaurant.restaurantLocationID.tags}}
+            <div class='extra content'>
+                {{tag-list-widget model=restaurant.restaurantLocation}}
+            </div>
+        {{/if}}
+    </div>
+{{/if}}

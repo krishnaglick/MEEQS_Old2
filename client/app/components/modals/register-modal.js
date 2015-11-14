@@ -17,6 +17,9 @@ export default Ember.Component.extend({
                         this.set('messages', [error]);
                         this.set('loading', false);
                     });
+            }, (error) => {
+                this.set('messages', [error]);
+                this.set('loading', false);
             });
             return false;
         },

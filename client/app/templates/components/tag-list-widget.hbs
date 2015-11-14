@@ -1,14 +1,20 @@
 
-<input type="hidden" name="filters">
-<span class="text">Add tags...</span>
-<div class="menu">
-    <div class="ui icon search input">
-        <i class="search icon"></i>
-        <input type="text" placeholder="Search tags...">
-    </div>
-    <div class="scrolling menu">
-        {{#each tagOptions as |tag|}}
-            {{tag-widget tag=tag}}
-        {{/each}}
-    </div>
-</div>
+{{#each model.tags as |tag|}}
+    {{tag-widget tag=tag enabled=enabled}}
+{{/each}}
+
+{{#if enabled}}
+    {{#unless adding}}
+        <a class='ui label' {{action 'addTag'}}><i class='plus icon no margins'></i></a>
+    {{else}}
+        {{tag-select-widget class='mini search selection'
+            textProperty='name'
+            valueProperty='id'
+            options=tagOptions
+            value=newTag
+            allowAdditions=true
+        }}
+        <a class='ui label' {{action 'saveTag'}}><i class='check icon no margins'></i></a>
+        <a class='ui label' {{action 'cancelTag'}}><i class='cancel icon no margins'></i></a>
+    {{/unless}}
+{{/if}}
